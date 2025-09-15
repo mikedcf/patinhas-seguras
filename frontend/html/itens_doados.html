@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itens Doados - Patinhas Seguras</title>
+    <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
+    <!-- Link para o arquivo CSS externo -->
+    <link rel="stylesheet" href="../css/itens_doados.css">
+</head>
+
+<body>
+    <!--
+    =================================================
+    ==================[ CABEÇALHO ]==================
+    =================================================
+    -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo-container">
+                <a href="home.html"><img src="../img/logo.png" alt="Logo Patinhas" class="logo-icon"></a>
+                <span class="logo-text">
+                    <span class="linha1">Patinhas</span><br>
+                    <span class="linha2">Seguras</span>
+                </span>
+            </div>
+
+            <!-- Barra de busca e nav centralizados -->
+            <div class="center-section">
+                <div class="search-bar">
+                    <button class="bu-pesq">
+                        <img class="logo-pesq" src="../img/search.png" alt="">
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                    </div>
+                </div>
+
+                <!-- Menu de navegação ao lado da busca -->
+                <nav class="nav-menu">
+                    <a href="home.html">Home</a>
+                    <a href="doacao.html">Doação</a>
+                    <a href="adotar.html">Adotar</a>
+                    <a href="veterinario.html">Veterinário</a>
+                    <a href="denuncia.html">Denunciar</a>
+                </nav>
+            </div>
+
+            <!-- Botões à direita -->
+            <div class="auth-buttons" id="boxLogin">
+                <a href="login.html"><button>Login</button></a>
+                <a href="register.html"><button>Registro</button></a>
+            </div>
+
+            <div class="user-menu" id="userMenu" >
+                <button class="user-btn">
+                    <img src="" alt="Usuário" class="user-avatar"
+                        id="avatarimg">
+
+                    <!-- 🔽 Nome + seta juntos -->
+                    <div class="user-info">
+                        <span class="username" id="nomeperfil">Usuário</span>
+                        <span class="seta">▼</span>
+                    </div>
+                </button>
+
+                <div class="dropdown" id="userDropdown">
+                    <a href="config.html">⚙️ Configurações</a>
+                    <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 
+    ========================================================
+    =======================[ CONTEÚDO DA PÁGINA ]====================
+    ========================================================
+    -->
+    <main>
+        <section class="hero">
+            <h1>Nossas Conquistas Graças a Você!</h1>
+            <p>Cada doação nos ajuda a oferecer uma vida mais digna e feliz para nossos resgatados. Veja o impacto da
+                sua generosidade e saiba como continuar ajudando!</p>
+        </section>
+
+        <section class="donations-section">
+            <h2>Itens Recebidos Recentemente</h2>
+            <div class="donations-grid-container">
+                <!-- Card de Alimentação -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22 10H2V8H22V10M22 14H2V12H22V14M11.25 18H2V16H11.25C12.03 16 12.75 16.67 12.75 17.5C12.75 18.33 12.03 19 11.25 18M22 6H2V4H22V6Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>Alimentação</h3>
+                    <p>Ração, petiscos e suplementos que mantêm nossos amiguinhos fortes e saudáveis.</p>
+                    <div class="progress-bar">
+                        <!-- Adicionado o atributo 'data-width' para o JS -->
+                        <div class="progress" data-width="75%"></div>
+                    </div>
+                    <span class="progress-label">Meta do Mês: 75%</span>
+                    <a href="doacao.html" class="cta-button">Quero Doar</a>
+                </div>
+
+                <!-- Card de Saúde e Higiene -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19,3H5C3.89,3 3,3.89 3,5V19C3,20.11 3.89,21 5,21H19C20.11,21 21,20.11 21,19V5C21,3.89 20.11,3 19,3M13,18H11V16H13V18M13,15H11V9H13V15Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>Saúde e Higiene</h3>
+                    <p>Medicamentos, produtos de limpeza e itens de higiene para garantir o bem-estar de todos.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="50%"></div>
+                    </div>
+                    <span class="progress-label">Meta do Mês: 50%</span>
+                    <a href="doacao.html" class="cta-button">Quero Doar</a>
+                </div>
+
+                <!-- Card de Conforto e Brinquedos -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12,5.5L14.03,8.73L17.89,9.27L15.11,12.03L15.7,15.89L12,14.19L8.3,15.89L8.89,12.03L6.11,9.27L9.97,8.73L12,5.5M12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>Conforto e Brinquedos</h3>
+                    <p>Caminhas, cobertores e brinquedos para deixar o dia a dia deles mais alegre e confortável.</p>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="90%"></div>
+                    </div>
+                    <span class="progress-label">Meta do Mês: 90%</span>
+                    <a href="doacao.html" class="cta-button">Quero Doar</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="wishlist">
+            <h2>Nossa Lista de Desejos</h2>
+            <p>Estes são os itens que mais precisamos no momento. Sua ajuda faz toda a diferença!</p>
+            <ul>
+                <li>Ração para filhotes (cães e gatos)</li>
+                <li>Desinfetante de alta performance</li>
+                <li>Vermífugo e Antipulgas</li>
+                <li>Brinquedos resistentes e seguros</li>
+                <li>Areia higiênica para gatos</li>
+            </ul>
+        </section>
+    </main>
+
+    <!--
+  ==========================================================
+  ===============[ FACTION (RODA PE DO SITE)]===============
+  ==========================================================
+  -->
+
+    <footer>
+        <div class="rodape" data-aos="fade-down">
+            <div class="rodape-conteudo">
+
+                <div class="item-rodape esquerda">
+                    <h2 data-aos="fade-right">Local</h2>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+                        width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <p class="endereco">R. Paineiras, 1300 - Eldorado, Contagem - MG</p>
+                </div>
+
+                <div class="item-rodape centro" data-aos="fade-down">
+                    <h2>Redes Sociais</h2>
+                    <div class="redes-botoes">
+                        <a href="#" class="botao-rede facebook" title="Facebook" data-aos="fade-right"></a>
+                        <a href="#" class="botao-rede instagram" title="Instagram" data-aos="fade-up"></a>
+                        <a href="#" class="botao-rede twitter" title="Twitter" data-aos="fade-left"></a>
+                    </div>
+                </div>
+
+                <div class="item-rodape direita" data-aos="fade-right">
+                    <h2 data-aos="fade-left">Acessibilidade</h2>
+                    <div class="itens-acess">
+                        <button class="botao-acess" data-aos="fade-right">Como Adotar?</button>
+                        <button class="botao-acess" data-aos="fade-right">Projetos Sociais</button>
+                        <button class="botao-acess" data-aos="fade-right">FAQ</button>
+                        <button class="botao-acess" data-aos="fade-right">Eventos</button>
+
+                        <!-- tem que arrumar animação -->
+                        <button class="botao-acess">Área de Bonificação</button>
+                        <button class="botao-acess">Ajuda</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link para o arquivo JavaScript externo -->
+    <script src="../js/itens_doados.js" defer></script>
+</body>
+
+</html>

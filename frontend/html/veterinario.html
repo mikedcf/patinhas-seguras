@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS - Veterinario</title>
+    <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/veterinario.css">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+    <!--
+  =================================================
+  ==================[ CABEÇALHO ]==================
+  =================================================
+  -->
+
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo-container">
+                <a href="home.html"><img src="../img/logo.png" alt="Logo Patinhas" class="logo-icon"></a>
+                <span class="logo-text">
+                    <span class="linha1">Patinhas</span><br>
+                    <span class="linha2">Seguras</span>
+                </span>
+            </div>
+
+            <!-- Barra de busca e nav centralizados -->
+            <div class="center-section">
+                <div class="search-bar">
+                    <button class="bu-pesq">
+                        <img class="logo-pesq" src="../img/search.png" alt="">
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                    </div>
+                </div>
+
+                <!-- Menu de navegação ao lado da busca -->
+                <nav class="nav-menu">
+                    <a href="home.html">Home</a>
+                    <a href="doacao.html">Doação</a>
+                    <a href="adotar.html">Adotar</a>
+                    <a href="itens_doados.html">Itens doados</a>
+                    <a href="denuncia.html">Denunciar</a>
+                </nav>
+            </div>
+
+            <!-- Botões à direita -->
+            <div class="auth-buttons" id="boxLogin">
+                <a href="login.html"><button>Login</button></a>
+                <a href="register.html"><button>Registro</button></a>
+            </div>
+
+            <div class="user-menu" id="userMenu" >
+                <button class="user-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="Usuário" class="user-avatar" id="avatarimg">
+
+                    <!-- 🔽 Nome + seta juntos -->
+                    <div class="user-info">
+                        <span class="username" id="nomeperfil">Usuário</span>
+                        <span class="seta">▼</span>
+                    </div>
+                </button>
+
+                <div class="dropdown" id="userDropdown">
+                    <a href="config.html" >⚙️ Configurações</a>
+                    <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SLIDER -->
+    <section class="slider-doacao">
+        <div class="slider-container">
+            <div class="slide fade"><img src="../img/slider1.jpg" alt="Pessoa alimentando cão resgatado" /></div>
+            <div class="slide fade"><img src="../img/slider2.jpg" alt="Voluntários cuidando de gatos" /></div>
+            <div class="slide fade"><img src="../img/slider3.jpg" alt="Entrega de doações" /></div>
+        </div>
+    </section>
+
+    <section class="introducao">
+        <h1>Cuidando da Saúde do Seu Novo Melhor Amigo</h1>
+        <p><br>Cuidar da saúde do seu novo companheiro é essencial para garantir uma vida longa, feliz e cheia de
+            carinho.
+            Por isso, oferecemos uma rede de serviços veterinários pensada especialmente para animais adotados, com
+            atendimento de qualidade, acessível e feito com amor. Aqui, você encontra desde consultas e vacinas até
+            castração e orientações sobre os primeiros cuidados — tudo para que seu pet tenha o melhor começo possível
+            em seu novo lar.</p>
+
+    </section>
+
+    <section class="servicos">
+        <h1>Oferecemos os seguintes serviços:</h1>
+        <ul>
+            <li>Consultas gerais</li>
+            <li>Vacinação</li>
+            <li>Castração/esterilização</li>
+            <li>Exames laboratoriais</li>
+            <li>Odontologia veterinária</li>
+            <li>Cuidados com filhotes e idosos</li>
+            <li>Microchipagem</li>
+
+        </ul>
+        <img src="../img/dogs.png" alt="cachorrinhos">
+
+    </section>
+
+    <!--
+  =================================================
+  ==================[ DICAS VETERINARIAS ]==================
+  =================================================
+  -->
+
+    <section class="dicas_veterinarias">
+        <h1>Dicas de Saúde e Cuidados</h1>
+        <div class="dica" id="dica1">
+            <div class="dica_texto">
+                <h3>Como saber se o pet está com dor?</h3>
+                <p>Diferente dos humanos, cães e gatos não costumam demonstrar dor de forma óbvia. Mudanças no
+                    comportamento, como apatia, agressividade repentina, falta de apetite ou dificuldade para se
+                    movimentar, podem ser sinais de que algo está errado. Fique atento e procure um veterinário ao notar
+                    qualquer alteração incomum.
+                </p>
+            </div>
+
+            <div>
+                <img src="../img/img_dica_1.png" alt="dica_1">
+            </div>
+        </div>
+        <div class="dica" id="dica2">
+            <div class="dica_texto">
+                <h3>Vacinas obrigatórias para cães e gatos</h3>
+                <p>A vacinação é essencial para proteger seu pet de doenças graves e contagiosas. Para cães, as vacinas
+                    mais importantes incluem a V10 e a antirrábica. Para gatos, a tríplice felina e a antirrábica são
+                    fundamentais. O ideal é seguir um calendário de vacinação com orientação veterinária, especialmente
+                    no primeiro ano de vida.
+                </p>
+            </div>
+
+            <div>
+                <img src="../img/img_dica_2.jpg" alt="dica_2">
+            </div>
+        </div>
+        <div class="dica" id="dica3">
+            <div class="dica_texto">
+                <h3>Cuidados pós-castração</h3>
+                <p>Após a castração, o pet precisa de um ambiente tranquilo para se recuperar. É importante evitar que
+                    ele lamba os pontos e seguir as instruções do veterinário quanto à medicação e alimentação. O uso de
+                    colar elizabetano e o acompanhamento da cicatrização são fundamentais para uma recuperação segura e
+                    rápida.
+                </p>
+            </div>
+
+            <div>
+                <img src="../img/img_dica_3.png" alt="dica_3">
+            </div>
+        </div>
+        <div class="dica" id="dica4">
+            <div class="dica_texto">
+                <h3>Alimentação adequada</h3>
+                <p>A alimentação correta é a base da saúde do seu animal. Rações específicas para a idade, porte e
+                    necessidades do pet ajudam a prevenir doenças e manter o peso ideal. Evite dar comida de humanos,
+                    especialmente alimentos gordurosos, temperados ou tóxicos para cães e gatos, como chocolate, uva e
+                    cebola.
+                </p>
+            </div>
+
+            <div>
+                <img src="../img/img_dica_4.png" alt="dica_4">
+            </div>
+        </div>
+        <div class="dica" id="dica5">
+            <div class="dica_texto">
+                <h3>Como preparar o lar para um animal doente</h3>
+                <p>Se seu pet estiver doente, é essencial criar um ambiente calmo e confortável. Deixe água e comida ao
+                    alcance, evite barulhos e permita que ele descanse bastante. Tapetes antiderrapantes, caminhas
+                    aconchegantes e acesso fácil ao banheiro são boas medidas. E, claro, siga à risca as orientações do
+                    veterinário.
+                </p>
+            </div>
+
+            <div>
+                <img src="../img/img_dica_5.png" alt="dica_5">
+            </div>
+        </div>
+        <div class="botoes_dicas">
+            <button data-dica='1' class="bt_dica"> </button>
+            <button data-dica='2' class="bt_dica"> </button>
+            <button data-dica='3' class="bt_dica"> </button>
+            <button data-dica='4' class="bt_dica"> </button>
+            <button data-dica='5' class="bt_dica"> </button>
+        </div>
+    </section>
+
+    <!--
+  =================================================
+  ==================[ PARCEIROS ]==================
+  =================================================
+  -->
+
+    <section class="parceiros">
+        <h1>Agende agora com uma de nossas clínicas parceitas!</h1>
+        <div class="img_parceiros">
+            <img src="../img/seres.png" alt="seres" onclick="showInfo(0)">
+            <img src="../img/dognotic.png" alt="dognostic" onclick="showInfo(1)">
+            <img src="../img/centro.png" alt="centro" onclick="showInfo(2)">
+        </div>
+        <div class="info-box">
+            <div class="info-content">
+                <h2>Centro Veterinário Seres</h2>
+                <p class="endereco">
+                    Endereço: Av. Babita Camargos, 1295 - Loja 03 - Cidade Industrial, Contagem - MG, 32210-180
+                    <br>
+                    ☎ : 03130797389
+                </p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+                    width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <button class="contato">Entre em Contato</button>
+            </div>
+            <div class="info-content">
+                <h2>Dognostic</h2>
+                <p class="endereco">
+                    Endereço: R. Padre Adelino, 1811 - Quarta Parada, São Paulo - SP, 03303-000
+                    <br>
+                    ☎ : 01126051126
+                </p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+                    width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <button class="contato">Entre em Contato</button>
+            </div>
+            <div class="info-content">
+                <h2>Centro Veterinário Alpha Conde</h2>
+                <p class="endereco">
+                    Endereço: R. Capricórnio, 64 - Alphaville Conde I, Barueri - SP, 06473-005
+                    <br>
+                    ☎ : 01141938231
+                </p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+                    width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <button class="contato">Entre em Contato</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!--
+  ==========================================================
+  ===============[ FACTION (RODA PE DO SITE)]===============
+  ==========================================================
+  -->
+
+    <footer>
+        <div class="rodape" data-aos="fade-down">
+            <div class="rodape-conteudo">
+
+                <div class="item-rodape esquerda">
+                    <h2 data-aos="fade-right">Local</h2>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+                        width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <p class="endereco">R. Paineiras, 1300 - Eldorado, Contagem - MG</p>
+                </div>
+
+                <div class="item-rodape centro" data-aos="fade-down">
+                    <h2>Redes Sociais</h2>
+                    <div class="redes-botoes">
+                        <a href="#" class="botao-rede facebook" title="Facebook" data-aos="fade-right"></a>
+                        <a href="#" class="botao-rede instagram" title="Instagram" data-aos="fade-up"></a>
+                        <a href="#" class="botao-rede twitter" title="Twitter" data-aos="fade-left"></a>
+                    </div>
+                </div>
+
+                <div class="item-rodape direita">
+                    <h2 data-aos="fade-left">Acessibilidade</h2>
+                    <div class="itens-acess">
+                        <button class="botao-acess" data-aos="fade-right">Como Adotar?</button>
+                        <button class="botao-acess" data-aos="fade-right">Projetos Sociais</button>
+                        <button class="botao-acess" data-aos="fade-right">FAQ</button>
+                        <button class="botao-acess" data-aos="fade-right">Eventos</button>
+
+                        <!-- tem que arrumar animação -->
+                        <button class="botao-acess">Área de Bonificação</button>
+                        <button class="botao-acess">Ajuda</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="../js/veterinario.js"></script>
+</body>
+
+</html>

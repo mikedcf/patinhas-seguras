@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS - adotar</title>
+  <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/adotar.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="top-bar">
+      <div class="logo-container">
+        <a href="home.html"><img src="../img/logo.png" alt="Logo Patinhas" class="logo-icon"></a>
+        <span class="logo-text">
+          <span class="linha1">Patinhas</span><br>
+          <span class="linha2">Seguras</span>
+        </span>
+      </div>
+
+      <!-- Barra de busca e nav centralizados -->
+      <div class="center-section">
+        <div class="search-bar">
+          <button class="bu-pesq">
+            <img class="logo-pesq" src="../img/search.png" alt="">
+          </button>
+          <div class="search-box">
+            <input type="text" placeholder="Buscar...">
+          </div>
+        </div>
+
+        <!-- Menu de navegação ao lado da busca -->
+        <nav class="nav-menu">
+          <a href="home.html">Home</a>
+          <a href="doacao.html">Doação</a>
+          <a href="veterinario.html">Veterinário</a>
+          <a href="itens_doados.html">Itens doados</a>
+          <a href="denuncia.html">Denunciar</a>
+        </nav>
+      </div>
+
+      <!-- Botões à direita -->
+      <div class="auth-buttons" id="boxLogin">
+        <a href="login.html"><button>Login</button></a>
+        <a href="register.html"><button>Registro</button></a>
+      </div>
+
+      <div class="user-menu" id="userMenu">
+        <button class="user-btn">
+          <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="Usuário" class="user-avatar" id="avatarimg">
+
+          <!-- 🔽 Nome + seta juntos -->
+          <div class="user-info">
+            <span class="username" id="nomeperfil">Usuário</span>
+            <span class="seta">▼</span>
+          </div>
+        </button>
+
+        <div class="dropdown" id="userDropdown">
+          <a href="config.html">⚙️ Configurações</a>
+          <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="secao-navegacao">
+    <div class="container-botoes">
+      <button class="btn-navegacao-cachorro" data-target="cachorros">Ver Cachorros</button>
+      <button class="btn-navegacao-gato" data-target="gatos">Ver Gatos</button>
+    </div>
+  </section>
+
+  <section class="section-animais" id="secao-cachorros">
+    <div class="filtros-container">
+      <div class="filtros">
+        <select>
+          <option disabled selected value="">Idade</option>
+          <option value="meses">Meses</option>
+          <option value="1 ano">1 ano</option>
+          <option value="2 anos">2 anos</option>
+          <option value="3 anos">3 anos</option>
+          <option value="4 anos">4 anos</option>
+          <option value="5 anos">5 anos ou mais</option>
+        </select>
+        <select>
+          <option disabled selected value="">Sexo</option>
+          <option value="macho">Macho</option>
+          <option value="femea">Fêmea</option>
+        </select>
+        <select>
+          <option disabled selected value="">Porte</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+        <select>
+          <option disabled selected value="">Raça</option>
+          <option value="srd">SRD</option>
+          <option value="pastor-alemao">Pastor Alemão</option>
+          <option value="golden-retriever">Golden Retriever</option>
+          <option value="bulldog-frances">Bulldog Francês</option>
+          <option value="poodle">Poodle</option>
+        </select>
+        <select name="regiao">
+          <option disabled selected value="">Região</option>
+          <option value="sudeste">Sudeste</option>
+          <option value="nordeste">Nordeste</option>
+          <option value="sul">Sul</option>
+        </select>
+        <button class="btn-buscar">Buscar</button>
+      </div>
+    </div>
+
+    <div class="carrossel-container">
+      <div class="carrossel">
+
+        <div class="card" data-nome="Mike" data-sexo="Macho" data-idade="2 anos" data-porte="Médio"
+          data-raca="SRD (Sem Raça Definida)" data-local="São Paulo, SP"
+          data-historia="Mike é um cachorrinho muito dócil e brincalhão, resgatado das ruas. Se dá bem com outros cães e adora um carinho na barriga. Está em busca de um lar amoroso."
+          data-img="https://images.amigonaosecompra.com.br/unsafe/460x440/1042a08a-be60-4fe8-b8e8-8052a16f9092/009a5625-2eef-48f3-9287-11279f1972a3/009a5625-2eef-48f3-9287-11279f1972a3.jpg?v=63818318419">
+          <img
+            src="https://images.amigonaosecompra.com.br/unsafe/460x440/1042a08a-be60-4fe8-b8e8-8052a16f9092/009a5625-2eef-48f3-9287-11279f1972a3/009a5625-2eef-48f3-9287-11279f1972a3.jpg?v=63818318419"
+            alt="Cachorro Mike">
+          <h3>Mike</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card" data-nome="Pepita" data-sexo="Fêmea" data-idade="8 meses" data-porte="Pequeno" data-raca="SRD"
+          data-local="Minas Gerais, MG"
+          data-historia="Pepita é uma filhotona cheia de energia e amor pra dar. É muito esperta e aprende rápido. Adora brincar e correr pelo quintal."
+          data-img="https://images.amigonaosecompra.com.br/unsafe/460x440/94fcff96-20c5-4786-9de3-c8eeaa99a40c/0189c00b-1a74-4d08-9a4c-7c0667ec23a0/0189c00b-1a74-4d08-9a4c-7c0667ec23a0.jpg?v=63918523034">
+          <img
+            src="https://images.amigonaosecompra.com.br/unsafe/460x440/94fcff96-20c5-4786-9de3-c8eeaa99a40c/0189c00b-1a74-4d08-9a4c-7c0667ec23a0/0189c00b-1a74-4d08-9a4c-7c0667ec23a0.jpg?v=63918523034"
+            alt="Cachorro Pepita">
+          <h3>Pepita</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>Minas Gerais, MG</span></div>
+        </div>
+
+        <div class="card" data-nome="Bingo" data-sexo="Macho" data-idade="5 anos" data-porte="Médio"
+          data-raca="Vira-lata" data-local="São Paulo, SP"
+          data-historia="Bingo é o companheiro perfeito para todas as horas. Calmo, educado e muito leal. Gosta de um bom sofá e da companhia de seus humanos."
+          data-img="../img/bingo.jpg">
+          <img src="../img/bingo.jpg" alt="Cachorro Bingo">
+          <h3>Bingo</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card" data-nome="Tigresa" data-sexo="Fêmea" data-idade="3 anos" data-porte="Médio" data-raca="SRD"
+          data-local="São Paulo, SP"
+          data-historia="Tigresa tem uma pelagem linda e um coração gigante. É um pouco tímida no começo, mas se solta e vira uma grande amiga. Paciente e carinhosa."
+          data-img="../img/tigresa.jpg">
+          <img src="../img/tigresa.jpg" alt="Cachorro Tigresa">
+          <h3>Tigresa</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card" data-nome="Brutos" data-sexo="Macho" data-idade="4 anos" data-porte="Grande" data-raca="SRD"
+          data-local="Rio de Janeiro, RJ"
+          data-historia="Apesar do nome, Brutos é um doce de cachorro. Um grandão bobo que só quer amor e um lugar para correr. Protetor e fiel."
+          data-img="https://images.amigonaosecompra.com.br/unsafe/460x440/1ff4ca92-3149-4919-b6b1-5a4802c897aa/486b501b-79fb-426f-9d3c-9e5e5b5491b6/486b501b-79fb-426f-9d3c-9e5e5b5491b6.jpg">
+          <img
+            src="https://images.amigonaosecompra.com.br/unsafe/460x440/1ff4ca92-3149-4919-b6b1-5a4802c897aa/486b501b-79fb-426f-9d3c-9e5e5b5491b6/486b501b-79fb-426f-9d3c-9e5e5b5491b6.jpg"
+            alt="Cachorro Brutos">
+          <h3>Brutos</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>Rio de Janeiro, RJ</span></div>
+        </div>
+
+        <div class="card" data-nome="Negão" data-sexo="Macho" data-idade="6 anos" data-porte="Grande" data-raca="SRD"
+          data-local="Fortaleza, Ceará"
+          data-historia="Negão é um senhorzinho muito sábio e tranquilo. Perfeito para uma família que busca um amigo calmo. Adora um passeio leve e um bom petisco."
+          data-img="../img/Negao.jpeg">
+          <img src="../img/Negao.jpeg" alt="Cachorro Negão">
+          <h3>Negão</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>Fortaleza, Ceará</span></div>
+        </div>
+
+        <div class="card" data-nome="Baruk" data-sexo="Macho" data-idade="1 ano" data-porte="Médio" data-raca="SRD"
+          data-local="São Paulo, SP"
+          data-historia="Baruk é um jovem cheio de vida! Adora brincar, pular e fazer novos amigos (cães e humanos). Precisa de um lar com espaço para gastar energia."
+          data-img="../img/baruk.jpg">
+          <img src="../img/baruk.jpg" alt="Cachorro Baruk">
+          <h3>Baruk</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card" data-nome="Bart" data-sexo="Macho" data-idade="2 anos" data-porte="Pequeno" data-raca="SRD"
+          data-local="Rio de Janeiro, RJ"
+          data-historia="Bart é um carinha muito simpático e sociável. Se dá bem com todo mundo e é o cachorrinho ideal para apartamentos."
+          data-img="../img/bart.jpg">
+          <img src="../img/bart.jpg" alt="Cachorro Bart">
+          <h3>Bart</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>Rio de Janeiro, RJ</span></div>
+        </div>
+
+        <div class="card" data-nome="Apolo Marc" data-sexo="Macho" data-idade="4 anos" data-porte="Médio"
+          data-raca="SRD" data-local="São Paulo, SP"
+          data-historia="Apolo é um cão obediente e muito inteligente. Gosta de agradar e aprender truques novos. Um companheiro leal para toda a vida."
+          data-img="../img/apolo.jpg">
+          <img src="../img/apolo.jpg" alt="Cachorro Apolo Marc">
+          <h3>Apolo Marc</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card" data-nome="Gorete" data-sexo="Fêmea" data-idade="3 anos" data-porte="Pequeno" data-raca="SRD"
+          data-local="São Paulo, SP"
+          data-historia="Gorete é uma princesa. Delicada, carinhosa e um pouco manhosa. Adora um colo e não dispensa um bom cochilo ao lado de seu dono."
+          data-img="../img/gorete.jpg">
+          <img src="../img/gorete.jpg" alt="Cachorro Gorete">
+          <h3>Gorete</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card" data-nome="Alfredo" data-sexo="Macho" data-idade="7 meses" data-porte="Médio" data-raca="SRD"
+          data-local="Congonhal, MG"
+          data-historia="Alfredo é um filhotão curioso e brincalhão. Está descobrindo o mundo e precisa de uma família com paciência e amor para ensiná-lo."
+          data-img="../img/alfredo.jpg">
+          <img src="../img/alfredo.jpg" alt="Cachorro Alfredo">
+          <h3>Alfredo</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>Congonhal, MG</span></div>
+        </div>
+
+        <div class="card" data-nome="Arrascaeta" data-sexo="Macho" data-idade="1 ano" data-porte="Médio"
+          data-raca="Vira-lata Caramelo" data-local="Fortaleza, Ceará"
+          data-historia="Arrascaeta é um craque em fazer amizades. Joga um bolão e é o artilheiro na busca por carinho. Um verdadeiro camisa 10!"
+          data-img="../img/arrascaeta.jpg">
+          <img src="../img/arrascaeta.jpg" alt="Cachorro Arrascaeta">
+          <h3>Arrascaeta</h3>
+          <div class="localizacao"><img src="../img/local.png" alt="local"><span>Fortaleza, Ceará</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-animais2 hidden" id="secao-gatos">
+    <div class="filtros-container2">
+      <div class="filtros2">
+        <select>
+          <option disabled selected value="">Idade</option>
+          <option value="meses">Meses</option>
+          <option value="1">1 ano</option>
+          <option value="2">2 anos</option>
+          <option value="3">3 anos</option>
+          <option value="4">4 anos ou mais</option>
+        </select>
+        <select>
+          <option disabled selected value="">Sexo</option>
+          <option value="macho">Macho</option>
+          <option value="femea">Fêmea</option>
+        </select>
+        <select>
+          <option disabled selected value="">Porte</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+        <select>
+          <option disabled selected value="">Raça</option>
+          <option value="srd">SRD</option>
+          <option value="persa">Persa</option>
+          <option value="siames">Siamês</option>
+          <option value="angora">Angorá</option>
+        </select>
+        <select>
+          <option disabled selected value="">Região</option>
+          <option value="sudeste">Sudeste</option>
+          <option value="nordeste">Nordeste</option>
+          <option value="sul">Sul</option>
+        </select>
+        <button class="btn-buscar2">Buscar</button>
+      </div>
+    </div>
+
+    <div class="carrossel-container2">
+      <div class="carrossel2">
+
+        <div class="card2" data-nome="Lola" data-sexo="Fêmea" data-idade="1 ano" data-porte="Pequeno" data-raca="SRD"
+          data-local="São Paulo, SP"
+          data-historia="Lola é uma gatinha muito carinhosa e calma. Adora um colo e um lugar quentinho para dormir. Perfeita para quem busca uma companheira tranquila."
+          data-img="../img/313840fd-f277-416d-bdf2-d2fa598b61ae.jpg">
+          <img src="../img/313840fd-f277-416d-bdf2-d2fa598b61ae.jpg" alt="Gato Lola">
+          <h3>Lola</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card2" data-nome="Gisele Bintchen" data-sexo="Fêmea" data-idade="2 anos" data-porte="Médio"
+          data-raca="SRD" data-local="Minas Gerais, MG"
+          data-historia="Gisele é uma gata elegante e charmosa. Desfila pela casa com sua beleza e adora ser admirada. É carinhosa quando quer e muito independente."
+          data-img="../img/01fa4bd5-4c69-4ff8-ac4d-d1f2940d4232.jpg">
+          <img src="../img/01fa4bd5-4c69-4ff8-ac4d-d1f2940d4232.jpg" alt="Gato Gisele">
+          <h3>Gisele Bintchen</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Minas Gerais, MG</span></div>
+        </div>
+
+        <div class="card2" data-nome="Merlim" data-sexo="Macho" data-idade="3 anos" data-porte="Médio" data-raca="SRD"
+          data-local="São Paulo, SP"
+          data-historia="Merlim é um gato mágico, que encanta a todos com seu olhar misterioso e seu jeito afetuoso. Gosta de explorar a casa e de brincar com varinhas."
+          data-img="../img/ab1b2aaa-81b4-461a-9e5e-7068b064d3fd.jpeg">
+          <img src="../img/ab1b2aaa-81b4-461a-9e5e-7068b064d3fd.jpeg" alt="Gato Merlim">
+          <h3>Merlim</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card2" data-nome="Bob" data-sexo="Macho" data-idade="4 anos" data-porte="Grande" data-raca="SRD"
+          data-local="Rio de Janeiro, RJ"
+          data-historia="Bob é um gatão muito tranquilo e bonachão. Passa a maior parte do dia relaxando e observando o movimento. É um ótimo ouvinte e companheiro."
+          data-img="https://images.amigonaosecompra.com.br/unsafe/460x440/665504c9-8159-4678-aa13-52c08ead9a4f/b9c4884c-4d74-4870-aff9-97ed521ec6b0/b9c4884c-4d74-4870-aff9-97ed521ec6b0.jpeg?v=63916461645">
+          <img
+            src="https://images.amigonaosecompra.com.br/unsafe/460x440/665504c9-8159-4678-aa13-52c08ead9a4f/b9c4884c-4d74-4870-aff9-97ed521ec6b0/b9c4884c-4d74-4870-aff9-97ed521ec6b0.jpeg?v=63916461645"
+            alt="Gato Bob">
+          <h3>Bob</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Rio de Janeiro, RJ</span></div>
+        </div>
+
+        <div class="card2" data-nome="Jean" data-sexo="Macho" data-idade="10 meses" data-porte="Pequeno" data-raca="SRD"
+          data-local="Fortaleza, Ceará"
+          data-historia="Jean é um filhote muito brincalhão e curioso. Adora um novelo de lã e perseguir bolinhas pela casa. Muita fofura e diversão garantida!"
+          data-img="../img/jean.jpg">
+          <img src="../img/jean.jpg" alt="Gato Jean">
+          <h3>Jean</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Fortaleza, Ceará</span></div>
+        </div>
+
+        <div class="card2" data-nome="Guinho" data-sexo="Macho" data-idade="5 anos" data-porte="Médio" data-raca="SRD"
+          data-local="São Paulo, SP"
+          data-historia="Guinho é um gato experiente e muito carinhoso. Sabe a hora de brincar e a hora de pedir carinho. Um verdadeiro cavalheiro."
+          data-img="../img/guinho.jpg">
+          <img src="../img/guinho.jpg" alt="Gato Guinho">
+          <h3>Guinho</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card2" data-nome="Raj" data-sexo="Macho" data-idade="2 anos" data-porte="Médio" data-raca="Siamês"
+          data-local="Rio de Janeiro, RJ"
+          data-historia="Raj é um siamês falante e muito apegado aos donos. Gosta de 'conversar' e seguir seus humanos pela casa. Tem lindos olhos azuis."
+          data-img="../img/raj.jpg">
+          <img src="../img/raj.jpg" alt="Gato Raj">
+          <h3>Raj</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Rio de Janeiro, RJ</span></div>
+        </div>
+
+        <div class="card2" data-nome="Frajola" data-sexo="Macho" data-idade="1 ano" data-porte="Pequeno" data-raca="SRD"
+          data-local="Rio de Janeiro, RJ"
+          data-historia="Assim como o do desenho, este Frajola é divertido e um pouco atrapalhado. Vai trazer muitas risadas para sua nova família."
+          data-img="../img/frajola.jpg">
+          <img src="../img/frajola.jpg" alt="Gato Frajola">
+          <h3>Frajola</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Rio de Janeiro, RJ</span></div>
+        </div>
+
+        <div class="card2" data-nome="Jack" data-sexo="Macho" data-idade="6 anos" data-porte="Grande"
+          data-raca="Maine Coon" data-local="Fortaleza, Ceará"
+          data-historia="Jack é um gigante gentil. Um Maine Coon dócil que se dá bem com crianças e outros animais. Adora um bom carinho na cabeça."
+          data-img="../img/jack.jpg">
+          <img src="../img/jack.jpg" alt="Gato Jack">
+          <h3>Jack</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Fortaleza, Ceará</span></div>
+        </div>
+
+        <div class="card2" data-nome="Izye" data-sexo="Fêmea" data-idade="2 anos" data-porte="Pequeno" data-raca="SRD"
+          data-local="Itaquaquecetuba, SP"
+          data-historia="Izye é uma gatinha de três cores que, dizem, traz sorte! É meiga, um pouco assustada no início, mas um amor de companheira."
+          data-img="../img/izye.jpg">
+          <img src="../img/izye.jpg" alt="Gato Izye">
+          <h3>Izye</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Itaquaquecetuba, SP</span></div>
+        </div>
+
+        <div class="card2" data-nome="Filipa" data-sexo="Fêmea" data-idade="4 anos" data-porte="Médio"
+          data-raca="Angorá" data-local="São Paulo, SP"
+          data-historia="Filipa é uma gata de pelos longos e brancos, muito vaidosa. Adora ser escovada e cuidada. É calma e prefere um ambiente tranquilo."
+          data-img="../img/filipa.jpg">
+          <img src="../img/filipa.jpg" alt="Gato Filipa">
+          <h3>Filipa</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
+        </div>
+
+        <div class="card2" data-nome="Chiquinha" data-sexo="Fêmea" data-idade="1 ano" data-porte="Pequeno"
+          data-raca="SRD" data-local="Fortaleza, Ceará"
+          data-historia="Chiquinha é chorona, mas só por carinho! É uma gatinha muito apegada que vai te seguir pela casa toda pedindo atenção."
+          data-img="https://images.amigonaosecompra.com.br/unsafe/460x440/612fd733-0834-452d-8845-561817bd4539/75f84fae-8cd8-4cef-a673-15687ceb2279/75f84fae-8cd8-4cef-a673-15687ceb2279.jpg?v=63916641519">
+          <img
+            src="https://images.amigonaosecompra.com.br/unsafe/460x440/612fd733-0834-452d-8845-561817bd4539/75f84fae-8cd8-4cef-a673-15687ceb2279/75f84fae-8cd8-4cef-a673-15687ceb2279.jpg?v=63916641519"
+            alt="Gato Chiquinha">
+          <h3>Chiquinha</h3>
+          <div class="localizacao2"><img src="../img/local.png" alt="local"><span>Fortaleza, Ceará</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="animal-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn">&times;</button>
+      <img id="modal-img" src="" alt="Foto do Animal">
+      <h2 id="modal-nome">Nome do Animal</h2>
+      <div class="modal-details">
+        <p><strong>Sexo:</strong> <span id="modal-sexo"></span></p>
+        <p><strong>Idade:</strong> <span id="modal-idade"></span></p>
+        <p><strong>Porte:</strong> <span id="modal-porte"></span></p>
+        <p><strong>Raça:</strong> <span id="modal-raca"></span></p>
+        <p><strong>Localização:</strong> <span id="modal-local"></span></p>
+        <p><strong>História:</strong></p>
+        <p id="modal-historia"></p>
+      </div>
+      <a href="login.html"><button class="btn-adotar-modal">Quero Adotar!</button></a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="rodape" data-aos="fade-right">
+      <div class="rodape-conteudo">
+
+        <div class="item-rodape esquerda">
+          <h2 data-aos="fade-right">Local</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+            width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <p class="endereco">R. Paineiras, 1300 - Eldorado, Contagem - MG</p>
+        </div>
+
+        <div class="item-rodape centro" data-aos="fade-down">
+          <h2>Redes Sociais</h2>
+          <div class="redes-botoes">
+            <a href="#" class="botao-rede facebook" title="Facebook" data-aos="fade-right"></a>
+            <a href="#" class="botao-rede instagram" title="Instagram" data-aos="fade-up"></a>
+            <a href="#" class="botao-rede twitter" title="Twitter" data-aos="fade-left"></a>
+          </div>
+        </div>
+
+        <div class="item-rodape direita">
+          <h2 data-aos="fade-left">Acessibilidade</h2>
+          <div class="itens-acess">
+            <button class="botao-acess" data-aos="fade-right">Como Adotar?</button>
+            <button class="botao-acess" data-aos="fade-right">Projetos Sociais</button>
+            <button class="botao-acess" data-aos="fade-right">FAQ</button>
+            <button class="botao-acess" data-aos="fade-right">Eventos</button>
+
+            <!-- tem que arrumar animação -->
+            <button class="botao-acess">Área de Bonificação</button>
+            <button class="botao-acess">Ajuda</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../js/adotar.js"></script>
+</body>
+
+</html>

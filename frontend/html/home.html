@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patinhas Seguras</title>
+  <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="../css/home.css">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
+</head>
+
+<body>
+
+  <!-- Preloader com logo central -->
+  <div class="preloader">
+    <img src="../img/logo.png" alt="Logo Patinhas" id="preloaderLogo" />
+  </div>
+
+  <!-- 
+  =================================================
+  ==================[ CABEÇALHO ]==================
+  =================================================
+  -->
+  <header>
+    <div class="overlay">
+      <div class="top-bar">
+        <div class="logo-container">
+          <img src="../img/logo.png" alt="Logo Patinhas Seguras" class="logo-icon" id="headerLogo">
+          <div class="logo-text">
+            <span class="linha1">Patinhas</span>
+            <span class="linha2">Seguras</span>
+          </div>
+        </div>
+
+        <!-- Barra de busca centralizada -->
+        <div class="search-bar">
+          <button class="bu-pesq">
+            <img class="logo-pesq" src="../img/search.png" alt="">
+          </button>
+          <div class="search-box">
+            <input type="text" placeholder="Buscar...">
+          </div>
+        </div>
+
+        <!-- Botões à direita -->
+        <div class="auth-buttons" id="boxLogin" >
+          <a href="login.html"><button>Login</button></a>
+          <a href="register.html"><button>Registrar</button></a>
+        </div>
+
+        <div class="user-menu" id="userMenu">
+          <button class="user-btn">
+            <img src="" alt="Usuário" class="user-avatar" id="avatarimg">
+
+            <!-- 🔽 Nome + seta juntos -->
+            <div class="user-info" id="userInfo">
+              <span class="username" id="nomeperfil"></span>
+              <span class="seta">▼</span>
+            </div>
+          </button>
+
+          <div class="dropdown" id="userDropdown">
+            <a href="config.html">⚙️ Configurações</a>
+            <a href="#" onclick="logout()" class="logout-btn">🚪 Sair</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Menu de navegação principal -->
+      <nav class="nav-menu">
+        <a href="doacao.html">Doação</a>
+        <a href="adotar.html">Adotar</a>
+        <a href="veterinario.html">Veterinário</a>
+        <a href="itens_doados.html">Itens doados</a>
+        <a href="denuncia.html">Denunciar</a>
+      </nav>
+
+
+      <div class="center-content">
+        <h1>Patinhas Seguras</h1>
+        <p>
+          Patinhas Seguras é uma plataforma dedicada ao bem-estar animal, oferecendo um espaço seguro e acolhedor para
+          quem deseja adotar e trabalha na conscientização sobre a importância do cuidado com os animais.
+        </p>
+        <a href="doacao.html"><button>Contribuir</button></a>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!--
+  ======================================================================
+  ==================[ SECTION 1 SOBRE NOIS ]============================
+  ======================================================================
+  -->
+  <!-- data-aos="fade-up" -->
+  <section class="sobre-ong">
+
+    <div class="box-sobre">
+      <div class="box-titulo-sobre">
+        <h2>Sobre a ONG</h2>
+      </div>
+      <div class="box-paragrafo-sobre">
+        <p>
+          A ONG <strong>Patinhas Seguras</strong> é uma organização sem fins lucrativos dedicada à proteção, resgate e
+          reabilitação de animais abandonados e vítimas de maus-tratos.
+          Nosso compromisso é proporcionar uma nova chance de vida com amor, cuidado e dignidade, promovendo adoções
+          responsáveis e conscientização sobre a causa animal.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  ======================================================================
+  ==================[ SECTION 2 PARCEROS ]==============================
+  ======================================================================
+  -->
+
+  <section class="parceiros" data-aos="fade-up">
+    <div class="parceiros-titulo">
+      <img src="../img/dog.png" alt="Cachorro" class="cachorro-icon">
+      <h2>Parceiros</h2>
+    </div>
+
+    <div class="swiper parceirosSwiper">
+      <div class="swiper-wrapper">
+        <!-- Cada logo dentro de um slide -->
+        <div class="swiper-slide"><img src="../img/seres.png" alt="Seres"></div>
+        <div class="swiper-slide"><img src="../img/dognotic.png" alt="Dogostic"></div>
+        <div class="swiper-slide"><img src="../img/logopet.png" alt="Pet Society"></div>
+        <div class="swiper-slide"><img src="../img/petz.png" alt="Petz"></div>
+        <div class="swiper-slide"><img src="../img/centro.png" alt="Centro Veterinário"></div>
+      </div>
+
+      <!-- Setas de navegação -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <!--
+  ======================================================================
+  ==================[ SECTION 3 ANIMAIS PARA DOAÇÕES ]==================
+  ======================================================================
+  -->
+
+  <!--
+  ===========================
+  ========[ CACHORROS]=======
+  ===========================
+  -->
+
+  <section class="section-animais" data-aos="fade-right">
+    <!-- FILTROS -->
+    <!-- <div class="filtros-container">
+      <div class="filtros">
+        <select>
+          <option disabled selected>Idade</option>
+          <option>Filhote</option>
+          <option>Adulto</option>
+          <option>Idoso</option>
+        </select>
+        <select>
+          <option disabled selected>Sexo</option>
+          <option>Macho</option>
+          <option>Fêmea</option>
+        </select>
+        <select>
+          <option disabled selected>Porte</option>
+          <option>Pequeno</option>
+          <option>Médio</option>
+          <option>Grande</option>
+        </select>
+        <select>
+          <option disabled selected>Raça</option>
+          <option>SRD</option>
+          <option>Labrador</option>
+          <option>Pitbull</option>
+          <option>Poodle</option>
+        </select>
+        <select>
+          <option disabled selected>Região</option>
+          <option>Acre</option>
+          <option>Alagoas</option>
+          <option>Amapá</option>
+          <option>Amazonas</option>
+          <option>Bahia</option>
+          <option>Ceará</option>
+          <option>Distrito Federal</option>
+          <option>Espírito Santo</option>
+          <option>Goiás</option>
+          <option>Maranhão</option>
+          <option>Mato Grosso</option>
+          <option>Mato Grosso do Sul</option>
+          <option>Minas Gerais</option>
+          <option>Pará</option>
+          <option>Paraíba</option>
+          <option>Paraná</option>
+          <option>Pernambuco</option>
+          <option>Piauí</option>
+          <option>Rio de Janeiro</option>
+          <option>Rio Grande do Norte</option>
+          <option>Rio Grande do Sul</option>
+          <option>Rondônia</option>
+          <option>Roraima</option>
+          <option>Santa Catarina</option>
+          <option>São Paulo</option>
+          <option>Sergipe</option>
+          <option>Tocantins</option>
+        </select>
+        <button class="btn-buscar">Buscar</button>
+      </div>
+    </div>     -->
+
+    <!-- CARROSSEL -->
+    <div class="carrossel-container">
+      <button class="seta esquerda">❮</button>
+
+      <div class="carrossel">
+        <div class="card" data-aos="zoom-in">
+          <img src="https://i.ibb.co/mrcCWgfh/mike.jpg" alt="Cachorro">
+          <h3>Mike</h3>
+          <div class="localizacao">
+            <img src="../img/local.png" alt="local">
+            <span>São Paulo, SP</span>
+          </div>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+          <img src="https://i.ibb.co/fV1F1nfV/c2.jpg" alt="Cachorro">
+          <h3>Pepita</h3>
+          <div class="localizacao">
+            <img src="../img/local.png" alt="local">
+            <span>Minas Gerais, MG</span>
+          </div>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+          <img src="../img/bingo.jpg" alt="Cachorro">
+          <h3>Bingo</h3>
+          <div class="localizacao">
+            <img src="../img/local.png" alt="local">
+            <span>São Paulo, SP</span>
+          </div>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+          <img src="https://i.ibb.co/KpwfhnPr/c3.jpg" alt="Cachorro">
+          <h3>Brutos</h3>
+          <div class="localizacao">
+            <img src="../img/local.png" alt="local">
+            <span>Rio de Janeiro, RJ</span>
+          </div>
+        </div>
+
+        <div class="card" data-aos="zoom-in">
+          <img src="https://i.ibb.co/8gDtWWfL/c5.jpg" alt="Cachorro">
+          <h3>Bingo</h3>
+          <div class="localizacao">
+            <img src="../img/local.png" alt="local">
+            <span>Fortaleza, Ceará</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="seta direita">❯</button>
+    </div>
+
+    <div class="saibamais">
+      <a href="adotar.html"><button class="botao-saibamais">Saiba Mais</button></a>
+    </div>
+
+
+  </section>
+
+  <!--
+  =======================
+  =======[ GATOS ]=======
+  =======================
+  -->
+
+  <section class="section-animais2" data-aos="fade-left">
+    <!-- FILTROS -->
+    <!-- <div class="filtros-container2">
+      <div class="filtros2">
+        <select>
+          <option disabled selected>Idade</option>
+          <option>Filhote</option>
+          <option>Adulto</option>
+          <option>Idoso</option>
+        </select>
+        <select>
+          <option disabled selected>Sexo</option>
+          <option>Macho</option>
+          <option>Fêmea</option>
+        </select>
+        <select>
+          <option disabled selected>Porte</option>
+          <option>Pequeno</option>
+          <option>Médio</option>
+          <option>Grande</option>
+        </select>
+        <select>
+          <option disabled selected>Raça</option>
+          <option>SRD</option>
+          <option>Persa</option>
+          <option>Siamês</option>
+          <option>Maine Coon</option>
+        </select>
+        <select>
+          <option disabled selected>Região</option>
+          <option>Acre</option>
+          <option>Alagoas</option>
+          <option>Amapá</option>
+          <option>Amazonas</option>
+          <option>Bahia</option>
+          <option>Ceará</option>
+          <option>Distrito Federal</option>
+          <option>Espírito Santo</option>
+          <option>Goiás</option>
+          <option>Maranhão</option>
+          <option>Mato Grosso</option>
+          <option>Mato Grosso do Sul</option>
+          <option>Minas Gerais</option>
+          <option>Pará</option>
+          <option>Paraíba</option>
+          <option>Paraná</option>
+          <option>Pernambuco</option>
+          <option>Piauí</option>
+          <option>Rio de Janeiro</option>
+          <option>Rio Grande do Norte</option>
+          <option>Rio Grande do Sul</option>
+          <option>Rondônia</option>
+          <option>Roraima</option>
+          <option>Santa Catarina</option>
+          <option>São Paulo</option>
+          <option>Sergipe</option>
+          <option>Tocantins</option>
+        </select>
+        <button class="btn-buscar2">Buscar</button>
+      </div>
+    </div> -->
+
+    <!-- CARROSSEL -->
+
+    <!-- <div class="saibamais">
+      <a href="./doacao.html"><button class="botao-saibamais-gatos">Saiba Mais</button></a>
+    </div> -->
+    <div class="carrossel-container2">
+
+      <button class="seta2 esquerda2">❮</button>
+
+      <div class="carrossel2">
+        <div class="card2" data-aos="zoom-in">
+          <img src="https://i.ibb.co/JF22n7ZK/g3.jpg" alt="Gato">
+          <h3>Lola</h3>
+          <div class="localizacao2">
+            <img src="../img/local.png" alt="local">
+            <span>São Paulo, SP</span>
+          </div>
+        </div>
+
+        <div class="card2" data-aos="zoom-in">
+          <img src="https://i.ibb.co/V0hQm5Jf/g4.jpg" alt="Gato">
+          <h3>Gisele Bintchen</h3>
+          <div class="localizacao2">
+            <img src="../img/local.png" alt="local">
+            <span>Minas Gerais, MG</span>
+          </div>
+        </div>
+
+        <div class="card2" data-aos="zoom-in">
+          <img src="https://i.ibb.co/8nnrygcc/g5.jpg" alt="Gato">
+          <h3>Merlim</h3>
+          <div class="localizacao2">
+            <img src="../img/local.png" alt="local">
+            <span>São Paulo, SP</span>
+          </div>
+        </div>
+
+        <div class="card2" data-aos="zoom-in">
+          <img src="https://i.ibb.co/TD8WqWMW/g1.jpg" alt="Gato">
+          <h3>Bob</h3>
+          <div class="localizacao2">
+            <img src="../img/local.png" alt="local">
+            <span>Rio de Janeiro, RJ</span>
+          </div>
+        </div>
+
+        <div class="card2" data-aos="zoom-in">
+          <img src="https://i.ibb.co/JR4Sf7QR/g2.jpg" alt="Gato">
+          <h3>Chiquinha</h3>
+          <div class="localizacao2">
+            <img src="../img/local.png" alt="local">
+            <span>Fortaleza, Ceará</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="seta2 direita2">❯</button>
+    </div>
+
+    <div class="saibamais">
+      <a href="adotar.html"><button class="botao-saibamais-gatos">Saiba Mais</button></a>
+    </div>
+  </section>
+
+
+
+
+  <!--
+  =========================================================
+  ==================[ COMENTARIOS ]==================
+  ==========================================================
+  -->
+  <section>
+    <div class="nosso_trabalho">
+      <div class="box_paragrafo">
+        <h2>
+          O que estão falando sobre nosso trabalho?
+        </h2>
+        <p>Amor quanto mais se divide, mais se multiplica.</p>
+        <p>Adotou por meio da Patinhas e quer compartilhar sua experiência?</p>
+        <p>Estamos ansiosos para conhecer sua história e inspirar outras pessoas!</p>
+        <p>Envie o seu depoimento para a gente</p>
+      </div>
+      <div class="box_comentarios">
+        <div class="comentario ativo">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=100&q=80"
+              alt="Mariana" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Mariana</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Thor</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Adotar Thor foi uma das decisões mais especiais da minha vida. Ele trouxe amor,
+            carinho e companheirismo para minha casa. Sou muito grata à Patinhas."</p>
+          <span class="autor">— Mariana S.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80"
+              alt="Rafael" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Rafael</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Luna</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Adotar a Luna mudou minha vida. Ela trouxe alegria e me ensinou o verdadeiro
+            significado da amizade. Todos os dias são uma aventura diferente com ela ao meu lado."</p>
+          <span class="autor">— Rafael D.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80"
+              alt="Aline" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Aline</span>
+                <div class="avaliacao">⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Simba</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Simba é mais do que um gato, é minha companhia constante nos momentos bons e
+            ruins. A adoção foi uma das melhores decisões que já tomei."</p>
+          <span class="autor">— Aline T.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=100&q=80"
+              alt="Carlos" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Carlos</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Max</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Max é meu protetor e melhor amigo. Ele me acompanha em todas as caminhadas e é
+            pura energia. Adotar um cão fez minha rotina muito mais feliz."</p>
+          <span class="autor">— Carlos S.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=100&q=80"
+              alt="Fernanda" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Fernanda</span>
+                <div class="avaliacao">⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Mel</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"A Mel é um raio de sol em minha casa. Seu jeito animado e carinhoso conquistou
+            toda minha família. A Patinhas facilitou muito esse encontro."</p>
+          <span class="autor">— Fernanda M.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=100&q=80"
+              alt="Gabriel" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Gabriel</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Bella</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Com a Bella, descobri um amor incondicional. Ela é esperta, dócil e faz meus dias
+            mais leves. A adoção é um ato de amor que recomendo para todos."</p>
+          <span class="autor">— Gabriel R.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80"
+              alt="Larissa" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Larissa</span>
+                <div class="avaliacao">⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Rocky</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"O Rocky trouxe paz e aconchego para minha vida agitada. Adotar foi uma
+            experiência transformadora que me ensinou a importância do cuidado e respeito."</p>
+          <span class="autor">— Larissa A.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80"
+              alt="Rafael" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Rafael</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Zoe</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"A Zoe tem um jeito único de alegrar meus dias. Com ela, aprendi o valor da
+            paciência e do companheirismo. A Patinhas realmente faz a diferença."</p>
+          <span class="autor">— Rafael M.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=100&q=80"
+              alt="Isabela" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Isabela</span>
+                <div class="avaliacao">⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Maya</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Maya é uma pequena grande amiga. Seu amor me inspira a ser melhor todos os dias.
+            Adotar foi o começo de uma linda história."</p>
+          <span class="autor">— Isabela P.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=100&q=80"
+              alt="Thiago" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Thiago</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Bilu</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Bilu é pura energia e felicidade. Ele me acompanha nas trilhas e me ajuda a
+            relaxar após um dia estressante. Adotar foi um presente para mim."</p>
+          <span class="autor">— Thiago R.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80"
+              alt="Juliana" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Juliana</span>
+                <div class="avaliacao">⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Nina</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Nina é meu raio de luz. Adotá-la trouxe mais amor e alegria para meu lar. A
+            experiência foi incrível e recomendo a todos que amam animais."</p>
+          <span class="autor">— Juliana F.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80"
+              alt="Pedro" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Pedro</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Toby</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Toby é meu parceiro nas corridas matinais e nas tardes de praia. A adoção mudou
+            minha rotina para melhor e me fez entender o valor do amor verdadeiro."</p>
+          <span class="autor">— Pedro F.</span>
+        </div>
+
+        <div class="comentario">
+          <div class="cabecalho_comentario">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=100&q=80"
+              alt="Camila" class="foto_usuario" />
+            <div class="info_usuario">
+              <div class="linha_nome">
+                <span class="nome_usuario">Camila</span>
+                <div class="avaliacao">⭐⭐⭐⭐⭐</div>
+              </div>
+              <span class="nome_animal">Adotou: Marley</span>
+            </div>
+          </div>
+          <p class="texto_comentario">"Marley tem um coração enorme e uma energia contagiante. A adoção me trouxe muita
+            felicidade e a certeza de que fiz a escolha certa."</p>
+          <span class="autor">— Camila D.</span>
+        </div>
+
+      </div>
+  </section>
+
+  <!--
+  =========================================================
+  ==================[ SECTION 4 DENUNCIA ]==================
+  ==========================================================
+  -->
+
+  <section class="container-principal" data-aos="zoom-in">
+    <p class="msg-denuncia">"Abandonar animais é crime e um ato de crueldade. Eles sofrem com fome, doenças e<br>
+      maus-tratos. Se presenciar abandono, denuncie. Adotar é um compromisso de amor e<br> responsabilidade para a vida
+      toda."</p>
+
+
+
+    <img src="../img/alerta.png" alt="Sinal de Alerta" class="img-alerta" data-aos="fade-right">
+
+    <img src="../img/pets.png" alt="Pets: cachorro, gato e filhote" class="img-pets" data-aos="zoom-in">
+
+    <a href="denuncia.html"><button class="bu-denuncia" data-aos="fade-right">Denuncie</button></a>
+
+  </section>
+
+  <!--
+  ==========================================================
+  ===============[ FACTION (RODA PE DO SITE)]===============
+  ==========================================================
+  -->
+
+  <footer>
+    <div class="rodape" data-aos="fade-down">
+      <div class="rodape-conteudo">
+
+        <div class="item-rodape esquerda">
+          <h2 data-aos="fade-right">Local</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+            width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <p class="endereco">R. Paineiras, 1300 - Eldorado, Contagem - MG</p>
+        </div>
+
+        <div class="item-rodape centro" data-aos="fade-down">
+          <h2>Redes Sociais</h2>
+          <div class="redes-botoes">
+            <a href="#" class="botao-rede facebook" title="Facebook" data-aos="fade-right"></a>
+            <a href="#" class="botao-rede instagram" title="Instagram" data-aos="fade-up"></a>
+            <a href="#" class="botao-rede twitter" title="Twitter" data-aos="fade-left"></a>
+          </div>
+        </div>
+
+        <div class="item-rodape direita" data-aos="fade-right">
+          <h2 data-aos="fade-left">Acessibilidade</h2>
+          <div class="itens-acess">
+            <button class="botao-acess" data-aos="fade-right">Como Adotar?</button>
+            <button class="botao-acess" data-aos="fade-right">Projetos Sociais</button>
+            <button class="botao-acess" data-aos="fade-right">FAQ</button>
+            <button class="botao-acess" data-aos="fade-right">Eventos</button>
+
+            <!-- tem que arrumar animação -->
+            <button class="botao-acess">Área de Bonificação</button>
+            <button class="botao-acess">Ajuda</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- <script type="module" src="../js/home.js"></script> -->
+  <script src="../js/home.js"></script>
+
+
+
+
+</body>
+
+</html>

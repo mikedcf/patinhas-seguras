@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS - Denuncia</title>
+    <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/denuncia.css">
+    
+
+</head>
+
+<body>
+
+    <!--
+  =================================================
+  ==================[ CABEÇALHO ]==================
+  =================================================
+  -->
+
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo-container">
+                <a href="home.html"><img src="../img/logo.png" alt="Logo Patinhas" class="logo-icon"></a>
+                <span class="logo-text">
+                    <span class="linha1">Patinhas</span><br>
+                    <span class="linha2">Seguras</span>
+                </span>
+            </div>
+
+            <!-- Barra de busca e nav centralizados -->
+            <div class="center-section">
+                <div class="search-bar">
+                    <button class="bu-pesq">
+                        <img class="logo-pesq" src="../img/search.png" alt="">
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                    </div>
+                </div>
+
+                <!-- Menu de navegação ao lado da busca -->
+                <nav class="nav-menu">
+                    <a href="home.html">Home</a>
+                    <a href="doacao.html">Doação</a>
+                    <a href="adotar.html">Adotar</a>
+                    <a href="veterinario.html">Veterinário</a>
+                    <a href="itens_doados.html">Itens doados</a>
+                </nav>
+            </div>
+
+            <!-- Botões à direita -->
+            <div class="auth-buttons" id="boxLogin">
+                <a href="login.html"><button>Login</button></a>
+                <a href="register.html"><button>Registro</button></a>
+            </div>
+
+            <div class="user-menu" id="userMenu" >
+                <button class="user-btn">
+                    <img src="" alt="Usuário" class="user-avatar" id="avatarimg">
+
+                    <!-- 🔽 Nome + seta juntos -->
+                    <div class="user-info">
+                        <span class="username" id="nomeperfil">Usuário</span>
+                        <span class="seta">▼</span>
+                    </div>
+                </button>
+
+                <div class="dropdown" id="userDropdown">
+                    <a href="config.html">⚙️ Configurações</a>
+                    <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="maus_tratos">
+        <div class="texto">
+            <h1>Denuncie maus-tratos aos animais
+                <br>— eles não têm voz, mas você pode agir.
+                Agressões, abandono e negligência são crimes.<br>
+                Seja a diferença: proteja, denuncie, salve vidas. <br>
+            </h1>
+        </div>
+        <div class="imagem">
+            <img class="cachorro_denuncie" src="../img/1557_o-vira-lata-e1602268125338.jpg"
+                alt="Denuncie maus tratos" />
+        </div>
+    </section>
+    <!-- <section class="o_que_e">
+        <h1>O que são maus-tratos aos animais?</h1>
+        <p>Maus-tratos aos animais referem-se a qualquer ação ou omissão que cause dor, sofrimento, medo, lesões físicas ou psicológicas, bem como à privação de <br>necessidades básicas de qualquer espécie sob responsabilidade humana. <br>
+        Esse conceito vai além da violência física, abrangendo também negligência, abusos emocionais,
+        exploração excessiva e condições de vida inadequadas.<p>
+
+
+    </section> -->
+    <section class="resgate-container">
+        <!-- Caixa de texto com a notícia -->
+        <div class="resgate-noticia">
+            <h2>Mais de 30 animais resgatados encontram novos lares no interior de SP</h2>
+
+            <p>Durante o último final de semana, uma operação conjunta resgatou <strong>34 animais</strong> — cães,
+                gatos e até um coelho — de uma chácara abandonada no interior de São Paulo, onde viviam em situação de
+                abandono e maus-tratos.</p>
+
+            <p>A ação foi realizada pela Polícia Ambiental com apoio de ONGs e voluntários locais. Após o resgate, os
+                animais receberam atendimento veterinário e, rapidamente, começaram a ser encaminhados para lares
+                temporários e adoção responsável.</p>
+
+            <p>O número de interessados superou as expectativas: em menos de uma semana, <strong>25 animais já foram
+                    adotados</strong>. Os demais seguem em tratamento e aguardam uma nova família.</p>
+
+            <blockquote>“É emocionante ver esses animais recuperados e recebendo amor. Essa é a maior recompensa do
+                nosso trabalho”, afirmou Mariana Lopes, coordenadora da ONG envolvida.</blockquote>
+
+            <p>Este resgate mostra que, com união e consciência, podemos transformar vidas e oferecer novas chances a
+                quem precisa de cuidado e carinho.🐾</p>
+        </div>
+
+        <!-- Caixa lateral com imagem, frase e botão -->
+        <div class="resgate-side">
+            <img src="../img/resgate.jpg" alt="Imagem de animal resgatado">
+            <p class="frase-incentivo">Ajude a mudar histórias como esta. <br><strong>Denuncie maus-tratos.</strong></p>
+            <a href="#" class="botao-denunciar" id="btnDenunciar">Fazer denúncia</a>
+        </div>
+    </section>
+
+    <section>
+        <article class="o_que_e">
+            <h1>O que são maus-tratos aos animais?</h1>
+            <p>Maus-tratos aos animais referem-se a qualquer ação ou omissão que cause dor, sofrimento, medo, lesões
+                físicas ou psicológicas, bem <br>como à privação de necessidades básicas de qualquer espécie sob
+                responsabilidade humana. <br>
+                Esse conceito vai além da violência física, abrangendo também negligência, abusos emocionais,
+                exploração excessiva e condições <br> de vida inadequadas.
+            <p>
+        </article>
+
+    </section>
+    <section class="exemplos_maus">
+        <h1>Exemplos de maus-tratos físicos e psicológicos:</h1>
+        <ul>
+            <li><strong>Agressões físicas:</strong> espancamentos, chutes, fraturas, queimaduras, mutilações e
+                envenenamentos.</li>
+            <li><strong>Privação de alimentação ou água:</strong> deixar o animal sem acesso à comida ou à água potável,
+                prolongando o sofrimento por fome e sede.</li>
+            <li><strong>Ausência de abrigo ou manutenção em ambientes insalubres:</strong> expor os animais à chuva, ao
+                frio ou ao calor intenso, ou mantê-los em espaços apertados, sujos, sem ventilação ou iluminação
+                adequadas.</li>
+            <li><strong>Negligência no atendimento veterinário:</strong> não oferecer cuidados médicos diante de
+                ferimentos, doenças ou sofrimento, seja por descaso ou omissão intencional.</li>
+            <li><strong>Isolamento e abandono:</strong> deixar o animal nas ruas, em imóveis vazios ou em confinamento
+                solitário, sem contato social ou estímulo.</li>
+        </ul>
+    </section>
+    <section>
+        <div class="legislacao">
+            <h1>Legislação brasileira sobre maus-tratos aos animais</h1>
+            <p>
+                Maus-tratos aos animais constituem crime pela legislação brasileira. A base desta proteção está na Lei
+                de Crimes Ambientais
+                <a href="https://www.planalto.gov.br/ccivil_03/LEIS/L9605.htm">(Lei&nbsp;9.605/1998)</a>, cujo artigo 32
+                prevê detenção e multa para quem cometer abusos, violência, ferimentos ou mutilações em animais de
+                qualquer espécie.
+                Posteriormente, em 2020, a proteção para cães e gatos foi ampliada pela
+                <a
+                    href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/L14064.htm">Lei&nbsp;14.064/2020</a>,
+                que aumentou a pena para reclusão de 2 a 5 anos.
+
+                Além disso, estados e municípios também possuem normativas específicas que reforçam os direitos dos
+                animais e regulam as denúncias.
+            </p>
+        </div>
+    </section>
+    <section class="faq-denuncia">
+        <h1>Perguntas frequentes sobre denúncias de maus-tratos</h1>
+
+        <div class="faq-item">
+            <h2>🔎 O que acontece após uma denúncia?</h2>
+            <p>
+                Quando você realiza uma denúncia, as informações são encaminhadas às autoridades responsáveis — como a
+                Polícia Militar, órgãos ambientais e o Ministério Público. Esses órgãos analisam a denúncia, realizam
+                vistorias e, se necessário, resgatam os animais e responsabilizam os agressores legalmente.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h2>📷 Preciso apresentar provas para denunciar?</h2>
+            <p>
+                Não é obrigatório apresentar provas. Porém, <strong>fotos, vídeos ou testemunhos</strong> ajudam muito
+                no processo, tornando a investigação mais rápida e eficaz.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h2>🐾 Quais animais estão protegidos por lei?</h2>
+            <p>
+                <strong>Todos os animais.</strong> As leis brasileiras contra maus-tratos se aplicam a:
+            <ul>
+                <li>Animais domésticos (como cães e gatos);</li>
+                <li>Animais silvestres (como pássaros e animais nativos);</li>
+                <li>Animais de produção (como bois, galinhas, porcos etc.).</li>
+            </ul>
+            Nenhum animal pode ser submetido à crueldade, abandono ou privação de cuidados essenciais.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h2>🌐 Posso denunciar maus-tratos que vi na internet?</h2>
+            <p>
+                Sim! Você pode e deve denunciar conteúdos de maus-tratos divulgados online. Para isso, use a plataforma
+                da <strong>SaferNet</strong>:<br>
+                🔗 <a href="https://www.safernet.org.br" target="_blank">www.safernet.org.br</a><br>
+                Ela permite denunciar casos de crueldade animal, apologia à violência e comércio ilegal de animais em
+                redes sociais ou sites.
+            </p>
+        </div>
+    </section>
+    <section class="consciencia-animal">
+        <h1>Conscientização e responsabilidade</h1>
+
+        <div class="consciencia-item">
+            <p>
+                <strong>Proteger os animais é responsabilidade de todos nós.</strong><br>
+                Ao conhecer, reconhecer e denunciar situações de crueldade, você contribui diretamente para a construção
+                de um mundo mais justo, seguro e compassivo para todos os seres vivos.
+            </p>
+        </div>
+
+        <div class="consciencia-item">
+            <p>
+                Por isso, compartilhe essas informações. Incentive sua rede de amigos, familiares e comunidade a ficarem
+                atentos — e, sempre que necessário, acione os canais oficiais de denúncia. <strong>Sua atitude pode
+                    salvar vidas e inspirar mais pessoas a fazerem o mesmo.</strong>
+            </p>
+        </div>
+
+        <div class="consciencia-item">
+            <p>
+                Pequenas ações no dia a dia, como respeitar, cuidar e defender os animais, ajudam a formar uma sociedade
+                mais ética e empática — onde todos os seres são tratados com a dignidade que merecem.
+            </p>
+        </div>
+    </section>
+    <div id="overlay">
+        <div class="form-container">
+            <form action="#" method="post" id="Formulario">
+                <!-- Botão para fechar -->
+
+                <button type="button" id="btn-fechar">X</button>
+                <!-- 1. Data -->
+                <label for="data">Data da denúncia:</label>
+                <input type="date" id="data" name="data" required>
+
+                <!-- 2. Denunciante -->
+                <label for="nomeDenunciante">Nome do denunciante (opcional):</label>
+                <input type="text" id="nomeDenunciante" name="nomeDenunciante">
+
+                <label for="telefone">Telefone de contato:</label>
+                <input type="tel" id="telefone" name="telefone">
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email">
+
+                <label>Deseja manter o anonimato?</label>
+                <div class="checkbox-group">
+                    <input id="anonimato-sim" type="radio" name="anonimato" value="Sim" checked> Sim
+                    <input id="anonimato-nao" type="radio" name="anonimato" value="Não"> Não
+                </div>
+
+                <!-- 3. Vítima -->
+                <label for="nomeVitima">Nome da vítima:</label>
+                <input type="text" id="nomeVitima" name="nomeVitima">
+
+                <label for="idadeVitima">Idade ou data de nascimento:</label>
+                <input type="text" id="idadeVitima" name="idadeVitima">
+
+                <label for="generoVitima">Gênero:</label>
+                <input type="text" id="generoVitima" name="generoVitima">
+
+                <label for="enderecoVitima">Endereço da vítima (se conhecido):</label>
+                <input type="text" id="enderecoVitima" name="enderecoVitima">
+
+                <label for="relacaoVitima">Relação com o(s) agressor(es):</label>
+                <input type="text" id="relacaoVitima" name="relacaoVitima">
+
+                <!-- 4. Agressor -->
+                <label for="nomeAgressor">Nome do(s) agressor(es):</label>
+                <input type="text" id="nomeAgressor" name="nomeAgressor">
+
+                <label for="idadeAgressor">Idade aproximada:</label>
+                <input type="text" id="idadeAgressor" name="idadeAgressor">
+
+                <label for="relacaoAgressor">Grau de parentesco/relação com a vítima:</label>
+                <input type="text" id="relacaoAgressor" name="relacaoAgressor">
+
+                <label for="enderecoAgressor">Endereço (se conhecido):</label>
+                <input type="text" id="enderecoAgressor" name="enderecoAgressor">
+
+                <!-- 5. Local do ocorrido -->
+                <label for="localOcorrido">Local do ocorrido (endereço ou descrição):</label>
+                <textarea id="localOcorrido" name="localOcorrido"></textarea>
+
+                <label for="dataHoraFato">Data e hora aproximada do fato:</label>
+                <input type="text" id="dataHoraFato" name="dataHoraFato">
+
+                <!-- 6. Descrição -->
+                <label for="descricao">Descrição detalhada da situação de maus-tratos:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+
+                <!-- 7. Provas -->
+                <label>Existem provas (fotos, vídeos, testemunhas)?</label>
+                <div class="checkbox-group">
+                    <input id="fotos" type="radio" name="provas" onclick="getcheckbox()" value="Sim"> Sim
+                    <input id="fotos" type="radio" name="provas" onclick="getcheckbox()" value="Não" checked> Não
+                </div>
+                <!-- Caixa para upload de arquivos (escondida por padrão) -->
+                <div id="uploadBox" style="display: none; margin-top: 10px;">
+                    <label for="arquivoProvas">Envie as provas (imagem ou vídeo):</label>
+                    <input type="file" id="arquivoProvas" name="arquivoProvas" accept="image/*,video/*" multiple>
+                </div>
+
+                <label for="detalhesProvas">Se sim, descreva quais:</label>
+                <textarea id="detalhesProvas" name="detalhesProvas"></textarea>
+
+                <!-- 8. Informações adicionais -->
+                <label for="informacoesAdicionais">Outras informações relevantes:</label>
+                <textarea id="informacoesAdicionais" name="informacoesAdicionais"></textarea>
+
+                <!-- 9. Assinatura -->
+                <label for="assinatura">Nome completo (caso não anônimo):</label>
+                <input type="text" id="assinatura" name="assinatura">
+
+                <!-- Botão -->
+                <button type="submit" id="submitbnt">Enviar Denúncia</button>
+            </form>
+        </div>
+    </div>
+    
+  <footer>
+    <div class="rodape" data-aos="fade-down">
+      <div class="rodape-conteudo">
+
+        <div class="item-rodape esquerda">
+          <h2 data-aos="fade-right">Local</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+            width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <p class="endereco">R. Paineiras, 1300 - Eldorado, Contagem - MG</p>
+        </div>
+
+        <div class="item-rodape centro" data-aos="fade-down">
+          <h2>Redes Sociais</h2>
+          <div class="redes-botoes" >
+            <a href="#" class="botao-rede facebook" title="Facebook" data-aos="fade-right"></a>
+            <a href="#" class="botao-rede instagram" title="Instagram" data-aos="fade-up"></a>
+            <a href="#" class="botao-rede twitter" title="Twitter" data-aos="fade-left"></a>
+          </div>
+        </div>
+
+        <div class="item-rodape direita" data-aos="fade-right">
+          <h2 data-aos="fade-left">Acessibilidade</h2>
+          <div class="itens-acess">
+            <button class="botao-acess" data-aos="fade-right">Como Adotar?</button>
+            <button class="botao-acess" data-aos="fade-right">Projetos Sociais</button>
+            <button class="botao-acess" data-aos="fade-right">FAQ</button>
+            <button class="botao-acess" data-aos="fade-right">Eventos</button>
+
+            <!-- tem que arrumar animação -->
+            <button class="botao-acess">Área de Bonificação</button> 
+            <button class="botao-acess" >Ajuda</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/denuncia.js"></script>
+</body>
+
+</html>

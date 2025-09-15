@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS - Doação</title>
+
+  <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/doacao.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <!--
+  =================================================
+  ==================[ CABEÇALHO ]==================
+  =================================================
+  -->
+
+  <header class="header">
+    <div class="top-bar">
+      <div class="logo-container">
+        <a href="home.html"><img src="../img/logo.png" alt="Logo Patinhas" class="logo-icon"></a>
+        <span class="logo-text">
+          <span class="linha1">Patinhas</span><br>
+          <span class="linha2">Seguras</span>
+        </span>
+      </div>
+
+      <!-- Barra de busca e nav centralizados -->
+      <div class="center-section">
+        <div class="search-bar">
+          <button class="bu-pesq">
+            <img class="logo-pesq" src="../img/search.png" alt="">
+          </button>
+          <div class="search-box">
+            <input type="text" placeholder="Buscar...">
+          </div>
+        </div>
+
+        <!-- Menu de navegação ao lado da busca -->
+        <nav class="nav-menu">
+          <a href="home.html">Home</a>
+          <a href="adotar.html">Adotar</a>
+          <a href="veterinario.html">Veterinário</a>
+          <a href="itens_doados.html">Itens doados</a>
+          <a href="denuncia.html">Denunciar</a>
+        </nav>
+      </div>
+
+      <!-- Botões à direita -->
+      <div class="auth-buttons" id="boxLogin">
+        <a href="login.html"><button>Login</button></a>
+        <a href="register.html"><button>Registro</button></a>
+      </div>
+
+      <div class="user-menu" id="userMenu" >
+        <button class="user-btn">
+          <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" alt="Usuário" class="user-avatar" id="avatarimg">
+
+          <!-- 🔽 Nome + seta juntos -->
+          <div class="user-info">
+            <span class="username" id="nomeperfil">Usuário</span>
+            <span class="seta">▼</span>
+          </div>
+        </button>
+
+        <div class="dropdown" id="userDropdown">
+          <a href="config.html">⚙️ Configurações</a>
+          <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!--
+  =================================================
+  ==============[ SECTION 1 SLIDERS]===============
+  =================================================
+  -->
+
+  <!-- SLIDER -->
+  <section class="slider-doacao">
+    <div class="slider-container">
+      <div class="slide fade"><img src="../img/slider1.jpg" alt="Pessoa alimentando cão resgatado" /></div>
+      <div class="slide fade"><img src="../img/slider2.jpg" alt="Voluntários cuidando de gatos" /></div>
+      <div class="slide fade"><img src="../img/slider3.jpg" alt="Entrega de doações" /></div>
+    </div>
+  </section>
+
+  <!--
+  =================================================
+  ========[ SECTION 2 IMPORTÂNCIA DA DOAÇÃ]========
+  =================================================
+  -->
+
+  <!-- IMPORTÂNCIA DA DOAÇÃO -->
+  <section class="importancia-doacao">
+    <h2>Por que sua doação é importante?</h2>
+    <p>Somos uma ONG que depende de corações solidários como o seu. Com sua ajuda conseguimos:</p>
+    <ul>
+      <li>Comprar ração para cães e gatos abandonados</li>
+      <li>Oferecer camas, cobertores e brinquedos</li>
+      <li>Adquirir medicamentos e pagar tratamentos</li>
+      <li>Melhorar o abrigo e promover adoções responsáveis</li>
+    </ul>
+    <p>Você pode doar <strong>dinheiro</strong>, ou itens como <strong>ração, brinquedos, caminhas, remédios e muito
+        mais</strong>.</p>
+  </section>
+
+
+  <!--
+  =================================================
+  ===========[ SECTION 3 FORMAS DE DOAÇÃO]=========
+  =================================================
+  -->
+
+  <!-- FORMAS DE DOAÇÃO -->
+  <section class="formas-doacao">
+    <h2>Como ajudar</h2>
+    <p>Clique em um dos botões abaixo para escolher sua forma de doação:</p>
+
+    <div class="botoes-doacao">
+      <button class="botao-doar" onclick="mostrarQR()">Doar com Pix</button>
+      <a href="https://pagamento.externo.com/cartao" target="_blank">
+        <button class="botao-doar">Doar com Cartão</button>
+      </a>
+      <a href="itens_doados.html"><button class="botao-doar" onclick="mostrarQR()">Doar itens</button></a>
+    </div>
+
+    <div class="qr-container" id="qrContainer">
+      <h3>Escaneie o QR Code para doar via Pix</h3>
+      <img src="../img/qrcode.png" alt="QR Code para doação via Pix">
+    </div>
+
+
+  </section>
+
+  <footer>
+    <div class="rodape" data-aos="fade-right">
+      <div class="rodape-conteudo">
+
+        <div class="item-rodape esquerda">
+          <h2 data-aos="fade-right">Local</h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.679000335113!2d-44.03880772477242!3d-19.937927381452358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa695ea5dd82e1d%3A0xca75cdd5bbcad1d6!2sFaculdade%20Senac%20-%20Contagem!5e0!3m2!1spt-BR!2sbr!4v1749856096182!5m2!1spt-BR!2sbr"
+            width="100%" height="120" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <p class="endereco">R. Paineiras, 1300 - Eldorado, Contagem - MG</p>
+        </div>
+
+        <div class="item-rodape centro" data-aos="fade-down">
+          <h2>Redes Sociais</h2>
+          <div class="redes-botoes">
+            <a href="#" class="botao-rede facebook" title="Facebook" data-aos="fade-right"></a>
+            <a href="#" class="botao-rede instagram" title="Instagram" data-aos="fade-up"></a>
+            <a href="#" class="botao-rede twitter" title="Twitter" data-aos="fade-left"></a>
+          </div>
+        </div>
+
+        <div class="item-rodape direita">
+          <h2 data-aos="fade-left">Acessibilidade</h2>
+          <div class="itens-acess">
+            <button class="botao-acess" data-aos="fade-right">Como Adotar?</button>
+            <button class="botao-acess" data-aos="fade-right">Projetos Sociais</button>
+            <button class="botao-acess" data-aos="fade-right">FAQ</button>
+            <button class="botao-acess" data-aos="fade-right">Eventos</button>
+
+            <!-- tem que arrumar animação -->
+            <button class="botao-acess">Área de Bonificação</button>
+            <button class="botao-acess">Ajuda</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../js/doacao.js"></script>
+</body>
+
+</html>
