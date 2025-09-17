@@ -125,9 +125,9 @@
         <div class="card" data-nome="Mike" data-sexo="Macho" data-idade="2 anos" data-porte="Médio"
           data-raca="SRD (Sem Raça Definida)" data-local="São Paulo, SP"
           data-historia="Mike é um cachorrinho muito dócil e brincalhão, resgatado das ruas. Se dá bem com outros cães e adora um carinho na barriga. Está em busca de um lar amoroso."
-          data-img="https://images.amigonaosecompra.com.br/unsafe/460x440/1042a08a-be60-4fe8-b8e8-8052a16f9092/009a5625-2eef-48f3-9287-11279f1972a3/009a5625-2eef-48f3-9287-11279f1972a3.jpg?v=63818318419">
+          data-img="https://i.ibb.co/fd3PWyHx/mike.jpg">
           <img
-            src="https://images.amigonaosecompra.com.br/unsafe/460x440/1042a08a-be60-4fe8-b8e8-8052a16f9092/009a5625-2eef-48f3-9287-11279f1972a3/009a5625-2eef-48f3-9287-11279f1972a3.jpg?v=63818318419"
+            src="https://i.ibb.co/fd3PWyHx/mike.jpg"
             alt="Cachorro Mike">
           <h3>Mike</h3>
           <div class="localizacao"><img src="../img/local.png" alt="local"><span>São Paulo, SP</span></div>
@@ -239,7 +239,7 @@
     </div>
   </section>
 
-  <section class="section-animais2 hidden" id="secao-gatos">
+  <section class="section-animais2 hidden" id="secao-gatos" name="gatos">
     <div class="filtros-container2">
       <div class="filtros2">
         <select>
@@ -396,6 +396,7 @@
     </div>
   </section>
 
+  <!-- Modal de Detalhes do Animal -->
   <div id="animal-modal" class="modal-overlay">
     <div class="modal-content">
       <button class="modal-close-btn">&times;</button>
@@ -411,6 +412,66 @@
         <p id="modal-historia"></p>
       </div>
       <a href="login.html"><button class="btn-adotar-modal">Quero Adotar!</button></a>
+    </div>
+  </div>
+
+  <!-- Botão Flutuante para Adicionar Animal -->
+  <button id="btn-open-add-modal" class="btn-add-animal">+</button>
+
+  <!-- Modal para Adicionar Animal -->
+  <div id="add-animal-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn">&times;</button>
+      <h2>Cadastrar Novo Animal</h2>
+      <form id="add-animal-form" autocomplete="off">
+        <div class="form-group">
+          <label for="animal-especie">Espécie:</label>
+          <select id="animal-especie" name="especie" required>
+            <option value="cachorro">Cachorro</option>
+            <option value="gato">Gato</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="animal-nome">Nome:</label>
+          <input type="text" id="animal-nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="animal-sexo">Sexo:</label>
+          <select id="animal-sexo" name="sexo" required>
+            <option value="Macho">Macho</option>
+            <option value="Fêmea">Fêmea</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="animal-idade">Idade:</label>
+          <input type="text" id="animal-idade" name="idade" placeholder="Ex: 2 anos" required>
+        </div>
+        <div class="form-group">
+          <label for="animal-porte">Porte:</label>
+          <select id="animal-porte" name="porte" required>
+            <option value="Pequeno">Pequeno</option>
+            <option value="Médio">Médio</option>
+            <option value="Grande">Grande</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="animal-raca">Raça:</label>
+          <input type="text" id="animal-raca" name="raca" value="SRD" required>
+        </div>
+        <div class="form-group">
+          <label for="animal-local">Localização:</label>
+          <input type="text" id="animal-local" name="local" placeholder="Ex: São Paulo, SP" required>
+        </div>
+         <div class="form-group">
+          <label for="animal-historia">História:</label>
+          <textarea id="animal-historia" name="historia" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="animal-img">Foto:</label>
+          <input type="file" id="animal-img-upload" name="img" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn-adotar-modal">Cadastrar Animal</button>
+      </form>
     </div>
   </div>
 
@@ -455,7 +516,7 @@
     </div>
   </footer>
 
-
+  <div class="notification-container" id="notification-container"></div>
 
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

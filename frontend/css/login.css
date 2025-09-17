@@ -25,6 +25,41 @@ body, html {
 }
 
 
+/* 
+================================================
+======== [ COR DO SCROLL ] ========
+================================================
+*/
+/* Largura da barra */
+::-webkit-scrollbar {
+  width: 12px; /* largura da barra lateral */
+  height: 12px; /* altura para scroll horizontal */
+}
+
+/* Fundo da barra */
+::-webkit-scrollbar-track {
+  background: #ffffff; /* cor do fundo */
+}
+
+/* "Thumb" (parte que arrasta) */
+::-webkit-scrollbar-thumb {
+  background: #ff0000; /* cor do thumb */
+  border-radius: 10px; /* bordas arredondadas */
+}
+
+/* Thumb ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #cc0000;
+}
+
+
+/* 
+================================================
+======== [ ESTILOS GERAIS DO HEADER ] ========
+================================================
+*/
+
+
 .header {
   background-image: linear-gradient(to right, #2b4133, #92572d);
   /* fundo translúcido escuro */
@@ -877,6 +912,107 @@ header div div nav a {
 .botao-acess:hover {
   background-color: rgba(255, 255, 255, 0.15);
   transform: translateX(-2px);
+}
+
+
+/*
+=================================================
+=============[ NOTIFICAÇÕES ]==================
+=================================================
+*/
+
+/* Container de todas notificações */
+.notification-container {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+/* Notificação base */
+.notification {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #813103;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  min-width: 280px;
+  max-width: 350px;
+  animation: slideIn 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ícone/foto */
+.notification img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.notification .text {
+  flex: 1;
+  color: #fff;
+}
+
+.notification .title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.notification .message {
+  font-size: 14px;
+  opacity: 0.9;
+  color: #fff;
+}
+
+/* Barra de progresso */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.progress {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+}
+
+/* Tipos de alerta */
+.success { background: #1e4620; }
+.success .progress { background: #4caf50; }
+
+.error { background: #4a1e1e; }
+.error .progress { background: #f44336; }
+
+.info { background: #1e3a5f; }
+.info .progress { background: #2196f3; }
+
+.warning { background: #4a3a1e; }
+.warning .progress { background: #ff9800; }
+
+/* Animações */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+@keyframes shrink {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
 }
 
 

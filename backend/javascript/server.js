@@ -16,11 +16,16 @@ const {
     listarDoacoes,
     inserirDoacao,
     atualizarDoacao,
-    deletarDoacao
+    deletarDoacao,
+    getPerfil,
+    updatePerfil,
+    setupDatabase
 } = require('./controller')
 
 // ===============================================================
 // ===============[ Configuração da aplicação ]==================================
+
+
 
 const app = express();
 
@@ -48,6 +53,7 @@ app.use(session({
 
 
 // =-==-=-=-=-=-=-=-=-=-=--=-=- [ Rota teste ] =-==-=-=-=-=-=-=-=-=-=--=-=-
+setupDatabase()
 
 app.get('/hello', (req, res) => {
     res.send('ola mundo');
@@ -61,6 +67,8 @@ app.get('/api/v1/user/auth', autenticacao);
 
 app.get('/api/v1/user/logout', logout);
 
+app.get('/api/v1/usuario/perfil', getPerfil);
+
 // // ------- API POST
 app.post('/api/v1/user/login', login);
 
@@ -69,7 +77,13 @@ app.post('/api/v1/user/cadastro', cadastro);
 
 
 // ------- API UPDATE
-app.put('/api/v1/user/update', updateUser);
+app.put('/api/v1/user/update', updateUser); // verificar se esta duplicada
+
+app.put('/api/v1/usuario/perfil', updatePerfil);
+
+// ------- API PERFIL
+
+
 
 // =============================================================================
 // =-==-=-=-=-=-=-=-=-=-=--=-=- [ API FLEXIVEL PARA ANIMAIS] =-==-=-=-=-=-=-=-=-=-=--=-=-

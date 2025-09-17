@@ -1,5 +1,62 @@
 // ===================================================================
-// ==================== [ MODULE IMPORT] ====================
+// ==================== [ NOTIFICAÇÃO] ====================
+
+function notify(title, message, duration = 3000, image = null, type = null) {
+  const container = document.getElementById("notification-container");
+
+  // Criar notificação
+  const notification = document.createElement("div");
+  notification.classList.add("notification");
+
+  // Se tiver tipo de alerta
+  if (!image && type) {
+      notification.classList.add(type);
+  }
+
+  // Se tiver imagem, adiciona foto
+  if (image) {
+      const img = document.createElement("img");
+      img.src = image;
+      notification.appendChild(img);
+  }
+
+  // Texto
+  const textDiv = document.createElement("div");
+  textDiv.classList.add("text");
+
+  const titleEl = document.createElement("div");
+  titleEl.classList.add("title");
+  titleEl.textContent = title;
+
+  const messageEl = document.createElement("div");
+  messageEl.classList.add("message");
+  messageEl.textContent = message;
+
+  textDiv.appendChild(titleEl);
+  textDiv.appendChild(messageEl);
+  notification.appendChild(textDiv);
+
+  // Se for alerta sem imagem → progress bar
+  if (!image && type) {
+      const progressBar = document.createElement("div");
+      progressBar.classList.add("progress-bar");
+
+      const progress = document.createElement("div");
+      progress.classList.add("progress");
+      progress.style.animation = `shrink ${duration}ms linear forwards`;
+
+      progressBar.appendChild(progress);
+      notification.appendChild(progressBar);
+  }
+
+  container.appendChild(notification);
+
+  // Remover após o tempo
+  setTimeout(() => {
+      notification.style.animation = "slideOut 0.4s forwards";
+      setTimeout(() => notification.remove(), 400);
+  }, duration);
+}
 
 
 
@@ -67,8 +124,12 @@ async function logout() {
     }
 
     const data = await response.json();
-    alert('Deslogando...')
-    await verificarAuth();
+    
+    notify('Sucesso!', 'Deslogado com sucesso.', 2000, null, 'success')
+
+    setTimeout( async()  => {
+      await verificarAuth();
+    }, 2000)
   }
   catch (error) {
     console.error('Erro na requisição:', error)

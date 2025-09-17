@@ -1,19 +1,30 @@
-const mysql =  require('mysql2/promise')
+const mysql = require('mysql2/promise')
 
 
-async function conectar(){
-    const conexao = mysql.createConnection({
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: '',
-        database: 'patinhas'
+// async function conectar() {
+//     const conexao = mysql.createConnection({
+//         host: 'localhost',
+//         port: 3306,
+//         user: 'root',
+//         password: '',
+//         database: 'patinhas'
+//     });
+//     return conexao
+// }
+
+async function conectar() {
+    const conexao = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE
     });
-    return conexao
+    return conexao;
 }
 
-async function desconectar(conexao){
+async function desconectar(conexao) {
     conexao.end();
 }
 
-module.exports = {conectar, desconectar};
+module.exports = { conectar, desconectar };

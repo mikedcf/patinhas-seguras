@@ -1,63 +1,5 @@
 // ===================================================================
-// ==================== [ NOTIFICAÇÃO] ====================
-
-function notify(title, message, duration = 3000, image = null, type = null) {
-  const container = document.getElementById("notification-container");
-
-  // Criar notificação
-  const notification = document.createElement("div");
-  notification.classList.add("notification");
-
-  // Se tiver tipo de alerta
-  if (!image && type) {
-      notification.classList.add(type);
-  }
-
-  // Se tiver imagem, adiciona foto
-  if (image) {
-      const img = document.createElement("img");
-      img.src = image;
-      notification.appendChild(img);
-  }
-
-  // Texto
-  const textDiv = document.createElement("div");
-  textDiv.classList.add("text");
-
-  const titleEl = document.createElement("div");
-  titleEl.classList.add("title");
-  titleEl.textContent = title;
-
-  const messageEl = document.createElement("div");
-  messageEl.classList.add("message");
-  messageEl.textContent = message;
-
-  textDiv.appendChild(titleEl);
-  textDiv.appendChild(messageEl);
-  notification.appendChild(textDiv);
-
-  // Se for alerta sem imagem → progress bar
-  if (!image && type) {
-      const progressBar = document.createElement("div");
-      progressBar.classList.add("progress-bar");
-
-      const progress = document.createElement("div");
-      progress.classList.add("progress");
-      progress.style.animation = `shrink ${duration}ms linear forwards`;
-
-      progressBar.appendChild(progress);
-      notification.appendChild(progressBar);
-  }
-
-  container.appendChild(notification);
-
-  // Remover após o tempo
-  setTimeout(() => {
-      notification.style.animation = "slideOut 0.4s forwards";
-      setTimeout(() => notification.remove(), 400);
-  }, duration);
-}
-
+// ==================== [ MODULE IMPORT] ====================
 
 
 
@@ -88,19 +30,19 @@ async function verificarAuth() {
 
     // userMenu
 
-    if (dados.logado) {
+    if(dados.logado){
 
       document.getElementById('boxLogin').style.display = 'none'
       document.getElementById('userMenu').style.display = 'flex'
       document.getElementById('nomeperfil').innerText = dados.usuario.nome
       document.getElementById('avatarimg').src = dados.usuario.foto_url
     }
-    else {
+    else{
       document.getElementById('boxLogin').style.display = 'flex'
       document.getElementById('userMenu').style.display = 'none'
     }
 
-
+    
   } catch (error) {
     console.error("Erro ao verificar autenticação:", error);
   }
@@ -124,12 +66,8 @@ async function logout() {
     }
 
     const data = await response.json();
-
-    notify('Sucesso!', 'Deslogado com sucesso.', 2000, null, 'success')
-
-    setTimeout(async () => {
-      await verificarAuth();
-    }, 2000)
+    alert('Deslogando...')
+    await verificarAuth();
   }
   catch (error) {
     console.error('Erro na requisição:', error)
@@ -172,29 +110,62 @@ function fecharMenuComDelay() {
 }
 
 // Event listeners para hover no menu do usuário
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   const userMenu = document.getElementById('userMenu');
   const dropdown = document.getElementById('userDropdown');
-
+  
   if (userMenu && dropdown) {
     // Abre o menu quando o mouse entra na div userMenu
     userMenu.addEventListener('mouseenter', abrirMenuSuspenso);
-
+    
     // Fecha o menu com delay quando o mouse sai da div userMenu
     userMenu.addEventListener('mouseleave', fecharMenuComDelay);
-
+    
     // Mantém o menu aberto quando o mouse está sobre o dropdown
     dropdown.addEventListener('mouseenter', abrirMenuSuspenso);
-
+    
     // Fecha o menu com delay quando o mouse sai do dropdown
     dropdown.addEventListener('mouseleave', fecharMenuComDelay);
   }
 });
 
-
-
 // ===================================================================
-// ==================== [ SLIDER] ====================
+// ==================== [ CHAMADAS DE FUNCTIONS] ====================
+document.addEventListener('DOMContentLoaded', verificarAuth);
+
+
+window.addEventListener("load", () => {
+  const preloader = document.querySelector(".preloader");
+  const preloaderLogo = document.getElementById("preloaderLogo");
+  const headerLogo = document.getElementById("headerLogo");
+
+  const delayBeforeSlide = 1000;
+
+  setTimeout(() => {
+      const headerRect = headerLogo.getBoundingClientRect();
+      const targetTop = headerRect.top + headerRect.height / 2;
+      const targetLeft = headerRect.left + headerRect.width / 2;
+
+      preloaderLogo.classList.add("slide-to-header");
+      preloaderLogo.style.top = `${targetTop}px`;
+      preloaderLogo.style.left = `${targetLeft}px`;
+      preloaderLogo.style.transform = "translate(-50%, -50%)";
+
+      document.body.classList.add("show-content");
+
+      setTimeout(() => {
+          preloader.style.display = "none";
+          document.body.style.overflow = "auto";
+      }, 1350);
+  }, delayBeforeSlide);
+});
+
+AOS.init();
+
+
+
+
+
 
 let slideIndex = 0;
 
@@ -211,48 +182,44 @@ function showSlides() {
   setTimeout(showSlides, 4000); // Troca a cada 4 segundos
 }
 
-// ===================================================================
-// ==================== [ SISTEMA DE DOAÇÃO ] ====================
+showSlides(); // Inicia o carrossel
 
-function mostrarQR() {
-  const qr = document.getElementById("qrContainer");
-  qr.style.display = qr.style.display === "block" ? "none" : "block";
+function showInfo(index) {
+  const contents = document.querySelectorAll('.info-content');
+  contents.forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
 }
 
-// ===================================================================
-// ==================== [ CHAMADAS DE FUNCTIONS] ====================
-document.addEventListener('DOMContentLoaded', verificarAuth);
+document.addEventListener("DOMContentLoaded", function () {
+  const botoes = document.querySelectorAll('.bt_dica');
+  const dicas = document.querySelectorAll('.dica');
 
+  // Oculta todas as dicas
+  dicas.forEach(d => d.classList.remove('ativa'));
 
-window.addEventListener("load", () => {
-  const preloader = document.querySelector(".preloader");
-  const preloaderLogo = document.getElementById("preloaderLogo");
-  const headerLogo = document.getElementById("headerLogo");
+  // Mostra a primeira dica por padrão
+  const primeiraDica = document.getElementById('dica1');
+  if (primeiraDica) primeiraDica.classList.add('ativa');
 
-  const delayBeforeSlide = 1000;
+  // Marca o primeiro botão como selecionado
+  if (botoes.length > 0) botoes[0].classList.add('selecionado');
 
-  setTimeout(() => {
-    const headerRect = headerLogo.getBoundingClientRect();
-    const targetTop = headerRect.top + headerRect.height / 2;
-    const targetLeft = headerRect.left + headerRect.width / 2;
+  // Adiciona o comportamento aos botões
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      const indice = botao.getAttribute('data-dica');
 
-    preloaderLogo.classList.add("slide-to-header");
-    preloaderLogo.style.top = `${targetTop}px`;
-    preloaderLogo.style.left = `${targetLeft}px`;
-    preloaderLogo.style.transform = "translate(-50%, -50%)";
+      // Esconde todas as dicas
+      dicas.forEach(d => d.classList.remove('ativa'));
 
-    document.body.classList.add("show-content");
+      // Mostra a dica correspondente
+      const dicaAtiva = document.getElementById(`dica${indice}`);
+      if (dicaAtiva) dicaAtiva.classList.add('ativa');
 
-    setTimeout(() => {
-      preloader.style.display = "none";
-      document.body.style.overflow = "auto";
-    }, 1350);
-  }, delayBeforeSlide);
+      // Atualiza a seleção visual dos botões
+      botoes.forEach(b => b.classList.remove('selecionado'));
+      botao.classList.add('selecionado');
+    });
+  });
 });
-
-showSlides(); // Inicia o carrossel
-AOS.init(); // footer
-
-
-
-

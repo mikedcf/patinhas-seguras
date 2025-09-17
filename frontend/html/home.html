@@ -12,11 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
-
 
 </head>
 
@@ -54,7 +50,7 @@
         </div>
 
         <!-- Botões à direita -->
-        <div class="auth-buttons" id="boxLogin" >
+        <div class="auth-buttons" id="boxLogin">
           <a href="login.html"><button>Login</button></a>
           <a href="register.html"><button>Registrar</button></a>
         </div>
@@ -71,6 +67,7 @@
           </button>
 
           <div class="dropdown" id="userDropdown">
+            <a href="#" onclick="abrirModalPerfil()">👤 Meu Perfil</a>
             <a href="config.html">⚙️ Configurações</a>
             <a href="#" onclick="logout()" class="logout-btn">🚪 Sair</a>
           </div>
@@ -165,119 +162,22 @@
   -->
 
   <section class="section-animais" data-aos="fade-right">
-    <!-- FILTROS -->
-    <!-- <div class="filtros-container">
-      <div class="filtros">
-        <select>
-          <option disabled selected>Idade</option>
-          <option>Filhote</option>
-          <option>Adulto</option>
-          <option>Idoso</option>
-        </select>
-        <select>
-          <option disabled selected>Sexo</option>
-          <option>Macho</option>
-          <option>Fêmea</option>
-        </select>
-        <select>
-          <option disabled selected>Porte</option>
-          <option>Pequeno</option>
-          <option>Médio</option>
-          <option>Grande</option>
-        </select>
-        <select>
-          <option disabled selected>Raça</option>
-          <option>SRD</option>
-          <option>Labrador</option>
-          <option>Pitbull</option>
-          <option>Poodle</option>
-        </select>
-        <select>
-          <option disabled selected>Região</option>
-          <option>Acre</option>
-          <option>Alagoas</option>
-          <option>Amapá</option>
-          <option>Amazonas</option>
-          <option>Bahia</option>
-          <option>Ceará</option>
-          <option>Distrito Federal</option>
-          <option>Espírito Santo</option>
-          <option>Goiás</option>
-          <option>Maranhão</option>
-          <option>Mato Grosso</option>
-          <option>Mato Grosso do Sul</option>
-          <option>Minas Gerais</option>
-          <option>Pará</option>
-          <option>Paraíba</option>
-          <option>Paraná</option>
-          <option>Pernambuco</option>
-          <option>Piauí</option>
-          <option>Rio de Janeiro</option>
-          <option>Rio Grande do Norte</option>
-          <option>Rio Grande do Sul</option>
-          <option>Rondônia</option>
-          <option>Roraima</option>
-          <option>Santa Catarina</option>
-          <option>São Paulo</option>
-          <option>Sergipe</option>
-          <option>Tocantins</option>
-        </select>
-        <button class="btn-buscar">Buscar</button>
-      </div>
-    </div>     -->
+    <div class="animais-titulo">
+      <h2>Cachorros para Adoção</h2>
+    </div>
 
     <!-- CARROSSEL -->
     <div class="carrossel-container">
-      <button class="seta esquerda">❮</button>
+      <button class="seta esquerda" id="setaEsquerdaCachorros">❮</button>
 
-      <div class="carrossel">
-        <div class="card" data-aos="zoom-in">
-          <img src="https://i.ibb.co/mrcCWgfh/mike.jpg" alt="Cachorro">
-          <h3>Mike</h3>
-          <div class="localizacao">
-            <img src="../img/local.png" alt="local">
-            <span>São Paulo, SP</span>
-          </div>
-        </div>
-
-        <div class="card" data-aos="zoom-in">
-          <img src="https://i.ibb.co/fV1F1nfV/c2.jpg" alt="Cachorro">
-          <h3>Pepita</h3>
-          <div class="localizacao">
-            <img src="../img/local.png" alt="local">
-            <span>Minas Gerais, MG</span>
-          </div>
-        </div>
-
-        <div class="card" data-aos="zoom-in">
-          <img src="../img/bingo.jpg" alt="Cachorro">
-          <h3>Bingo</h3>
-          <div class="localizacao">
-            <img src="../img/local.png" alt="local">
-            <span>São Paulo, SP</span>
-          </div>
-        </div>
-
-        <div class="card" data-aos="zoom-in">
-          <img src="https://i.ibb.co/KpwfhnPr/c3.jpg" alt="Cachorro">
-          <h3>Brutos</h3>
-          <div class="localizacao">
-            <img src="../img/local.png" alt="local">
-            <span>Rio de Janeiro, RJ</span>
-          </div>
-        </div>
-
-        <div class="card" data-aos="zoom-in">
-          <img src="https://i.ibb.co/8gDtWWfL/c5.jpg" alt="Cachorro">
-          <h3>Bingo</h3>
-          <div class="localizacao">
-            <img src="../img/local.png" alt="local">
-            <span>Fortaleza, Ceará</span>
-          </div>
+      <div class="carrossel" id="carrosselCachorros">
+        <!-- Cards serão carregados dinamicamente via JavaScript -->
+        <div class="loading-message">
+          <p>Carregando cachorros...</p>
         </div>
       </div>
 
-      <button class="seta direita">❯</button>
+      <button class="seta direita" id="setaDireitaCachorros">❯</button>
     </div>
 
     <div class="saibamais">
@@ -294,128 +194,26 @@
   -->
 
   <section class="section-animais2" data-aos="fade-left">
-    <!-- FILTROS -->
-    <!-- <div class="filtros-container2">
-      <div class="filtros2">
-        <select>
-          <option disabled selected>Idade</option>
-          <option>Filhote</option>
-          <option>Adulto</option>
-          <option>Idoso</option>
-        </select>
-        <select>
-          <option disabled selected>Sexo</option>
-          <option>Macho</option>
-          <option>Fêmea</option>
-        </select>
-        <select>
-          <option disabled selected>Porte</option>
-          <option>Pequeno</option>
-          <option>Médio</option>
-          <option>Grande</option>
-        </select>
-        <select>
-          <option disabled selected>Raça</option>
-          <option>SRD</option>
-          <option>Persa</option>
-          <option>Siamês</option>
-          <option>Maine Coon</option>
-        </select>
-        <select>
-          <option disabled selected>Região</option>
-          <option>Acre</option>
-          <option>Alagoas</option>
-          <option>Amapá</option>
-          <option>Amazonas</option>
-          <option>Bahia</option>
-          <option>Ceará</option>
-          <option>Distrito Federal</option>
-          <option>Espírito Santo</option>
-          <option>Goiás</option>
-          <option>Maranhão</option>
-          <option>Mato Grosso</option>
-          <option>Mato Grosso do Sul</option>
-          <option>Minas Gerais</option>
-          <option>Pará</option>
-          <option>Paraíba</option>
-          <option>Paraná</option>
-          <option>Pernambuco</option>
-          <option>Piauí</option>
-          <option>Rio de Janeiro</option>
-          <option>Rio Grande do Norte</option>
-          <option>Rio Grande do Sul</option>
-          <option>Rondônia</option>
-          <option>Roraima</option>
-          <option>Santa Catarina</option>
-          <option>São Paulo</option>
-          <option>Sergipe</option>
-          <option>Tocantins</option>
-        </select>
-        <button class="btn-buscar2">Buscar</button>
-      </div>
-    </div> -->
+    <div class="animais-titulo-gato">
+      <h2>Gatos para Adoção</h2>
+    </div>
 
     <!-- CARROSSEL -->
-
-    <!-- <div class="saibamais">
-      <a href="./doacao.html"><button class="botao-saibamais-gatos">Saiba Mais</button></a>
-    </div> -->
     <div class="carrossel-container2">
+      <button class="seta2 esquerda2" id="setaEsquerdaGatos">❮</button>
 
-      <button class="seta2 esquerda2">❮</button>
-
-      <div class="carrossel2">
-        <div class="card2" data-aos="zoom-in">
-          <img src="https://i.ibb.co/JF22n7ZK/g3.jpg" alt="Gato">
-          <h3>Lola</h3>
-          <div class="localizacao2">
-            <img src="../img/local.png" alt="local">
-            <span>São Paulo, SP</span>
-          </div>
-        </div>
-
-        <div class="card2" data-aos="zoom-in">
-          <img src="https://i.ibb.co/V0hQm5Jf/g4.jpg" alt="Gato">
-          <h3>Gisele Bintchen</h3>
-          <div class="localizacao2">
-            <img src="../img/local.png" alt="local">
-            <span>Minas Gerais, MG</span>
-          </div>
-        </div>
-
-        <div class="card2" data-aos="zoom-in">
-          <img src="https://i.ibb.co/8nnrygcc/g5.jpg" alt="Gato">
-          <h3>Merlim</h3>
-          <div class="localizacao2">
-            <img src="../img/local.png" alt="local">
-            <span>São Paulo, SP</span>
-          </div>
-        </div>
-
-        <div class="card2" data-aos="zoom-in">
-          <img src="https://i.ibb.co/TD8WqWMW/g1.jpg" alt="Gato">
-          <h3>Bob</h3>
-          <div class="localizacao2">
-            <img src="../img/local.png" alt="local">
-            <span>Rio de Janeiro, RJ</span>
-          </div>
-        </div>
-
-        <div class="card2" data-aos="zoom-in">
-          <img src="https://i.ibb.co/JR4Sf7QR/g2.jpg" alt="Gato">
-          <h3>Chiquinha</h3>
-          <div class="localizacao2">
-            <img src="../img/local.png" alt="local">
-            <span>Fortaleza, Ceará</span>
-          </div>
+      <div class="carrossel2" id="carrosselGatos">
+        <!-- Cards serão carregados dinamicamente via JavaScript -->
+        <div class="loading-message">
+          <p>Carregando gatos...</p>
         </div>
       </div>
 
-      <button class="seta2 direita2">❯</button>
+      <button class="seta2 direita2" id="setaDireitaGatos">❯</button>
     </div>
 
     <div class="saibamais">
-      <a href="adotar.html"><button class="botao-saibamais-gatos">Saiba Mais</button></a>
+      <a href="adotar.html#gatos"><button class="botao-saibamais-gatos">Saiba Mais</button></a>
     </div>
   </section>
 
@@ -730,6 +528,47 @@
       </div>
     </div>
   </footer>
+
+  <div class="notification-container" id="notification-container"></div>
+
+  <!-- Modal de Perfil do Usuário -->
+  <div id="modalPerfil" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Editar Perfil</h2>
+        <span class="close" id="closeModalPerfil">&times;</span>
+      </div>
+      
+      <div class="modal-body">
+        <form id="formPerfil">
+          <div class="form-group">
+            <label for="nomePerfil">Nome:</label>
+            <input type="text" id="nomePerfil" name="nome" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label for="emailPerfil">Email:</label>
+            <input type="email" id="emailPerfil" name="email" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefonePerfil">Telefone:</label>
+            <input type="tel" id="telefonePerfil" name="telefone" placeholder="(11) 99999-9999">
+          </div>
+          
+          <div class="form-group">
+            <label for="enderecoPerfil">Endereço:</label>
+            <textarea id="enderecoPerfil" name="endereco" rows="3" placeholder="Rua, número, bairro, cidade - UF"></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-cancelar" id="cancelarPerfil">Cancelar</button>
+            <button type="submit" class="btn-salvar">Salvar Alterações</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

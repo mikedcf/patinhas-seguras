@@ -8,7 +8,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Kaushan+Script&display=swap');
 
-
+/*
+=================================================
+==================[ CABEÇALHO ]==================
+=================================================
+*/
 * {
   margin: 0;
   padding: 0;
@@ -20,40 +24,6 @@ body, html {
   font-family: 'Fredoka', sans-serif;
   
 }
-
-/* 
-================================================
-======== [ COR DO SCROLL ] ========
-================================================
-*/
-/* Largura da barra */
-::-webkit-scrollbar {
-  width: 12px; /* largura da barra lateral */
-  height: 12px; /* altura para scroll horizontal */
-}
-
-/* Fundo da barra */
-::-webkit-scrollbar-track {
-  background: #ffffff; /* cor do fundo */
-}
-
-/* "Thumb" (parte que arrasta) */
-::-webkit-scrollbar-thumb {
-  background: #ff0000; /* cor do thumb */
-  border-radius: 10px; /* bordas arredondadas */
-}
-
-/* Thumb ao passar o mouse */
-::-webkit-scrollbar-thumb:hover {
-  background: #cc0000;
-}
-
-
-/* 
-================================================
-======== [ ESTILOS GERAIS DO HEADER ] ========
-================================================
-*/
 
 
 .header {
@@ -312,7 +282,7 @@ button:hover,
 
 .user-menu {
   position: relative;
-  display: none;
+  display: flex;
   align-items: center;
   margin-left: auto;
 }
@@ -487,6 +457,11 @@ header div div nav a {
   font-weight: bold;
 }
 /* Botões de autenticação */
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
 .auth-buttons a {
   text-decoration: none;
@@ -533,6 +508,176 @@ header div div nav a {
   transform: translateY(0) scale(1);
 }
 
+/*
+===========================================
+=============== [box menu suspenso] ======================
+*/
+
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(255, 145, 77, 0.15), rgba(249, 115, 22, 0.15));
+  border: 2px solid #FF914D;
+  padding: 10px 18px;
+  border-radius: 35px;
+  cursor: pointer;
+  color: white;
+  font-family: 'Fredoka';
+  font-weight: bold;
+  box-shadow: 0px 4px 15px rgba(255, 145, 77, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.user-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.user-btn:hover::before {
+  left: 100%;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+.user-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0px 8px 25px rgba(255, 145, 77, 0.6);
+  background: linear-gradient(135deg, rgba(255, 145, 77, 0.25), rgba(249, 115, 22, 0.25));
+  border-color: #f97316;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #16a34a;
+  box-shadow: 0px 3px 10px rgba(22, 163, 74, 0.4);
+  transition: all 0.3s ease;
+  object-fit: cover;
+}
+
+.user-btn:hover .user-avatar {
+  box-shadow: 0px 5px 15px rgba(22, 163, 74, 0.6);
+  transform: scale(1.08);
+  border-color: #22c55e;
+}
+
+.username {
+  font-size: 16px;
+  white-space: nowrap;
+  color: white;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.seta {
+  font-size: 16px;
+  opacity: 0.8;
+  color: #FF914D;
+  transition: all 0.3s ease;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+}
+
+.user-btn:hover .seta {
+  opacity: 1;
+  color: #f97316;
+  transform: scale(1.2) rotate(180deg);
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.user-btn:hover .username {
+  color: #f97316;
+  text-shadow: 0px 2px 4px rgba(249, 115, 22, 0.3);
+}
+
+.dropdown {
+  display: none; /* 🔽 Você controla com JS */
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(20,20,20,0.95));
+  border: 2px solid #FF914D;
+  border-radius: 15px;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.6);
+  flex-direction: column;
+  min-width: 180px;
+  overflow: hidden;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  animation: dropdownFadeIn 0.3s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdown a {
+  padding: 12px 18px;
+  color: white;
+  text-decoration: none;
+  font-family: 'Fredoka';
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 145, 77, 0.1);
+  position: relative;
+}
+
+.dropdown a:last-child {
+  border-bottom: none;
+}
+
+.dropdown a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 145, 77, 0.2), transparent);
+  transition: width 0.3s ease;
+}
+
+.dropdown a:hover::before {
+  width: 100%;
+}
+
+.dropdown a:hover {
+  background: rgba(255, 145, 77, 0.15);
+  color: #FF914D;
+  transform: translateX(5px);
+}
 
 .search-button {
   background: transparent;
@@ -546,34 +691,18 @@ header div div nav a {
 
 
 .bu-pesq {
-  background-color: rgba(255, 145, 77, 0.2);
-  border-radius: 50%;
-  border: 2px solid rgba(255, 145, 77, 0.5);
+  background-color: transparent;
+  border-radius: 20px;
+  border: none;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.bu-pesq:hover {
-  background-color: rgba(255, 145, 77, 0.3);
-  border-color: #FF914D;
-  transform: scale(1.1);
-  box-shadow: 0px 4px 12px rgba(255, 145, 77, 0.4);
+  
 }
 
 .logo-pesq {
   width: 24px;
   height: 24px;
-  filter: brightness(0) invert(1);
-  transition: all 0.3s ease;
-}
-
-.bu-pesq:hover .logo-pesq {
-  transform: scale(1.1);
 }
 
 
@@ -666,25 +795,16 @@ header div div nav a {
 
 
 .slider-doacao {
-  width: 100vw;
-  max-height: 500px;
+  width: 100%;
+  max-height: 400px;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(135deg, #fef9f4, #fff8f0);
-  border-radius: 0;
-  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
-  margin: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .slider-container {
   position: relative;
   width: 100%;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 400px;
 }
 
 .slide {
@@ -693,17 +813,49 @@ header div div nav a {
   width: 100%;
   height: 100%;
   transition: opacity 1s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
-  box-shadow: none;
+}
+
+.fade {
+  animation: fadeEffect 1s;
+}
+
+/*
+=================================================
+==============[ SECTION 1 SLIDERS]===============
+=================================================
+*/
+
+.slider-doacao {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.slide {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .fade {
@@ -1124,108 +1276,6 @@ img{
   transform: translateX(-2px);
 }
 
-
-
-/*
-=================================================
-=============[ NOTIFICAÇÕES ]==================
-=================================================
-*/
-
-/* Container de todas notificações */
-.notification-container {
-  position: fixed;
-  top: 90px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 9999;
-}
-
-/* Notificação base */
-.notification {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #813103;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  min-width: 280px;
-  max-width: 350px;
-  animation: slideIn 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Ícone/foto */
-.notification img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.notification .text {
-  flex: 1;
-  color: #fff;
-}
-
-.notification .title {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #fff;
-}
-
-.notification .message {
-  font-size: 14px;
-  opacity: 0.9;
-  color: #fff;
-}
-
-/* Barra de progresso */
-.progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.2);
-}
-.progress {
-  height: 100%;
-  width: 100%;
-  transform-origin: left;
-}
-
-/* Tipos de alerta */
-.success { background: #1e4620; }
-.success .progress { background: #4caf50; }
-
-.error { background: #4a1e1e; }
-.error .progress { background: #f44336; }
-
-.info { background: #1e3a5f; }
-.info .progress { background: #2196f3; }
-
-.warning { background: #4a3a1e; }
-.warning .progress { background: #ff9800; }
-
-/* Animações */
-@keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-@keyframes slideOut {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(100%); opacity: 0; }
-}
-@keyframes shrink {
-  from { transform: scaleX(1); }
-  to { transform: scaleX(0); }
-}
-
 @media (max-width: 768px) {
   .center-section {
     position: static;
@@ -1323,31 +1373,4 @@ img{
 @keyframes fadeEffect {
   from { opacity: 0.4 }
   to { opacity: 1 }
-}
-
-/* Responsividade do slider para dispositivos móveis */
-@media (max-width: 768px) {
-  .slider-doacao {
-    max-height: 300px;
-    margin: 0;
-    border-radius: 0;
-  }
-
-  .slider-container {
-    height: 300px;
-  }
-
-  .slide img {
-    border-radius: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .slider-doacao {
-    max-height: 250px;
-  }
-
-  .slider-container {
-    height: 250px;
-  }
 }
