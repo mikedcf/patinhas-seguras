@@ -34,7 +34,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://127.0.0.1:5501',
+    origin: ['http://127.0.0.1:5501','https://mikedcf.github.io','http://localhost:5501'],
     credentials: true
 }));
 
