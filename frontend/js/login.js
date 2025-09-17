@@ -65,7 +65,7 @@ function notify(title, message, duration = 3000, image = null, type = null) {
 
 async function autenticacao() {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/api/v1/user/auth`, {
+        const response = await fetch(`https://patinhas-seguras-production.up.railway.app/api/v1/user/auth`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
@@ -106,7 +106,7 @@ async function login(event) {
     };
 
     try {
-        const response = await fetch('http://127.0.0.1:3000/api/v1/user/login', {
+        const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/user/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -123,7 +123,7 @@ async function login(event) {
 
         } else {
             const errorData = await response.json();
-            alert(`Erro ao fazer login: ${errorData.message || 'Desconhecido'}`);
+            notify('Error!', `Erro ao fazer login: ${errorData.message || 'Desconhecido'}`, 2000, null, 'error')
         }
     }
     catch (error) {
