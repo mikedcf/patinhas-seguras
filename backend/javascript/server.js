@@ -30,10 +30,12 @@ const {
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-    origin: 'http://127.0.0.1:5501',
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'http://127.0.0.1:5501',
+//     credentials: true
+// }));
+
+app.use(cors())
 
 app.use(session({
     secret: 'patinhas-web-secret-key',
