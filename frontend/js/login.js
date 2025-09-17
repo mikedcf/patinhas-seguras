@@ -123,7 +123,7 @@ async function login(event) {
 
         } else {
             const errorData = await response.json();
-            alert(`Erro ao fazer login: ${errorData.message || 'Desconhecido'}`);
+            notify('Error!', `Erro ao fazer login: ${errorData.message || 'Desconhecido'}`, 2000, null, 'error')
         }
     }
     catch (error) {
