@@ -493,9 +493,9 @@ async function updatePerfil(req, res) {
 
 
 async function setupDatabase(){
-    let conexao;
+   
 
-    conexao = await conectar()
+    let conexao = await conectar()
 
     let query;
 
