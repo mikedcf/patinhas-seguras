@@ -1,5 +1,8 @@
 // ===================================================================
 // ==================== [ NOTIFICAÇÃO] ====================
+// const URL = "http://localhost:3000";
+const URL = "https://patinhas-seguras-production.up.railway.app";
+
 
 function notify(title, message, duration = 3000, image = null, type = null) {
     const container = document.getElementById("notification-container");
@@ -65,7 +68,7 @@ function notify(title, message, duration = 3000, image = null, type = null) {
 
 async function autenticacao() {
     try {
-        const response = await fetch(`https://patinhas-seguras-production.up.railway.app/api/v1/user/auth`, {
+        const response = await fetch(`${URL}/api/v1/user/auth`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
@@ -106,7 +109,7 @@ async function login(event) {
     };
 
     try {
-        const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/user/login', {
+        const response = await fetch(`${URL}/api/v1/user/login`, {
             method: 'POST',
             credentials: 'include',
             headers: {

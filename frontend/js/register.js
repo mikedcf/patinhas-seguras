@@ -2,7 +2,8 @@
 // ==================== [ MODULE IMPORT] ====================
 import { autenticacao } from './ultis.js';
 
-
+// const URL = "http://localhost:3000";
+const URL = "https://patinhas-seguras-production.up.railway.app";
 
 // ===================================================================
 // ==================== [ AUTENTICAÇÃO ] ====================
@@ -122,7 +123,7 @@ async function cadastro(event) {
     };
 
     try {
-        const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/user/cadastro', {
+        const response = await fetch(`${URL}/api/v1/user/cadastro`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
