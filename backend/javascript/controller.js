@@ -497,6 +497,8 @@ async function setupDatabase(){
 
     conexao = await conectar()
 
+    let query;
+
 
     query = `
         CREATE TABLE IF NOT EXISTS  usuarios (
@@ -546,6 +548,20 @@ async function setupDatabase(){
         foto_url VARCHAR(250),
         localizacao VARCHAR(100),
         status ENUM('disponivel','adotado') NOT NULL
+    )`
+
+    await conexao.execute(query)
+
+    query = `
+        CREATE TABLE IF NOT EXISTS  adocao (
+        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+        id_usuario INT NOT NULL,
+        id_gato INT,
+        id_cachorro INT,
+        tipo_animal ENUM('cachorro','gato') NOT NULL,
+        data_adocao DATE,
+        status ENUM('em adamento','concluída','cancelada'),
+        observacoes TEXT
     )`
 
     await conexao.execute(query)
@@ -626,3 +642,4 @@ module.exports = {
     updatePerfil,
     setupDatabase
 };
+
