@@ -6,7 +6,7 @@ require('dotenv').config()
 
 const express = require('express');
 const cors = require('cors');
-// const session = require('express-session');
+const session = require('express-session');
 const {
     cadastro,
     login,
@@ -39,17 +39,17 @@ app.use(cors({
 }));
 
 
-// app.use(session({
-//     secret: 'patinhas-web-secret-key',
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//         maxAge: 1000 * 60 * 60 * 24,
-//         httpOnly: true,
-//         secure: false,
-//         sameSite: 'lax'
-//     }
-// }))
+app.use(session({
+    secret: 'patinhas-web-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax'
+    }
+}))
 
 
 // ===============================================================
