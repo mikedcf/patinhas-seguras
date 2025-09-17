@@ -65,7 +65,7 @@ function notify(title, message, duration = 3000, image = null, type = null) {
 
 async function autenticacao() {
   try {
-    const response = await fetch(`http://127.0.0.1:3000/api/v1/user/auth`, {
+    const response = await fetch(`https://patinhas-seguras-production.up.railway.app/api/v1/user/auth`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -108,7 +108,7 @@ async function verificarAuth() {
 async function logout() {
 
   try {
-    const response = await fetch('http://127.0.0.1:3000/api/v1/user/logout', {
+    const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/user/logout', {
 
       method: 'GET',
       headers: {
@@ -206,7 +206,6 @@ function abrirModalPerfil() {
   }
 }
 
-
 // Função para fechar o modal de perfil
 function fecharModalPerfil() {
   const modal = document.getElementById('modalPerfil');
@@ -220,7 +219,7 @@ function fecharModalPerfil() {
 async function carregarDadosPerfil() {
   try {
     // Busca dados do usuário logado
-    const response = await fetch('http://127.0.0.1:3000/api/v1/usuario/perfil', {
+    const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/usuario/perfil', {
       method: 'GET',
       credentials: 'include'
     });
@@ -254,7 +253,7 @@ async function salvarPerfil(event) {
   };
 
   try {
-    const response = await fetch('http://127.0.0.1:3000/api/v1/usuario/perfil', {
+    const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/usuario/perfil', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -391,7 +390,7 @@ async function carregarCachorros() {
   try {
     carrossel.innerHTML = '<div class="loading-message"><p>Carregando cachorros...</p></div>';
 
-    const response = await fetch('http://127.0.0.1:3000/api/v1/animal/cachorros');
+    const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/animal/cachorros'); 
 
     if (!response.ok) {
       throw new Error(`Erro HTTP: ${response.status}`);
@@ -624,6 +623,7 @@ window.addEventListener('load', () => {
   }
 });
 
+
 // ===================== [ CARROSSEL DINÂMICO DE GATOS ] =====================
 
 // Variáveis globais para gatos
@@ -639,7 +639,7 @@ async function carregarGatos() {
   carregandoGatos = true;
 
   try {
-    const response = await fetch('http://127.0.0.1:3000/api/v1/animal/gatos');
+    const response = await fetch('https://patinhas-seguras-production.up.railway.app/api/v1/animal/gatos');
     if (!response.ok) {
       throw new Error('Erro ao carregar gatos');
     }
@@ -819,7 +819,6 @@ window.addEventListener('load', () => {
     inicializarCarrosselDinamicoGatos();
   }
 });
-
 
 // ====================================================================
 // =================== [ COMENTARIOS ] ====================
