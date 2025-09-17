@@ -3,7 +3,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
+// const session = require('express-session');
 const {
     cadastro,
     login,
@@ -30,24 +30,23 @@ const {
 const app = express();
 
 app.use(express.json());
-// app.use(cors({
-//     origin: 'http://127.0.0.1:5501',
-//     credentials: true
-// }));
+app.use(cors({
+    origin: 'http://127.0.0.1:5501',
+    credentials: true
+}));
 
-app.use(cors())
 
-app.use(session({
-    secret: 'patinhas-web-secret-key',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax'
-    }
-}))
+// app.use(session({
+//     secret: 'patinhas-web-secret-key',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         maxAge: 1000 * 60 * 60 * 24,
+//         httpOnly: true,
+//         secure: false,
+//         sameSite: 'lax'
+//     }
+// }))
 
 
 // ===============================================================
