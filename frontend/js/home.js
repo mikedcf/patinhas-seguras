@@ -1,13 +1,12 @@
+// const URL = "http://127.0.0.1:3000";
+const URL = "https://patinhas-seguras-production.up.railway.app";
+
 // ===================================================================
 // ==================== [ NOTIFICAÇÃO] ====================
 
-// const URL = "http://localhost:3000";
-const URL = "https://patinhas-seguras-production.up.railway.app";
-
-
 function notify(title, message, duration = 3000, image = null, type = null) {
   const container = document.getElementById("notification-container");
-
+  
   // Criar notificação
   const notification = document.createElement("div");
   notification.classList.add("notification");
@@ -393,7 +392,7 @@ async function carregarCachorros() {
 
   try {
     carrossel.innerHTML = '<div class="loading-message"><p>Carregando cachorros...</p></div>';
-
+    
     const response = await fetch(`${URL}/api/v1/animal/cachorros`); 
 
     if (!response.ok) {

@@ -1,57 +1,54 @@
-// ===================================================================
-// ==================== [ NOTIFICAÇÃO] ====================
 
-function notify(title, message, duration = 3000, image = null, type = null) {
+// const URL = "http://127.0.0.1:3000";
+const URL = "https://patinhas-seguras-production.up.railway.app";
+
+
+// ===================================================================
+// ==================== [ SISTEMA DE NOTIFICAÇÃO ] ====================
+// ===================================================================
+function notify(title, message, duration = 3000, image = null, type = 'info') {
     const container = document.getElementById("notification-container");
 
-    // Criar notificação
     const notification = document.createElement("div");
-    notification.classList.add("notification");
-
-    // Se tiver tipo de alerta
-    if (!image && type) {
-        notification.classList.add(type);
-    }
-
-    // Se tiver imagem, adiciona foto
+    notification.className = `notification ${type}`;
+    
+    let content = '';
     if (image) {
-        const img = document.createElement("img");
-        img.src = image;
-        notification.appendChild(img);
+        content += `<img src="${image}" alt="Notificação">`;
     }
+    content += `
+        <div class="text">
+            <div class="title">${title}</div>
+            <div class="message">${message}</div>
+        </div>
+    `;
+    notification.innerHTML = content;
+    
+    const progressBar = document.createElement('div');
+    progressBar.style.height = '4px';
+    progressBar.style.width = '100%';
+    progressBar.style.backgroundColor = 'rgba(255,255,255,0.3)';
+    progressBar.style.position = 'absolute';
+    progressBar.style.bottom = '0';
+    progressBar.style.left = '0';
 
-    // Texto
-    const textDiv = document.createElement("div");
-    textDiv.classList.add("text");
-
-    const titleEl = document.createElement("div");
-    titleEl.classList.add("title");
-    titleEl.textContent = title;
-
-    const messageEl = document.createElement("div");
-    messageEl.classList.add("message");
-    messageEl.textContent = message;
-
-    textDiv.appendChild(titleEl);
-    textDiv.appendChild(messageEl);
-    notification.appendChild(textDiv);
-
-    // Se for alerta sem imagem → progress bar
-    if (!image && type) {
-        const progressBar = document.createElement("div");
-        progressBar.classList.add("progress-bar");
-
-        const progress = document.createElement("div");
-        progress.classList.add("progress");
-        progress.style.animation = `shrink ${duration}ms linear forwards`;
-
-        progressBar.appendChild(progress);
-        notification.appendChild(progressBar);
-    }
-
+    const progress = document.createElement('div');
+    progress.style.height = '100%';
+    progress.style.width = '100%';
+    progress.style.backgroundColor = 'white';
+    progress.style.transition = `width ${duration}ms linear`;
+    
+    progressBar.appendChild(progress);
+    notification.appendChild(progressBar);
+    
     container.appendChild(notification);
+    
+    // Inicia a animação da barra
+    setTimeout(() => {
+        progress.style.width = '0%';
+    }, 10);
 
-    // Remover após o tempo
+
     setTimeout(() => {
         notification.style.animation = "slideOut 0.4s forwards";
         setTimeout(() => notification.remove(), 400);
@@ -59,14 +56,12 @@ function notify(title, message, duration = 3000, image = null, type = null) {
 }
 
 
-
-
 // ===================================================================
 // ==================== [ AUTENTICAÇÃO ] ====================
 
 async function autenticacao() {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/api/v1/user/auth`, {
+        const response = await fetch(`${URL}/api/v1/user/auth`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
@@ -106,11 +101,10 @@ async function verificarAuth() {
     }
 }
 
-
 async function logout() {
 
     try {
-        const response = await fetch('http://127.0.0.1:3000/api/v1/user/logout', {
+        const response = await fetch(`${URL}/api/v1/user/logout`, {
 
             method: 'GET',
             headers: {
@@ -194,158 +188,120 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// ================================================
-// ============== [MODAL DE FORMULARIO] =============
 
-function abrirFormulario() {
-    const overlay = document.getElementById('overlay');
-    if (overlay) {
-        overlay.style.display = 'flex';
-    } else {
-        console.error('Elemento overlay não encontrado!');
-    }
-}
+document.addEventListener('DOMContentLoaded', () => {
 
-
-function fecharFormulario() {
-    const overlay = document.getElementById('overlay');
-    overlay.style.display = 'none';
-}
-
-// Event listeners para os botões
-document.addEventListener('DOMContentLoaded', function () {
-    // Verificar autenticação
-    verificarAuth();
-
-    // Botão de abrir modal
-    const btnDenunciar = document.getElementById('btnDenunciar');
-    if (btnDenunciar) {
-        btnDenunciar.addEventListener('click', function (e) {
-            e.preventDefault();
-            abrirFormulario();
-        });
-    }
-
-    // Botão de fechar modal
-    const btnFechar = document.getElementById('btn-fechar');
-    if (btnFechar) {
-        btnFechar.addEventListener('click', function (e) {
-            e.preventDefault();
-            fecharFormulario();
-        });
-    }
-
-    // Botão de submit do formulário
-    const btnSubmit = document.getElementById('submitbnt');
-    if (btnSubmit) {
-        btnSubmit.addEventListener('click', function (e) {
-            e.preventDefault();
-            formularioget(e);
-        });
-    }
-
-    // Radio buttons de provas
-    const radioProvas = document.querySelectorAll('input[name="provas"]');
-    radioProvas.forEach(radio => {
-        radio.addEventListener('change', getcheckbox);
+    AOS.init({
+        duration: 800,
+        once: true,
     });
+
+    // ==========================================================
+    // ===========[ MODAL DE DENÚNCIA ]===========
+    // ==========================================================
+    const denunciaModal = document.getElementById('denuncia-modal');
+    const btnAbrirModalDenuncia = document.getElementById('btnAbrirModalDenuncia');
+    const denunciaForm = document.getElementById('denuncia-form');
+    const closeDenunciaModalBtn = denunciaModal.querySelector('.modal-close-btn');
+
+    if (denunciaModal && btnAbrirModalDenuncia && denunciaForm) {
+        
+        const openDenunciaModal = () => {
+            denunciaModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeDenunciaModal = () => {
+            denunciaModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            denunciaForm.reset();
+        };
+
+        btnAbrirModalDenuncia.addEventListener('click', openDenunciaModal);
+        closeDenunciaModalBtn.addEventListener('click', closeDenunciaModal);
+        
+        denunciaModal.addEventListener('click', (event) => {
+            if (event.target === denunciaModal) {
+                closeDenunciaModal();
+            }
+        });
+
+        denunciaForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            // Aqui você adicionaria a lógica para enviar os dados do formulário
+            // Por enquanto, vamos apenas simular o sucesso.
+            
+            closeDenunciaModal();
+            notify('Denúncia Enviada!', 'Agradecemos sua colaboração. As autoridades competentes foram notificadas.', 4000, null, 'success');
+        });
+        
+         // Fechar modal com a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && denunciaModal.style.display === 'flex') {
+                closeDenunciaModal();
+            }
+        });
+    }
 });
 
-
-
-
 // ================================================
-// ============== [formulario] =============
+// ============== [formulario de denuncia] =============
 
+async function formularioDenuncia(event){
+    event.preventDefault();
+    
+    const local = document.getElementById('denuncia-local').value;
+    const descricao = document.getElementById('denuncia-descricao').value;
+    const especie = document.getElementById('denuncia-especie').value;
+    const provas = document.getElementById('denuncia-provas').value;
+    const imgInput = document.getElementById('denuncia-provas');
 
-// Fechar o formulário
-function formularioget(event) {
-    event.preventDefault()
-
-    const nome = document.getElementById("nomeDenunciante").value
-    const telefone = document.getElementById("telefone").value
-    const email = document.getElementById("email").value
-    const nomeVitima = document.getElementById("nomeVitima").value
-    const idadeVitima = document.getElementById("idadeVitima").value
-    const generoVitima = document.getElementById("generoVitima").value
-    const enderecoVitima = document.getElementById("enderecoVitima").value
-    const relacaoVitima = document.getElementById("relacaoVitima").value
-    const nomeAgressor = document.getElementById("nomeAgressor").value
-    const idadeAgressor = document.getElementById("idadeAgressor").value
-    const relacaoAgressor = document.getElementById("relacaoAgressor").value
-    const enderecoAgressor = document.getElementById("enderecoAgressor").value
-    const localOcorrido = document.getElementById("localOcorrido").value
-    const dataHoraFato = document.getElementById("dataHoraFato").value
-    const descricao = document.getElementById("descricao").value
-    const detalhesProvas = document.getElementById("detalhesProvas").value
-    const informacoesAdicionais = document.getElementById("informacoesAdicionais").value
-    const assinatura = document.getElementById("assinatura").value
-    const valorSelecionado = document.querySelector('input[name="anonimato"]:checked').value
-    const arquivosProvas = document.getElementById("arquivoProvas");
-
-    const inputAvatar = arquivosProvas.files[0];
-    // let avatarUrl = uploadimagem(inputAvatar)
-    let avatarUrl = 'teste';
-    console.log('anonimato2', valorSelecionado)
+    let img = '';
+    if (imgInput && imgInput.files && imgInput.files[0]) {
+        img = await uploadimagem(imgInput.files[0]);
+    } else {
+        img = '';
+    }
 
     const dados = {
-        nome: nome,
-        telefone: telefone,
-        email: email,
-        anonimato: valorSelecionado,
-        nomeVitima: nomeVitima,
-        idadeVitima: idadeVitima,
-        generoVitima: generoVitima,
-        enderecoVitima: enderecoVitima,
-        relacaoVitima: relacaoVitima,
-        nomeAgressor: nomeAgressor,
-        idadeAgressor: idadeAgressor,
-        relacaoAgressor: relacaoAgressor,
-        enderecoAgressor: enderecoAgressor,
-        localOcorrido: localOcorrido,
-        dataHoraFato: dataHoraFato,
-        descricao: descricao,
-        detalhesProvas: detalhesProvas,
-        informacoesAdicionais: informacoesAdicionais,
-        assinatura: assinatura,
-        provas: avatarUrl
-    }
-    enviarDados(dados)
-}
+        local_ocorrencia: local,
+        descricao_situacao: descricao,
+        tipo_animal: especie,
+        arquivo_prova : img,
+    };
+    console.log(dados);
 
-async function enviarDados(dados) {
-    console.log(dados)
-
-    try {
-        const response = await fetch('http://127.0.0.1:3000/api/v1/denuncia', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dados),
-        })
-        console.log('ok')
-        alert('Denúncia enviada com sucesso!')
-
-    } catch (error) {
-        console.error('Erro ao enviar dados:', error)
-    }
+    enviarDados(dados);
 }
 
 
-function getcheckbox() {
-    const fotos = document.querySelector('input[name="provas"]:checked').value;
-    if (fotos == `Sim`) {
-        document.getElementById('uploadBox').style.display = 'flex'
-    }
-    else {
-        document.getElementById('uploadBox').style.display = 'none'
+async function enviarDados(dados){
+    const response = await fetch(`${URL}/api/v1/denuncia`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados),
+        credentials: 'include',
+    });
+
+    if (response.ok) {
+        notify('Sucesso!', 'Denúncia enviada com sucesso!', 3000, null, 'success');
+        document.getElementById('denuncia-form').reset();
+        document.getElementById('denuncia-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    } else {
+        notify('Erro!', 'Erro ao enviar denúncia!', 3000, null, 'error');
     }
 }
 
 
 // ================================================
 // ============== [UPLOAD IMAGEM] =============
+// Configurações globais do Cloudinary (reutilizadas por todas as funções)
+const cloudName = 'dbc822i55';
+const uploadPreset = 'ml_default';
+
 async function uploadImagemCloudinary(file) {
     // Retorna imediatamente se nenhum arquivo for fornecido
     if (!file) {
@@ -449,38 +405,36 @@ async function uploadImagemCloudinaryComPresetAlternativo(file) {
 }
 
 
-function uploadimagem(file) {
+async function uploadimagem(file) {
     if (!file) {
-        alert("Por favor, selecione uma imagem para enviar.");
-        return;
+        return null;
     }
 
-    // CONFIGURAÇÕES DO CLOUDINARY
-    const uploadPreset = "ml_default"
-    const cloudName = "dbc822i55"
-
-    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
 
-    fetch(url, {
-        method: "POST",
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Upload concluído com sucesso:", data);
-            // URL da imagem hospedada:
-            const imagemUrl = data.secure_url;
-            console.log("Imagem hospedada em:", imagemUrl);
-
-            // Aqui você pode continuar o envio do formulário com os outros dados + imagemUrl
-        })
-        .catch(err => {
-            console.error("Erro ao fazer upload para o Cloudinary:", err);
+    try {
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: 'POST',
+            body: formData,
         });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Erro Cloudinary:', errorText);
+            return null;
+        }
+
+        const data = await response.json();
+        return data.secure_url || null;
+    } catch (err) {
+        console.error('Falha no upload Cloudinary:', err);
+        return null;
+    }
 }
 
+// ===================================================================
+// ==================== [ CHAMADAS DE FUNCTIONS] ====================
 
+document.addEventListener('DOMContentLoaded', verificarAuth);

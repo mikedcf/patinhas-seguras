@@ -7,8 +7,8 @@ const saltRounds = 10;
 
 // ===================== [ CRIAÇÃO DO BANCO DE DADOS ] =====================
 
-async function setupDatabase(){
-   
+async function setupDatabase() {
+
 
     let conexao = await conectar()
 
@@ -97,47 +97,16 @@ async function setupDatabase(){
     await conexao.execute(query)
 
     query = `
-        CREATE TABLE IF NOT EXISTS  denuncias (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        id_usuario INT NOT NULL,
-
-        data_denuncia DATE NOT NULL,
-        
-        nome_denunciante VARCHAR(255),
-        telefone VARCHAR(20),
-        email VARCHAR(255),
-        anonimato ENUM('Sim', 'Não') DEFAULT 'Sim',
-
-        nome_vitima VARCHAR(255),
-        idade_vitima VARCHAR(100),
-        genero_vitima VARCHAR(50),
-        endereco_vitima TEXT,
-        relacao_vitima VARCHAR(255),
-
-        nome_agressor VARCHAR(255),
-        idade_agressor VARCHAR(100),
-        relacao_agressor VARCHAR(255),
-        endereco_agressor TEXT,
-
-        local_ocorrido TEXT,
-        data_hora_fato VARCHAR(100),
-
-        descricao TEXT NOT NULL,
-
-        provas ENUM('Sim', 'Não') DEFAULT 'Não',
-        detalhes_provas TEXT,
-
-        informacoes_adicionais TEXT,
-
-        assinatura VARCHAR(255),
-
-        data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+        CREATE TABLE denuncias (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        local_ocorrencia VARCHAR(255) NOT NULL,
+        descricao_situacao TEXT NOT NULL,
+        tipo_animal VARCHAR(50) DEFAULT 'Não sei / Outro',
+        prova_arquivo VARCHAR(255)
     )`
 
     await conexao.execute(query)
-   
+
 }
 // ===================== [ AUTENTICAÇÃO ] =====================
 
@@ -303,7 +272,7 @@ async function updateUser(req, res) {
 }
 
 
-// ===================== [ PERFIL DE USUÁRIO ] =====================
+// ===================== [ ANIMAIS ] =====================
 
 // ------- GET PERFIL
 async function getPerfil(req, res) {
@@ -347,7 +316,7 @@ async function updatePerfil(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-        
+
         // Constrói a query dinamicamente baseada nos campos fornecidos
         let query = 'UPDATE usuarios SET ';
         let valores = [];
@@ -372,7 +341,7 @@ async function updatePerfil(req, res) {
         if (telefone) req.session.user.telefone = telefone;
         if (endereco) req.session.user.endereco = endereco;
 
-        return res.status(200).json({ 
+        return res.status(200).json({
             message: 'Perfil atualizado com sucesso!',
             usuario: req.session.user
         });
@@ -384,8 +353,6 @@ async function updatePerfil(req, res) {
     }
 }
 
-// ===================== [ ANIMAIS ] =====================
-
 // ------- API GET
 async function listarAnimal(req, res) {
     const animal = req.params.tipo;
@@ -395,10 +362,52 @@ async function listarAnimal(req, res) {
         return res.status(400).json({ message: 'Tipo de animal inválido!' });
     }
 
+    // Filtros opcionais via query string
+    const {
+        idade,
+        sexo,
+        porte,
+        raca,
+        regiao,
+        localizacao // alias opcional para compatibilidade
+    } = req.query;
+
+    // Monta a cláusula WHERE dinamicamente
+    const whereClauses = [];
+    const params = [];
+
+    if (idade && idade.trim() !== '') {
+        // Como idade pode ser texto (ex.: "2 anos"), usar LIKE para flexibilidade
+        whereClauses.push('idade LIKE ?');
+        params.push(`%${idade}%`);
+    }
+    if (sexo && sexo.trim() !== '') {
+        whereClauses.push('sexo = ?');
+        params.push(sexo);
+    }
+    if (porte && porte.trim() !== '') {
+        whereClauses.push('porte = ?');
+        params.push(porte);
+    }
+    if (raca && raca.trim() !== '') {
+        whereClauses.push('raca LIKE ?');
+        params.push(`%${raca}%`);
+    }
+    const regiaoOuLocal = regiao || localizacao;
+    if (regiaoOuLocal && regiaoOuLocal.trim() !== '') {
+        whereClauses.push('localizacao LIKE ?');
+        params.push(`%${regiaoOuLocal}%`);
+    }
+
     let conexao;
     try {
         conexao = await conectar();
-        const [resultado] = await conexao.execute(`SELECT * FROM ${animal}`);
+        let baseQuery = `SELECT * FROM ${animal}`;
+        if (whereClauses.length > 0) {
+            baseQuery += ' WHERE ' + whereClauses.join(' AND ');
+        }
+
+        const [resultado] = await conexao.execute(baseQuery, params);
         return res.status(200).json(resultado);
     } catch (error) {
         console.error('Erro ao listar animais:', error);
@@ -408,9 +417,11 @@ async function listarAnimal(req, res) {
     }
 }
 
+
 // ------- API POST
 async function inserirAnimal(req, res) {
     const { tipo, nome, idade, raca, sexo, porte, vacinado, castrado, descricao, foto_url, localizacao, status } = req.body;
+
     const presets = ['cachorros', 'gatos'];
 
     if (!presets.includes(tipo)) {
@@ -420,10 +431,15 @@ async function inserirAnimal(req, res) {
     let conexao;
     try {
         conexao = await conectar();
+
         const query = `INSERT INTO ${tipo} (nome,idade,raca,sexo,porte,vacinado,castrado,descricao,foto_url,localizacao, status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
+
         const parametros = [nome, idade, raca, sexo, porte, vacinado, castrado, descricao, foto_url, localizacao, status];
+
         await conexao.execute(query, parametros);
+
         return res.status(201).json({ message: 'Animal inserido com sucesso!' });
+
     } catch (error) {
         console.error('Erro ao inserir animal:', error);
         return res.status(500).json({ message: 'Erro interno do servidor!' });
@@ -445,7 +461,7 @@ async function atualizarAnimal(req, res) {
 
     let conexao;
 
-    try{
+    try {
         conexao = await conectar();
         let query = `UPDATE ${tipo} SET nome = ?, idade = ? , raca = ? , sexo = ? , porte = ? , vacinado = ? , castrado = ? , descricao = ? , foto_url = ? , localizacao = ? , status = ? WHERE id = ?`;
 
@@ -499,71 +515,33 @@ async function listarDenuncias(req, res) {
 // ------- API POST
 async function inserirdenuncia(req, res) {
     const {
-        usuario_id,
-        data,
-        nome_denunciante,
-        telefone,
-        email,
-        anonimato,
-        nome_vitima,
-        idade_vitima,
-        genero_vitima,
-        endereco_vitima,
-        relacao_vitima,
-        nome_agressor,
-        idade_agressor,
-        relacao_agressor,
-        endereco_agressor,
-        local_ocorrido,
-        data_hora_fato,
-        descricao,
-        provas,
-        detalhes_provas,
-        informacoes_adicionais,
-        assinatura
+        local_ocorrencia,
+        descricao_situacao,
+        tipo_animal,
+        arquivo_prova
     } = req.body;
 
-    console.log(req.body);
-
     let conexao;
-    // try {
-    //     conexao = await conectar();
-    //     const query = `INSERT INTO denuncias (usuario_id, data, nome_denunciante, telefone, email, anonimato, nome_vitima, idade_vitima, genero_vitima, endereco_vitima, relacao_vitima, nome_agressor, idade_agressor, relacao_agressor, endereco_agressor, local_ocorrido, data_hora_fato, descricao, provas, detalhes_provas, informacoes_adicionais, assinatura)
-    //     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    try {
+        conexao = await conectar();
+        const query = `INSERT INTO denuncias (local_ocorrencia, descricao_situacao, tipo_animal, arquivo_prova)
+        VALUES (?, ?, ?, ?)`;
 
-    //     const params = [
-    //         usuario_id,
-    //         data,
-    //         nome_denunciante,
-    //         telefone,
-    //         email,
-    //         anonimato,
-    //         nome_vitima,
-    //         idade_vitima,
-    //         genero_vitima,
-    //         endereco_vitima,
-    //         relacao_vitima,
-    //         nome_agressor,
-    //         idade_agressor,
-    //         relacao_agressor,
-    //         endereco_agressor,
-    //         local_ocorrido,
-    //         data_hora_fato,
-    //         descricao,
-    //         provas,
-    //         detalhes_provas,
-    //         informacoes_adicionais,
-    //         assinatura
-    //     ];
+        const params = [
+            local_ocorrencia,
+            descricao_situacao,
+            tipo_animal,
+            arquivo_prova,
+        ];
 
-    //     await conexao.execute(query, params);
-    //     res.status(201).json({ message: 'Denúncia inserida com sucesso' });
-    // } catch (error) {
-    //     console.error('Erro ao inserir denúncia:', error);
-    //     res.status(500).json({ message: 'Erro no servidor' });
-    // } finally {
-    //     if (conexao) await desconectar(conexao);
-    // }
+        await conexao.execute(query, params);
+        res.status(201).json({ message: 'Denúncia inserida com sucesso' });
+    } catch (error) {
+        console.error('Erro ao inserir denúncia:', error);
+        res.status(500).json({ message: 'Erro no servidor' });
+    } finally {
+        if (conexao) await desconectar(conexao);
+    }
 }
 
 // ------- API UPDATE
@@ -572,7 +550,7 @@ async function atualizarDenuncia(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-        const query = `UPDATE denuncias SET nome = ?, idade = ? , raca = ? , sexo = ? , porte = ? , vacinado = ? , castrado = ? , descricao = ? , foto_url = ? , localizacao = ? , status = ? WHERE id = ?`;
+        const query = `UPDATE denuncias SET local_ocorrencia = ?, descricao_situacao = ? , tipo_animal = ? , arquivo_prova = ? WHERE id = ?`;
         const parametros = [nome, idade, raca, sexo, porte, vacinado, castrado, descricao, foto_url, localizacao, status, id];
         await conexao.execute(query, parametros);
         return res.status(200).json({ message: 'Denúncia atualizada com sucesso!' });
@@ -714,6 +692,8 @@ async function deletarDoacao(req, res) {
 }
 
 
+// ===================== [ PERFIL DE USUÁRIO ] =====================
+
 // ------- GET PERFIL
 async function getPerfil(req, res) {
     if (!req.session.user) {
@@ -756,7 +736,7 @@ async function updatePerfil(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-        
+
         // Constrói a query dinamicamente baseada nos campos fornecidos
         let query = 'UPDATE usuarios SET ';
         let valores = [];
@@ -781,7 +761,7 @@ async function updatePerfil(req, res) {
         if (telefone) req.session.user.telefone = telefone;
         if (endereco) req.session.user.endereco = endereco;
 
-        return res.status(200).json({ 
+        return res.status(200).json({
             message: 'Perfil atualizado com sucesso!',
             usuario: req.session.user
         });
@@ -793,140 +773,6 @@ async function updatePerfil(req, res) {
     }
 }
 
-
-
-async function setupDatabase(){
-   
-
-    let conexao = await conectar()
-
-    let query;
-
-
-    query = `
-        CREATE TABLE IF NOT EXISTS  usuarios (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(100) NOT NULL,
-        email VARCHAR(120) UNIQUE NOT NULL,
-        senha VARCHAR(255) NOT NULL,
-        telefone VARCHAR(20),
-        endereco TEXT,
-        foto_url VARCHAR(255) DEFAULT '',
-        tipo ENUM('adotante','admin') DEFAULT 'adotante',
-        data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )`
-
-    await conexao.execute(query)
-
-    query = `
-        CREATE TABLE IF NOT EXISTS  cachorros (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        nome VARCHAR(100),
-        idade INT,
-        raca VARCHAR(100),
-        sexo ENUM('macho','femea') NOT NULL,
-        porte ENUM('pequeno','medio','grande') NOT NULL,
-        vacinado BOOLEAN,
-        castrado BOOLEAN,
-        descricao TEXT,
-        foto_url VARCHAR(250),
-        localizacao VARCHAR(100),
-        status ENUM('disponivel','adotado') NOT NULL
-    )`
-
-    await conexao.execute(query)
-
-
-    query = `
-        CREATE TABLE IF NOT EXISTS  gatos (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        nome VARCHAR(100),
-        idade INT,
-        raca VARCHAR(100),
-        sexo ENUM('macho','femea') NOT NULL,
-        porte ENUM('pequeno','medio','grande') NOT NULL,
-        vacinado BOOLEAN,
-        castrado BOOLEAN,
-        descricao TEXT,
-        foto_url VARCHAR(250),
-        localizacao VARCHAR(100),
-        status ENUM('disponivel','adotado') NOT NULL
-    )`
-
-    await conexao.execute(query)
-
-    query = `
-        CREATE TABLE IF NOT EXISTS  adocao (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        id_usuario INT NOT NULL,
-        id_gato INT,
-        id_cachorro INT,
-        tipo_animal ENUM('cachorro','gato') NOT NULL,
-        data_adocao DATE,
-        status ENUM('em adamento','concluída','cancelada'),
-        observacoes TEXT
-    )`
-
-    await conexao.execute(query)
-
-
-    query = `
-        CREATE TABLE IF NOT EXISTS  doacao (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        id_usuario INT,
-        tipo ENUM('financeira','itens'),
-        valor DECIMAL(10,2),
-        item_descrico TEXT,
-        data_doacao DATE,
-        forma_pagamento VARCHAR(50),
-        recibo_url VARCHAR(255)
-    )`
-
-    await conexao.execute(query)
-
-    query = `
-        CREATE TABLE IF NOT EXISTS  denuncias (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        id_usuario INT NOT NULL,
-
-        data_denuncia DATE NOT NULL,
-        
-        nome_denunciante VARCHAR(255),
-        telefone VARCHAR(20),
-        email VARCHAR(255),
-        anonimato ENUM('Sim', 'Não') DEFAULT 'Sim',
-
-        nome_vitima VARCHAR(255),
-        idade_vitima VARCHAR(100),
-        genero_vitima VARCHAR(50),
-        endereco_vitima TEXT,
-        relacao_vitima VARCHAR(255),
-
-        nome_agressor VARCHAR(255),
-        idade_agressor VARCHAR(100),
-        relacao_agressor VARCHAR(255),
-        endereco_agressor TEXT,
-
-        local_ocorrido TEXT,
-        data_hora_fato VARCHAR(100),
-
-        descricao TEXT NOT NULL,
-
-        provas ENUM('Sim', 'Não') DEFAULT 'Não',
-        detalhes_provas TEXT,
-
-        informacoes_adicionais TEXT,
-
-        assinatura VARCHAR(255),
-
-        data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
-    )`
-
-    await conexao.execute(query)
-   
-}
 
 module.exports = {
     cadastro,

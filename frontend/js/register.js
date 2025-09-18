@@ -1,12 +1,87 @@
-// ===================================================================
-// ==================== [ MODULE IMPORT] ====================
-import { autenticacao } from './ultis.js';
-
-// const URL = "http://localhost:3000";
+// const URL = "http://127.0.0.1:3000";
 const URL = "https://patinhas-seguras-production.up.railway.app";
 
 // ===================================================================
+// ==================== [ NOTIFICAÇÃO] ====================
+
+function notify(title, message, duration = 3000, image = null, type = null) {
+    const container = document.getElementById("notification-container");
+
+    // Criar notificação
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+
+    // Se tiver tipo de alerta
+    if (!image && type) {
+        notification.classList.add(type);
+    }
+
+    // Se tiver imagem, adiciona foto
+    if (image) {
+        const img = document.createElement("img");
+        img.src = image;
+        notification.appendChild(img);
+    }
+
+    // Texto
+    const textDiv = document.createElement("div");
+    textDiv.classList.add("text");
+
+    const titleEl = document.createElement("div");
+    titleEl.classList.add("title");
+    titleEl.textContent = title;
+
+    const messageEl = document.createElement("div");
+    messageEl.classList.add("message");
+    messageEl.textContent = message;
+
+    textDiv.appendChild(titleEl);
+    textDiv.appendChild(messageEl);
+    notification.appendChild(textDiv);
+
+    // Se for alerta sem imagem → progress bar
+    if (!image && type) {
+        const progressBar = document.createElement("div");
+        progressBar.classList.add("progress-bar");
+
+        const progress = document.createElement("div");
+        progress.classList.add("progress");
+        progress.style.animation = `shrink ${duration}ms linear forwards`;
+
+        progressBar.appendChild(progress);
+        notification.appendChild(progressBar);
+    }
+
+    container.appendChild(notification);
+
+    // Remover após o tempo
+    setTimeout(() => {
+        notification.style.animation = "slideOut 0.4s forwards";
+        setTimeout(() => notification.remove(), 400);
+    }, duration);
+}
+
+
+// ===================================================================
 // ==================== [ AUTENTICAÇÃO ] ====================
+
+
+async function autenticacao() {
+    try {
+        const response = await fetch(`${URL}/api/v1/user/auth`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        return data
+
+    } catch (error) {
+        console.error('Erro na inicialização:', error);
+    }
+}
 
 async function verificarAuth() {
 
@@ -121,7 +196,13 @@ async function cadastro(event) {
         endereco,
         foto_url
     };
+    
+    registrar_cadastro(dados)
+}
 
+
+async function registrar_cadastro(dados) {
+    console.log(dados)
     try {
         const response = await fetch(`${URL}/api/v1/user/cadastro`, {
             method: 'POST',
@@ -132,19 +213,20 @@ async function cadastro(event) {
         });
 
         if (response.ok) {
-            alert('Cadastro realizado com sucesso!');
+            notify('Sucesso!', 'Cadastro realizado com sucesso.', 2000, null, 'success')
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 1500);
             
         } else {
             const errorData = await response.json();
-            alert(`Erro ao cadastrar: ${errorData.message || 'Desconhecido'}`);
+            notify('Error!', `Erro ao cadastrar: ${errorData.message || 'Desconhecido'}`, 2000, null, 'error')
         }
     } catch (error) {
         console.error('Erro ao cadastrar:', error);
-        alert('Erro ao cadastrar!');
+        notify('Error!', 'Erro ao cadastrar!', 2000, null, 'error')
     }
+
 }
 
 

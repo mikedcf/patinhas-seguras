@@ -76,6 +76,8 @@ body, html {
   align-items: center;
   padding: 15px 40px;
   position: relative;
+  flex-wrap: wrap; /* permite quebra de linha como no adotar.css */
+  gap: 15px;
 }
 
 .logo-container {
@@ -218,10 +220,14 @@ button:hover,
   display: flex;
   align-items: center;
   gap: 25px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 80%;
+  /* remover posicionamento absoluto para responsividade como no adotar.css */
+  position: static;
+  left: auto;
+  transform: none;
+  max-width: 100%;
+  flex-grow: 1;
+  justify-content: center;
+  min-width: 300px;
 }
 
 .search-bar {
@@ -235,8 +241,8 @@ button:hover,
   backdrop-filter: blur(10px);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  width: 550px;
-  max-width: 550px;
+  width: 100%; /* fluida */
+  max-width: 550px; /* limite igual ao adotar.css */
 }
 
 .search-bar:hover {
@@ -562,97 +568,26 @@ header div div nav a {
   transform: translateX(5px);
 }
 
+@media (max-width: 1100px) {
+  .top-bar { justify-content: space-between; }
+  .center-section { order: 3; width: 100%; margin-top: 15px; gap: 15px; justify-content: center; }
+  .nav-menu { flex-wrap: wrap; justify-content: center; }
+  .logo-container { order: 1; }
+  .auth-buttons { order: 2; }
+  .rodape-conteudo { flex-direction: column; text-align: center; }
+  .item-rodape.direita, .item-rodape.direita .itens-acess { align-items: center; text-align: center; }
+  .item-rodape.direita h2 { text-align: left; margin-left: 65px; }
+}
+
 @media (max-width: 768px) {
-  .center-section {
-    position: static;
-    transform: none;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-  }
-
-  .search-bar {
-    width: 100%;
-    max-width: 100%;
-    padding: 6px 12px;
-    gap: 8px;
-  }
-
-  .nav-menu {
-    gap: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .nav-menu a {
-    font-size: 13px;
-    padding: 5px 8px;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .search-box input {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-
-  .bu-pesq {
-    width: 40px;
-    height: 40px;
-  }
-
-  .logo-pesq {
-    width: 18px;
-    height: 18px;
-  }
-
-  .auth-buttons {
-    gap: 8px;
-  }
-
-  .auth-buttons button {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  .user-btn {
-    padding: 8px 14px;
-    gap: 8px;
-  }
-
-  .user-avatar {
-    width: 35px;
-    height: 35px;
-    border-width: 2px;
-  }
-
-  .username {
-    font-size: 14px;
-    letter-spacing: 0.3px;
-  }
-
-  .seta {
-    font-size: 14px;
-  }
-
-  .dropdown {
-    min-width: 150px;
-    right: -10px;
-  }
-
-  .dropdown a {
-    padding: 10px 15px;
-    font-size: 13px;
-  }
-
-  .nav-menu {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+  .top-bar { padding: 15px 20px; flex-direction: column; align-items: center; }
+  .logo-container, .auth-buttons, .center-section { order: 0; width: 100%; justify-content: center; }
+  .auth-buttons { margin-bottom: 15px; }
+  .center-section { flex-direction: column; margin-top: 0; }
+  .dropdown { left: 50%; transform: translateX(-50%); min-width: 250px; }
+  .rodape-conteudo { flex-direction: column; text-align: center; }
+  .item-rodape.direita, .item-rodape.direita .itens-acess { align-items: center; text-align: center; }
+  .item-rodape.direita h2 { text-align: left; margin-left: 65px; }
 }
 
 
@@ -1026,13 +961,24 @@ header div div nav a {
 @media (max-width: 768px) {
 
   .auth-buttons button {
-    background: none;
+    background: linear-gradient(135deg, #FF914D, #f97316);
     border: 2px solid #FF914D;
     color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    border-radius: 25px;
     cursor: pointer;
+    font-family: 'Fredoka';
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0px 4px 12px rgba(255, 145, 77, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
+
+  .rodape-conteudo { flex-direction: column; text-align: center; }
+  .item-rodape.direita, .item-rodape.direita .itens-acess { align-items: center; text-align: center; }
+  .item-rodape.direita h2 { text-align: left; margin-left: 65px; }
 
 }
 

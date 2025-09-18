@@ -1,8 +1,8 @@
-// ===================================================================
-// ==================== [ NOTIFICAÇÃO] ====================
-// const URL = "http://localhost:3000";
+// const URL = "http://127.0.0.1:3000";
 const URL = "https://patinhas-seguras-production.up.railway.app";
 
+// ===================================================================
+// ==================== [ NOTIFICAÇÃO] ====================
 
 function notify(title, message, duration = 3000, image = null, type = null) {
     const container = document.getElementById("notification-container");
@@ -61,8 +61,6 @@ function notify(title, message, duration = 3000, image = null, type = null) {
     }, duration);
 }
 
-
-
 // ===================================================================
 // ==================== [ AUTENTICAÇÃO ] ====================
 
@@ -93,7 +91,7 @@ async function verificarAuth() {
 
 
 // ===================================================================
-// ================ [ AUTENTICAÇÃO ] ====================
+// ================ [ SISTEMA DE LOGIN ] ====================
 const formulario = document.querySelector('form');
 formulario.addEventListener('submit', login);
 async function login(event) {
@@ -119,7 +117,6 @@ async function login(event) {
         });
 
         if (response.ok) {
-            alert('Login realizado com sucesso!');
             const dados = await autenticacao()
             notify('Sucesso!', 'Login realizado com sucesso.', 2000, dados.usuario.foto_url, 'success')
             setTimeout(() => { window.location.href = 'home.html' }, 2000)
