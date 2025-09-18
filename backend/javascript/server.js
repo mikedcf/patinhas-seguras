@@ -35,14 +35,9 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://mikedcf.github.io',
+    origin: process.env.CORS_DOMAIN,
     credentials: true
 }));
-
-// app.use(cors({
-//     origin: 'http://127.0.0.1:5500',
-//     credentials: true
-// }));
 
 app.use(session({
     secret: 'patinhas-web-secret-key',

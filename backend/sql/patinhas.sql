@@ -1,9 +1,8 @@
--- Active: 1754065786791@@127.0.0.1@3306@patinhas
 CREATE DATABASE IF NOT EXISTS patinhas;
 USE patinhas;
 
 -- Usuários (quem se cadastra no site)
-drop table usuarios;
+drop table if EXISTS usuarios;
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -20,7 +19,7 @@ CREATE TABLE usuarios (
 ----------------------------------------
 ------------ [ANIMAIS] ------------
 
-Drop table cachorros;
+Drop table if EXISTS cachorros;
 -- CACHORROS
 CREATE TABLE cachorros(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -50,7 +49,7 @@ INSERT INTO cachorros (nome, idade, raca, sexo, porte, vacinado, castrado, descr
 ('Apolo', 7, 'Rottweiler', 'macho', 'grande', TRUE, FALSE, 'Forte e protetor, precisa de um tutor experiente.', 'https://exemplo.com/fotos/apolo.jpg', 'Recife, PE', 'disponivel'),
 ('Amora', 1, 'Spitz Alemão', 'femea', 'pequeno', TRUE, FALSE, 'Pequenina e esperta, adora brincar com bolinhas.', 'https://exemplo.com/fotos/amora.jpg', 'Curitiba, PR', 'disponivel');
 
-
+Drop table if EXISTS gatos;
 -- GATOS
 CREATE TABLE gatos(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -80,6 +79,8 @@ INSERT INTO gatos (nome, idade, raca, sexo, porte, vacinado, castrado, descricao
 ('Amora', 1, 'Vira-lata', 'femea', 'pequeno', TRUE, FALSE, 'Filhote alegre, adora correr pela casa.', 'https://exemplo.com/fotos/amora_gata.jpg', 'Recife, PE', 'disponivel'),
 ('Thor', 7, 'British Shorthair', 'macho', 'medio', TRUE, TRUE, 'Independente e calmo, ótimo para companhia.', 'https://exemplo.com/fotos/thor_gato.jpg', 'Curitiba, PR', 'disponivel');
 
+
+Drop table if EXISTS adocao;
 -- ADOTANTES
 CREATE TABLE adocao(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -96,7 +97,7 @@ CREATE TABLE adocao(
 ------------ [DOACOES] ------------
 
 -- DOACOES
-CREATE TABLE doacao(
+CREATE TABLE if not exists doacao(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_usuario INT,
     tipo ENUM('financeira','itens'),
@@ -110,7 +111,7 @@ CREATE TABLE doacao(
 
 ----------------------------------------
 ------------ [DENUNCIAS] ------------
-DROP TABLE denuncias;
+DROP TABLE if EXISTS denuncias;
 CREATE TABLE denuncias (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
