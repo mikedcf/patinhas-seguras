@@ -97,7 +97,7 @@ async function setupDatabase() {
     await conexao.execute(query)
 
     query = `
-        CREATE TABLE denuncias (
+        CREATE TABLE IF NOT EXISTS denuncias (
         id INT AUTO_INCREMENT PRIMARY KEY,
         local_ocorrencia VARCHAR(255) NOT NULL,
         descricao_situacao TEXT NOT NULL,
@@ -159,6 +159,8 @@ async function login(req, res) {
         if (!verificacao_senha) {
             return res.status(401).json({ message: 'Usuário ou senha inválidos!' });
         }
+
+        console.log(usuario)
 
         req.session.user = {
             id: usuario.id,
@@ -520,6 +522,8 @@ async function inserirdenuncia(req, res) {
         tipo_animal,
         arquivo_prova
     } = req.body;
+
+    console.log(req.body)
 
     let conexao;
     try {
