@@ -31,7 +31,7 @@ async function setupDatabase() {
     await conexao.execute(query)
 
     query = `
-        CREATE TABLE IF NOT EXISTS  cachorros (
+        CREATE TABLE IF NOT EXISTS cachorros (
         id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         nome VARCHAR(100),
         idade INT,
@@ -96,16 +96,19 @@ async function setupDatabase() {
 
     await conexao.execute(query)
 
-    query = `
-        CREATE TABLE IF NOT EXISTS denuncias (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        local_ocorrencia VARCHAR(255) NOT NULL,
-        descricao_situacao TEXT NOT NULL,
-        tipo_animal VARCHAR(50) DEFAULT 'Não sei / Outro',
-        prova_arquivo VARCHAR(255)
-    )`
+    // query = `
+    //     CREATE TABLE IF NOT EXISTS denuncias (
+    //     id INT AUTO_INCREMENT PRIMARY KEY,
+    //     local_ocorrencia VARCHAR(255) NOT NULL,
+    //     descricao_situacao TEXT NOT NULL,
+    //     tipo_animal ENUM('Não sei / Outro', 'Cachorro', 'Gato', 'Pássaro', 'Cavalo') DEFAULT 'Não sei / Outro',
+    //     arquivo_prova VARCHAR(255),
+    //     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    // )`
 
-    await conexao.execute(query)
+    
+
+    // await conexao.execute(query)
 
 }
 // ===================== [ AUTENTICAÇÃO ] =====================
@@ -142,7 +145,7 @@ async function login(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-
+        
         const query = 'SELECT * FROM usuarios WHERE email = ?';
         const parametros = [email];
 
@@ -155,12 +158,9 @@ async function login(req, res) {
         const usuario = dados_banco[0];
 
         const verificacao_senha = await bcrypt.compare(senha, usuario.senha);
-
         if (!verificacao_senha) {
             return res.status(401).json({ message: 'Usuário ou senha inválidos!' });
         }
-
-        console.log(usuario)
 
         req.session.user = {
             id: usuario.id,
@@ -273,87 +273,8 @@ async function updateUser(req, res) {
     }
 }
 
-
 // ===================== [ ANIMAIS ] =====================
 
-// ------- GET PERFIL
-async function getPerfil(req, res) {
-    if (!req.session.user) {
-        return res.status(401).json({ message: 'Usuário não autenticado!' });
-    }
-
-    let conexao;
-    try {
-        conexao = await conectar();
-        const [resultado] = await conexao.execute(
-            'SELECT id, nome, email, telefone, endereco, foto_url FROM usuarios WHERE id = ?',
-            [req.session.user.id]
-        );
-
-        if (resultado.length === 0) {
-            return res.status(404).json({ message: 'Usuário não encontrado!' });
-        }
-
-        return res.status(200).json(resultado[0]);
-    } catch (error) {
-        console.error('Erro ao buscar perfil:', error);
-        return res.status(500).json({ message: 'Erro interno do servidor!' });
-    } finally {
-        if (conexao) await desconectar(conexao);
-    }
-}
-
-// ------- UPDATE PERFIL
-async function updatePerfil(req, res) {
-    if (!req.session.user) {
-        return res.status(401).json({ message: 'Usuário não autenticado!' });
-    }
-
-    const { telefone, endereco } = req.body;
-
-    if (!telefone && !endereco) {
-        return res.status(400).json({ message: 'Pelo menos um campo deve ser fornecido!' });
-    }
-
-    let conexao;
-    try {
-        conexao = await conectar();
-
-        // Constrói a query dinamicamente baseada nos campos fornecidos
-        let query = 'UPDATE usuarios SET ';
-        let valores = [];
-        let campos = [];
-
-        if (telefone) {
-            campos.push('telefone = ?');
-            valores.push(telefone);
-        }
-
-        if (endereco) {
-            campos.push('endereco = ?');
-            valores.push(endereco);
-        }
-
-        query += campos.join(', ') + ' WHERE id = ?';
-        valores.push(req.session.user.id);
-
-        await conexao.execute(query, valores);
-
-        // Atualiza a sessão com os novos dados
-        if (telefone) req.session.user.telefone = telefone;
-        if (endereco) req.session.user.endereco = endereco;
-
-        return res.status(200).json({
-            message: 'Perfil atualizado com sucesso!',
-            usuario: req.session.user
-        });
-    } catch (error) {
-        console.error('Erro ao atualizar perfil:', error);
-        return res.status(500).json({ message: 'Erro interno do servidor!' });
-    } finally {
-        if (conexao) await desconectar(conexao);
-    }
-}
 
 // ------- API GET
 async function listarAnimal(req, res) {
@@ -504,7 +425,7 @@ async function listarDenuncias(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-        const [resultado] = await conexao.execute("SELECT * FROM denuncias");
+        const [resultado] = await conexao.execute("SELECT * FROM denuncia");
         res.status(200).json(resultado);
     } catch (error) {
         console.error('Erro ao listar denúncias:', error);
@@ -523,12 +444,11 @@ async function inserirdenuncia(req, res) {
         arquivo_prova
     } = req.body;
 
-    console.log(req.body)
 
     let conexao;
     try {
         conexao = await conectar();
-        const query = `INSERT INTO denuncias (local_ocorrencia, descricao_situacao, tipo_animal, arquivo_prova)
+        const query = `INSERT INTO denuncia (local_ocorrencia, descricao_situacao, tipo_animal, arquivo_prova)
         VALUES (?, ?, ?, ?)`;
 
         const params = [
@@ -554,7 +474,7 @@ async function atualizarDenuncia(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-        const query = `UPDATE denuncias SET local_ocorrencia = ?, descricao_situacao = ? , tipo_animal = ? , arquivo_prova = ? WHERE id = ?`;
+        const query = `UPDATE denuncia SET local_ocorrencia = ?, descricao_situacao = ? , tipo_animal = ? , arquivo_prova = ? WHERE id = ?`;
         const parametros = [nome, idade, raca, sexo, porte, vacinado, castrado, descricao, foto_url, localizacao, status, id];
         await conexao.execute(query, parametros);
         return res.status(200).json({ message: 'Denúncia atualizada com sucesso!' });
@@ -572,7 +492,7 @@ async function deletarDenuncia(req, res) {
     let conexao;
     try {
         conexao = await conectar();
-        const query = `DELETE FROM denuncias WHERE id = ?`;
+        const query = `DELETE FROM denuncia WHERE id = ?`;
         const parametros = [id];
         await conexao.execute(query, parametros);
         return res.status(200).json({ message: 'Denúncia deletada com sucesso!' });

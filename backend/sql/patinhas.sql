@@ -111,5 +111,12 @@ CREATE TABLE if not exists doacao(
 
 ----------------------------------------
 ------------ [DENUNCIAS] ------------
-
+CREATE TABLE denuncia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    local_ocorrencia VARCHAR(255) NOT NULL,
+    descricao_situacao TEXT NOT NULL,
+    tipo_animal ENUM('Não sei / Outro', 'Cachorro', 'Gato', 'Pássaro', 'Cavalo') DEFAULT 'Não sei / Outro',
+    arquivo_prova VARCHAR(255),
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 

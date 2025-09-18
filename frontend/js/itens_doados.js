@@ -1,5 +1,5 @@
-// const URL = "http://127.0.0.1:3000";
-const URL = "https://patinhas-seguras-production.up.railway.app";
+const URL = "http://127.0.0.1:3000";
+// const URL = "https://patinhas-seguras-production.up.railway.app";
 
 
 // ===================================================================
