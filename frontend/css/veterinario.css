@@ -193,7 +193,7 @@ body {
 }
 
 .auth-buttons {
-    display: flex; /* Alterado de 'none' para 'flex' por padrão */
+    display: none; /* Alterado de 'none' para 'flex' por padrão */
     gap: 12px;
 }
 

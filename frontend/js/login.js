@@ -118,9 +118,8 @@ async function login(event) {
 
         if (response.ok) {
             const dados = await autenticacao()
-            console.log(dados)
-            notify('Sucesso!', 'Login realizado com sucesso.', 2000, null, 'success')
-            // setTimeout(() => { window.location.href = 'home.html' }, 2000)
+            notify('Sucesso!', 'Login realizado com sucesso.', 2000, dados.usuario.foto_url, 'success')
+            setTimeout(() => { window.location.href = 'home.html' }, 2000)
 
         } else {
             const errorData = await response.json();
@@ -129,7 +128,7 @@ async function login(event) {
     }
     catch (error) {
         console.error('Erro ao fazer login:', error);
-        alert('Erro ao fazer login!');
+        notify('Error!', 'Erro ao fazer login!', 2000, null, 'error')
     }
 }
 
