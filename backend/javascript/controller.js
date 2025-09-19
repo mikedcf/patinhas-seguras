@@ -16,7 +16,13 @@ async function setupDatabase() {
 
 
     query = `
-        CREATE TABLE IF NOT EXISTS  usuarios (
+        drop table if EXISTS usuarios
+    `
+
+    await conexao.execute(query)
+
+    query = `
+        CREATE TABLE usuarios (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         email VARCHAR(120) UNIQUE NOT NULL,
@@ -26,25 +32,8 @@ async function setupDatabase() {
         foto_url VARCHAR(255) DEFAULT '',
         tipo ENUM('adotante','admin') DEFAULT 'adotante',
         data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )`
-
-    await conexao.execute(query)
-
-    query = `
-        CREATE TABLE IF NOT EXISTS cachorros (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        nome VARCHAR(100),
-        idade INT,
-        raca VARCHAR(100),
-        sexo ENUM('macho','femea') NOT NULL,
-        porte ENUM('pequeno','medio','grande') NOT NULL,
-        vacinado BOOLEAN,
-        castrado BOOLEAN,
-        descricao TEXT,
-        foto_url VARCHAR(250),
-        localizacao VARCHAR(100),
-        status ENUM('disponivel','adotado') NOT NULL
-    )`
+    )
+    `
 
     await conexao.execute(query)
 
@@ -83,32 +72,27 @@ async function setupDatabase() {
 
 
     query = `
-        CREATE TABLE IF NOT EXISTS  doacao (
-        id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-        id_usuario INT,
-        tipo ENUM('financeira','itens'),
-        valor DECIMAL(10,2),
-        item_descricao TEXT,
-        data_doacao DATE,
-        forma_pagamento VARCHAR(50),
-        recibo_url VARCHAR(255)
-    )`
+        drop table if EXISTS denuncia
+    `
 
     await conexao.execute(query)
 
-    // query = `
-    //     CREATE TABLE IF NOT EXISTS denuncias (
-    //     id INT AUTO_INCREMENT PRIMARY KEY,
-    //     local_ocorrencia VARCHAR(255) NOT NULL,
-    //     descricao_situacao TEXT NOT NULL,
-    //     tipo_animal ENUM('Não sei / Outro', 'Cachorro', 'Gato', 'Pássaro', 'Cavalo') DEFAULT 'Não sei / Outro',
-    //     arquivo_prova VARCHAR(255),
-    //     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    // )`
+    query = `
+        drop table if EXISTS denuncia
+
+        CREATE TABLE denuncia (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        local_ocorrencia VARCHAR(255) NOT NULL,
+        descricao_situacao TEXT NOT NULL,
+        tipo_animal ENUM('Não sei / Outro', 'Cachorro', 'Gato', 'Pássaro', 'Cavalo') DEFAULT 'Não sei / Outro',
+        arquivo_prova VARCHAR(255),
+        data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    `
 
     
 
-    // await conexao.execute(query)
+    await conexao.execute(query)
 
 }
 // ===================== [ AUTENTICAÇÃO ] =====================
