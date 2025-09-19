@@ -202,13 +202,13 @@ body {
 }
 
 .auth-buttons-container {
-    display: none;
+    display: flex;
     align-items: center;
     gap: 12px;
 }
 
 .auth-buttons {
-    display: flex;
+    display: none;
     /* Alterado de 'none' para 'flex' por padrão */
     gap: 12px;
 }
