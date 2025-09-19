@@ -327,7 +327,21 @@ async function inserirAnimal(req, res) {
 
         const query = `INSERT INTO ${tipo} (nome,idade,raca,sexo,porte,vacinado,castrado,descricao,foto_url,localizacao, status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
 
-        const parametros = [nome, idade, raca, sexo, porte, vacinado, castrado, descricao, foto_url, localizacao, status];
+        // const parametros = [nome, idade, raca, sexo, porte, vacinado, castrado, descricao, foto_url, localizacao, status];
+
+        const parametros = [
+            nome,
+            parseInt(idade),
+            raca,
+            sexo,
+            porte,
+            vacinado === 'true' ? 1 : 0,
+            castrado === 'true' ? 1 : 0,
+            descricao,
+            foto_url,
+            localizacao,
+            status
+        ];
 
         await conexao.execute(query, parametros);
 

@@ -1053,6 +1053,8 @@ async function formularioAnimal(event){
         status: 'disponivel'
     };
 
+    console.log(dados)
+
     enviarDados(dados);
 
 }
