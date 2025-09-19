@@ -1184,7 +1184,7 @@ main {
     .card-dinamico,
     .card-dinamico-gato {
         flex: 0 0 250px;
-        height: 380px;
+        height: 420px;
     }
 
     .card-dinamico h3,
@@ -1203,7 +1203,7 @@ main {
     .card-dinamico,
     .card-dinamico-gato {
         flex: 0 0 220px;
-        height: 350px;
+        height: 430px;
     }
 
     .card-dinamico .localizacao,
