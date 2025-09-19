@@ -78,8 +78,6 @@ async function setupDatabase() {
     await conexao.execute(query)
 
     query = `
-        drop table if EXISTS denuncia
-
         CREATE TABLE denuncia (
         id INT AUTO_INCREMENT PRIMARY KEY,
         local_ocorrencia VARCHAR(255) NOT NULL,
