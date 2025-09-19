@@ -71,6 +71,7 @@ async function autenticacao() {
 
         const data = await response.json();
 
+
         return data
 
     } catch (error) {
@@ -82,6 +83,7 @@ async function verificarAuth() {
 
     try {
         const dados = await autenticacao();
+        
 
         // userMenu
 
