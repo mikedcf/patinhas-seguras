@@ -719,7 +719,7 @@ body.show-content .preloader {
 .card-dinamico-gato {
   flex: 0 0 280px;
   scroll-snap-align: center; /* Centraliza o card ao "parar" o scroll */
-  height: 420px;
+  height: 450px;
   border-radius: 25px;
   text-align: center;
   display: flex;
@@ -1557,8 +1557,8 @@ body.show-content .preloader {
         height: 60px;
     }
     .card-dinamico, .card-dinamico-gato {
-        flex-basis: 250px; /* Reduz a largura base dos cards */
-        height: 400px;
+        flex-basis: 300px; /* Reduz a largura base dos cards */
+        height: 500px;
     }
 }
 
