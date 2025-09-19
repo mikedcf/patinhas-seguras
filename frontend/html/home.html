@@ -41,25 +41,24 @@
           </div>
         </div>
 
-        <div class="auth-buttons" id="boxLogin">
-          <a href="login.html"><button>Login</button></a>
-          <a href="register.html"><button>Registrar</button></a>
-        </div>
+        <div class="auth-buttons-container">
+          <div class="auth-buttons" id="boxLogin">
+            <a href="login.html"><button>Login</button></a>
+            <a href="register.html"><button>Registrar</button></a>
+          </div>
 
-        <div class="user-menu" id="userMenu">
-          <button class="user-btn">
-            <img src="" alt="Usuário" class="user-avatar" id="avatarimg">
-
-            <div class="user-info" id="userInfo">
-              <span class="username" id="nomeperfil"></span>
-              <span class="seta">▼</span>
+          <div class="user-menu" id="userMenu">
+            <button class="user-btn">
+              <img src="" alt="Usuário" class="user-avatar" id="avatarimg">
+              <div class="user-info">
+                <span class="username" id="nomeperfil">Usuário</span>
+                <span class="seta">▼</span>
+              </div>
+            </button>
+            <div class="dropdown" id="userDropdown">
+              <a href="">⚙️ Configurações</a>
+              <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
             </div>
-          </button>
-
-          <div class="dropdown" id="userDropdown">
-            <a href="#" onclick="abrirModalPerfil()">👤 Meu Perfil</a>
-            <a href="config.html">⚙️ Configurações</a>
-            <a href="#" onclick="logout()" class="logout-btn">🚪 Sair</a>
           </div>
         </div>
 
