@@ -39,17 +39,32 @@ app.use(cors({
     credentials: true
 }));
 
+app.set('trust proxy', 1);
+
 app.use(session({
     secret: 'patinhas-web-secret-key',
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // true no deploy
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+        secure: process.env.NODE_ENV === "production", 
+        sameSite: 'none'
     }
-}))
+}));
+
+// app.use(session({
+//     secret: 'patinhas-web-secret-key',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         maxAge: 1000 * 60 * 60 * 24,
+//         httpOnly: true,
+//         secure: process.env.NODE_ENV === 'production', // true no deploy
+//         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+//     }
+// }))
 
 
 // ===============================================================
