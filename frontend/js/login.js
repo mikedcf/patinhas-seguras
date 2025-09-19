@@ -119,7 +119,7 @@ async function login(event) {
         if (response.ok) {
             const dados = await autenticacao()
             notify('Sucesso!', 'Login realizado com sucesso.', 2000, null, 'success')
-            setTimeout(() => { window.location.href = 'home.html' }, 2000)
+            // setTimeout(() => { window.location.href = 'home.html' }, 2000)
 
         } else {
             const errorData = await response.json();
