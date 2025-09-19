@@ -2,8 +2,6 @@
 const URL = "https://patinhas-seguras-production.up.railway.app";
 
 
-
-
 // ===================================================================
 // ==================== [ NOTIFICAÇÃO] ====================
 
@@ -1052,8 +1050,6 @@ async function formularioAnimal(event){
         localizacao: local,
         status: 'disponivel'
     };
-
-    console.log(dados)
 
     enviarDados(dados);
 
