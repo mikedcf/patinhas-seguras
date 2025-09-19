@@ -8,7 +8,6 @@
   <link rel="shortcut icon" href="../ico/log.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="../css/home.css">
-  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
@@ -18,16 +17,10 @@
 
 <body>
 
-  <!-- Preloader com logo central -->
   <div class="preloader">
     <img src="../img/logo.png" alt="Logo Patinhas" id="preloaderLogo" />
   </div>
 
-  <!-- 
-  =================================================
-  ==================[ CABEÇALHO ]==================
-  =================================================
-  -->
   <header>
     <div class="overlay">
       <div class="top-bar">
@@ -39,7 +32,6 @@
           </div>
         </div>
 
-        <!-- Barra de busca centralizada -->
         <div class="search-bar">
           <button class="bu-pesq">
             <img class="logo-pesq" src="../img/search.png" alt="">
@@ -49,7 +41,6 @@
           </div>
         </div>
 
-        <!-- Botões à direita -->
         <div class="auth-buttons" id="boxLogin">
           <a href="login.html"><button>Login</button></a>
           <a href="register.html"><button>Registrar</button></a>
@@ -59,7 +50,6 @@
           <button class="user-btn">
             <img src="" alt="Usuário" class="user-avatar" id="avatarimg">
 
-            <!-- 🔽 Nome + seta juntos -->
             <div class="user-info" id="userInfo">
               <span class="username" id="nomeperfil"></span>
               <span class="seta">▼</span>
@@ -75,7 +65,6 @@
 
       </div>
 
-      <!-- Menu de navegação principal -->
       <nav class="nav-menu">
         <a href="home.html">Home</a>
         <a href="doacao.html">Doação</a>
@@ -99,12 +88,6 @@
 
 
 
-  <!--
-  ======================================================================
-  ==================[ SECTION 1 SOBRE NOIS ]============================
-  ======================================================================
-  -->
-  <!-- data-aos="fade-up" -->
   <section class="sobre-ong">
 
     <div class="box-sobre">
@@ -122,12 +105,6 @@
     </div>
   </section>
 
-  <!--
-  ======================================================================
-  ==================[ SECTION 2 PARCEROS ]==============================
-  ======================================================================
-  -->
-
   <section class="parceiros" data-aos="fade-up">
     <div class="parceiros-titulo">
       <img src="../img/dog.png" alt="Cachorro" class="cachorro-icon">
@@ -136,7 +113,6 @@
 
     <div class="swiper parceirosSwiper">
       <div class="swiper-wrapper">
-        <!-- Cada logo dentro de um slide -->
         <div class="swiper-slide"><img src="../img/seres.png" alt="Seres"></div>
         <div class="swiper-slide"><img src="../img/dognotic.png" alt="Dogostic"></div>
         <div class="swiper-slide"><img src="../img/logopet.png" alt="Pet Society"></div>
@@ -144,35 +120,20 @@
         <div class="swiper-slide"><img src="../img/centro.png" alt="Centro Veterinário"></div>
       </div>
 
-      <!-- Setas de navegação -->
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
   </section>
-
-  <!--
-  ======================================================================
-  ==================[ SECTION 3 ANIMAIS PARA DOAÇÕES ]==================
-  ======================================================================
-  -->
-
-  <!--
-  ===========================
-  ========[ CACHORROS]=======
-  ===========================
-  -->
 
   <section class="section-animais" data-aos="fade-right">
     <div class="animais-titulo">
       <h2>Cachorros para Adoção</h2>
     </div>
 
-    <!-- CARROSSEL -->
     <div class="carrossel-container">
       <button class="seta esquerda" id="setaEsquerdaCachorros">❮</button>
 
       <div class="carrossel" id="carrosselCachorros">
-        <!-- Cards serão carregados dinamicamente via JavaScript -->
         <div class="loading-message">
           <p>Carregando cachorros...</p>
         </div>
@@ -188,23 +149,15 @@
 
   </section>
 
-  <!--
-  =======================
-  =======[ GATOS ]=======
-  =======================
-  -->
-
   <section class="section-animais2" data-aos="fade-left">
     <div class="animais-titulo-gato">
       <h2>Gatos para Adoção</h2>
     </div>
 
-    <!-- CARROSSEL -->
     <div class="carrossel-container2">
       <button class="seta2 esquerda2" id="setaEsquerdaGatos">❮</button>
 
       <div class="carrossel2" id="carrosselGatos">
-        <!-- Cards serão carregados dinamicamente via JavaScript -->
         <div class="loading-message">
           <p>Carregando gatos...</p>
         </div>
@@ -221,11 +174,6 @@
 
 
 
-  <!--
-  =========================================================
-  ==================[ COMENTARIOS ]==================
-  ==========================================================
-  -->
   <section>
     <div class="nosso_trabalho">
       <div class="box_paragrafo">
@@ -462,12 +410,6 @@
       </div>
   </section>
 
-  <!--
-  =========================================================
-  ==================[ SECTION 4 DENUNCIA ]==================
-  ==========================================================
-  -->
-
   <section class="container-principal" data-aos="zoom-in">
     <p class="msg-denuncia">"Abandonar animais é crime e um ato de crueldade. Eles sofrem com fome, doenças e<br>
       maus-tratos. Se presenciar abandono, denuncie. Adotar é um compromisso de amor e<br> responsabilidade para a vida
@@ -482,12 +424,6 @@
     <a href="denuncia.html"><button class="bu-denuncia" data-aos="fade-right">Denuncie</button></a>
 
   </section>
-
-  <!--
-  ==========================================================
-  ===============[ FACTION (RODA PE DO SITE)]===============
-  ==========================================================
-  -->
 
   <footer>
     <div class="rodape" data-aos="fade-down">
@@ -520,7 +456,6 @@
             <button class="botao-acess" data-aos="fade-right">FAQ</button>
             <button class="botao-acess" data-aos="fade-right">Eventos</button>
 
-            <!-- tem que arrumar animação -->
             <button class="botao-acess">Área de Bonificação</button>
             <button class="botao-acess">Ajuda</button>
           </div>
@@ -532,12 +467,11 @@
 
   <div class="notification-container" id="notification-container"></div>
 
-  <!-- Modal de Perfil do Usuário -->
   <div id="modalPerfil" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h2>Editar Perfil</h2>
-        <span class="close" id="closeModalPerfil">&times;</span>
+        <span class="close" id="closeModalPerfil">×</span>
       </div>
 
       <div class="modal-body">
@@ -572,10 +506,8 @@
     </div>
   </div>
 
-  <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <!-- <script type="module" src="../js/home.js"></script> -->
   <script src="../js/home.js"></script>
 
 
