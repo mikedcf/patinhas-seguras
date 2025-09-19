@@ -16,13 +16,7 @@ async function setupDatabase() {
 
 
     query = `
-        drop table if EXISTS usuarios
-    `
-
-    await conexao.execute(query)
-
-    query = `
-        CREATE TABLE usuarios (
+        CREATE TABLE IF NOT EXISTS usuarios (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         email VARCHAR(120) UNIQUE NOT NULL,
@@ -39,7 +33,7 @@ async function setupDatabase() {
 
 
     query = `
-        CREATE TABLE IF NOT EXISTS  gatos (
+        CREATE TABLE IF NOT EXISTS gatos (
         id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         nome VARCHAR(100),
         idade INT,
@@ -57,7 +51,7 @@ async function setupDatabase() {
     await conexao.execute(query)
 
     query = `
-        CREATE TABLE IF NOT EXISTS  adocao (
+        CREATE TABLE IF NOT EXISTS adocao (
         id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         id_usuario INT NOT NULL,
         id_gato INT,
@@ -72,13 +66,7 @@ async function setupDatabase() {
 
 
     query = `
-        drop table if EXISTS denuncia
-    `
-
-    await conexao.execute(query)
-
-    query = `
-        CREATE TABLE denuncia (
+        CREATE TABLE IF NOT EXISTS denuncia (
         id INT AUTO_INCREMENT PRIMARY KEY,
         local_ocorrencia VARCHAR(255) NOT NULL,
         descricao_situacao TEXT NOT NULL,
