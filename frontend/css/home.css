@@ -896,6 +896,49 @@ body.show-content .preloader {
   /* Escondido por padrão para mobile-first */
 }
 
+/* Exibir setas do carrossel de cachorros em todas as larguras */
+.carrossel-container button.seta {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border: none;
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 24px !important;
+  font-weight: bold;
+  z-index: 100;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  color: var(--cor-laranja) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+}
+
+#setaEsquerdaCachorros { left: 8px; }
+#setaDireitaCachorros { right: 8px; }
+
+.carrossel-container button.seta:hover { background-color: #fff !important; }
+.carrossel-container button.seta.disabled { opacity: .5; cursor: not-allowed; }
+
+/* Força visibilidade mesmo com regras anteriores */
+button#setaEsquerdaCachorros,
+button#setaDireitaCachorros {
+  display: flex !important;
+}
+
+/* Alinha offsets como os de .seta2 em telas grandes */
+@media (min-width: 993px) {
+  #setaEsquerdaCachorros { left: -20px !important; }
+  #setaDireitaCachorros { right: -20px !important; }
+}
+
 /** 7. SEÇÃO DE COMENTÁRIOS **/
 .nosso_trabalho {
   display: flex;

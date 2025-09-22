@@ -616,6 +616,26 @@ async function inicializarCarrosselDinamico() {
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializa o carrossel dinâmico de cachorros
   inicializarCarrosselDinamico();
+
+  // Força visibilidade das setas do carrossel de cachorros
+  const setaEsq = document.getElementById('setaEsquerdaCachorros');
+  const setaDir = document.getElementById('setaDireitaCachorros');
+  [setaEsq, setaDir].forEach(btn => {
+    if (btn) {
+      btn.style.display = 'flex';
+      btn.style.zIndex = '200';
+      btn.style.alignItems = 'center';
+      btn.style.justifyContent = 'center';
+      btn.style.pointerEvents = 'auto';
+    }
+  });
+
+  if (setaEsq) {
+    // posição é controlada pelo CSS responsivo
+  }
+  if (setaDir) {
+    // posição é controlada pelo CSS responsivo
+  }
 });
 
 window.addEventListener('load', () => {
