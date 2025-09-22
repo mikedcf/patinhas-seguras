@@ -118,6 +118,7 @@ async function login(event) {
 
         if (response.ok) {
             const dados = await autenticacao()
+            console.log(dados)
             notify('Sucesso!', 'Login realizado com sucesso.', 2000, dados.usuario.foto_url, 'success')
             setTimeout(() => { window.location.href = 'home.html' }, 2000)
 

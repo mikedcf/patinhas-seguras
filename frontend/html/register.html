@@ -79,6 +79,30 @@
 
         <label for="password">Senha</label>
         <input type="password" id="password" placeholder="Digite sua senha" required />
+        
+        <!-- Indicador de requisitos de senha -->
+        <div class="password-requirements" id="password-requirements">
+          <div class="requirement-item" id="req-length">
+            <span class="requirement-icon">❌</span>
+            <span class="requirement-text">Mínimo 8 caracteres</span>
+          </div>
+          <div class="requirement-item" id="req-uppercase">
+            <span class="requirement-icon">❌</span>
+            <span class="requirement-text">Pelo menos 1 letra maiúscula</span>
+          </div>
+          <div class="requirement-item" id="req-lowercase">
+            <span class="requirement-icon">❌</span>
+            <span class="requirement-text">Pelo menos 1 letra minúscula</span>
+          </div>
+          <div class="requirement-item" id="req-number">
+            <span class="requirement-icon">❌</span>
+            <span class="requirement-text">Pelo menos 1 número</span>
+          </div>
+          <div class="requirement-item" id="req-special">
+            <span class="requirement-icon">❌</span>
+            <span class="requirement-text">Pelo menos 1 caractere especial (@$!%*?&)</span>
+          </div>
+        </div>
 
         <label for="confirm-password">Confirme a senha</label>
         <input type="password" id="confirm-password" placeholder="Confirme sua senha" required />

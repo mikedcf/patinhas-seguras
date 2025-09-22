@@ -196,10 +196,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
-
 // ===================================================================
 // ==================== [ CARREGAR CACHORROS DA API ] ====================
 
@@ -1011,7 +1007,9 @@ AOS.init();
 // ===================================================================
 // ==================== [ FORMULARIO DE CADASTRO DE ANIMAIS ] ====================
 
-async function formularioAnimal(event){
+let animalImgUrl = ''; // variável global para armazenar a URL da imagem
+
+async function formularioAnimal(event) {
     event.preventDefault();
 
     const tipo = document.getElementById('animal-especie').value;
@@ -1022,40 +1020,29 @@ async function formularioAnimal(event){
     const idade = document.getElementById('animal-idade').value;
     const porte = document.getElementById('animal-porte').value;
     const raca = document.getElementById('animal-raca').value;
-    const local = document.getElementById('animal-local').value;
+    const estado = document.getElementById('animal-estado').value;
+    const cidade = document.getElementById('animal-cidade').value;
+    const local = `${cidade}, ${estado}`;
     const historia = document.getElementById('animal-historia').value;
-    // imagem: pega o arquivo e faz upload (Cloudinary)
-    const imgInput = document.getElementById('animal-img-file');
-    let img = '';
-    if (imgInput && imgInput.files && imgInput.files[0]) {
-        // Presume que uploadimagem(file) retorna a URL pública (string)
-        img = await uploadimagem(imgInput.files[0]);
-    } else {
-        img = '';
-    }
 
-    
-
+    // aqui já uso a URL do upload que aconteceu antes
     const dados = {
-        tipo: tipo,
-        nome: nome,
-        idade: idade,
-        raca: raca,
-        sexo: sexo,
-        porte: porte,
-        vacinado: vacinado,
-        castrado: castrado,
+        tipo,
+        nome,
+        idade,
+        raca,
+        sexo,
+        porte,
+        vacinado,
+        castrado,
         descricao: historia,
-        foto_url: img,
+        foto_url: animalImgUrl, // já vem pronto
         localizacao: local,
         status: 'disponivel'
     };
 
     enviarDados(dados);
-
 }
-
-
 
 async function enviarDados(dados) {
     const response = await fetch(`${URL}/api/v1/animal`, {
@@ -1069,7 +1056,7 @@ async function enviarDados(dados) {
     if (response.ok) {
         notify('Sucesso!', 'Animal cadastrado com sucesso!', 3000, null, 'success');
 
-            // Limpar o formulário
+        // Limpar o formulário
         document.getElementById('add-animal-form').reset();
         
         // Fechar o modal
@@ -1079,13 +1066,34 @@ async function enviarDados(dados) {
             document.body.style.overflow = 'auto';
         }
 
+        // limpa a URL para não enviar errado depois
+        animalImgUrl = '';
+
+        carregarGatos()
+        carregarCachorros()
     } else {
         notify('Erro!', 'Erro ao cadastrar animal!', 3000, null, 'error');
     }
 }
 
+// upload feito assim que selecionar a imagem
+async function preloaderAnimalImg() {
+    const imgInput = document.getElementById('animal-img-file');
 
-
+    if (imgInput && imgInput.files && imgInput.files[0]) {
+        document.getElementById('upload-loading').style.display = 'flex'; // mostra loading
+        try {
+            animalImgUrl = await uploadimagem(imgInput.files[0]);
+            console.log("Upload concluído:", animalImgUrl);
+            notify('Sucesso!', 'Imagem enviada com sucesso!', 3000, null, 'success');
+        } catch (err) {
+            console.error("Erro no upload:", err);
+            notify('Erro!', 'Falha ao enviar imagem!', 3000, null, 'error');
+            animalImgUrl = '';
+        }
+        document.getElementById('upload-loading').style.display = 'none'; // esconde loading
+    }
+}
 
 // ================================================
 // ============== [UPLOAD IMAGEM] =============
@@ -1224,3 +1232,74 @@ async function uploadimagem(file) {
         return null;
     }
 }
+
+// ===================================================================
+// ==================== [ SISTEMA DE CIDADES POR ESTADO ] ====================
+
+// Base de dados de cidades por estado (principais cidades)
+const cidadesPorEstado = {
+    'AC': ['Rio Branco', 'Cruzeiro do Sul', 'Sena Madureira', 'Tarauacá', 'Feijó', 'Brasiléia', 'Xapuri', 'Plácido de Castro', 'Epitaciolândia', 'Acrelândia'],
+    'AL': ['Maceió', 'Arapiraca', 'Rio Largo', 'Palmeira dos Índios', 'União dos Palmares', 'Penedo', 'Coruripe', 'Delmiro Gouveia', 'São Miguel dos Campos', 'Marechal Deodoro'],
+    'AP': ['Macapá', 'Santana', 'Laranjal do Jari', 'Oiapoque', 'Porto Grande', 'Mazagão', 'Vitória do Jari', 'Pedra Branca do Amapari', 'Tartarugalzinho', 'Amapá'],
+    'AM': ['Manaus', 'Parintins', 'Itacoatiara', 'Manacapuru', 'Coari', 'Tefé', 'Tabatinga', 'Maués', 'Humaitá', 'São Gabriel da Cachoeira'],
+    'BA': ['Salvador', 'Feira de Santana', 'Vitória da Conquista', 'Camaçari', 'Juazeiro', 'Ilhéus', 'Itabuna', 'Lauro de Freitas', 'Jequié', 'Alagoinhas', 'Barreiras', 'Porto Seguro', 'Simões Filho', 'Paulo Afonso', 'Eunápolis', 'Guanambi', 'Serrinha', 'Jacobina', 'Santo Antônio de Jesus', 'Valença'],
+    'CE': ['Fortaleza', 'Caucaia', 'Juazeiro do Norte', 'Maracanaú', 'Sobral', 'Crato', 'Itapipoca', 'Maranguape', 'Iguatu', 'Quixadá', 'Cascavel', 'Pacatuba', 'Aquiraz', 'Eusébio', 'Horizonte', 'Pacajus', 'Russas', 'Aracati', 'Icó', 'Limoeiro do Norte'],
+    'DF': ['Brasília', 'Gama', 'Taguatinga', 'Ceilândia', 'Samambaia', 'Planaltina', 'Sobradinho', 'Santa Maria', 'São Sebastião', 'Paranoá', 'Recanto das Emas', 'Riacho Fundo', 'Brazlândia', 'Núcleo Bandeirante', 'Guará', 'Candangolândia', 'Águas Claras', 'Sudoeste/Octogonal', 'Varjão', 'Park Way'],
+    'ES': ['Vitória', 'Vila Velha', 'Cariacica', 'Serra', 'Cachoeiro de Itapemirim', 'Linhares', 'São Mateus', 'Colatina', 'Guarapari', 'Aracruz', 'Viana', 'Nova Venécia', 'Barra de São Francisco', 'Santa Teresa', 'Domingos Martins', 'Venda Nova do Imigrante', 'Castelo', 'Itapemirim', 'Mimoso do Sul', 'São Gabriel da Palha'],
+    'GO': ['Goiânia', 'Aparecida de Goiânia', 'Anápolis', 'Rio Verde', 'Luziânia', 'Águas Lindas de Goiás', 'Valparaíso de Goiás', 'Trindade', 'Formosa', 'Novo Gama', 'Itumbiara', 'Senador Canedo', 'Catalão', 'Jataí', 'Santo Antônio do Descoberto', 'Planaltina', 'Caldas Novas', 'Goianésia', 'Mineiros', 'Cidade Ocidental'],
+    'MA': ['São Luís', 'Imperatriz', 'São José de Ribamar', 'Timon', 'Caxias', 'Codó', 'Paço do Lumiar', 'Açailândia', 'Bacabal', 'Balsas', 'Barra do Corda', 'Pinheiro', 'Santa Inês', 'Santa Luzia', 'Viana', 'Zé Doca', 'Grajaú', 'Itapecuru Mirim', 'Presidente Dutra', 'Rosário'],
+    'MT': ['Cuiabá', 'Várzea Grande', 'Rondonópolis', 'Sinop', 'Tangará da Serra', 'Cáceres', 'Sorriso', 'Lucas do Rio Verde', 'Barra do Garças', 'Primavera do Leste', 'Alta Floresta', 'Pontes e Lacerda', 'Mirassol d\'Oeste', 'Nova Mutum', 'Campo Verde', 'Diamantino', 'Juína', 'Colíder', 'Peixoto de Azevedo', 'Nova Xavantina'],
+    'MS': ['Campo Grande', 'Dourados', 'Três Lagoas', 'Corumbá', 'Ponta Porã', 'Naviraí', 'Nova Andradina', 'Sidrolândia', 'Paranaíba', 'Maracaju', 'Coxim', 'Amambai', 'Jardim', 'Rio Brilhante', 'Aquidauana', 'Caarapó', 'Bela Vista', 'São Gabriel do Oeste', 'Ivinhema', 'Chapadão do Sul'],
+    'MG': ['Belo Horizonte', 'Uberlândia', 'Contagem', 'Juiz de Fora', 'Betim', 'Montes Claros', 'Ribeirão das Neves', 'Uberaba', 'Governador Valadares', 'Ipatinga', 'Sete Lagoas', 'Divinópolis', 'Santa Luzia', 'Ibirité', 'Poços de Caldas', 'Patos de Minas', 'Pouso Alegre', 'Teófilo Otoni', 'Barbacena', 'Sabará', 'Vespasiano', 'Conselheiro Lafaiete', 'Varginha', 'Araguari', 'Itabira', 'Coronel Fabriciano', 'Lavras', 'Araxá', 'Ituiutaba', 'Passos', 'Nova Lima', 'Ubá', 'Caratinga', 'Muriaé', 'Formiga', 'Pará de Minas', 'Manhuaçu', 'Curvelo', 'São João del Rei', 'Três Corações', 'Alfenas', 'Itajubá', 'Extrema', 'Vazante', 'Bocaiúva', 'Januária', 'Diamantina', 'Ouro Preto', 'Mariana', 'Congonhas', 'Tiradentes', 'São Lourenço', 'Caxambu', 'Monte Verde', 'Campos do Jordão', 'Serro'],
+    'PA': ['Belém', 'Ananindeua', 'Santarém', 'Marabá', 'Parauapebas', 'Castanhal', 'Abaetetuba', 'Cametá', 'Bragança', 'Altamira', 'Tucuruí', 'Barcarena', 'Itaituba', 'Redenção', 'Marituba', 'Paragominas', 'Tailândia', 'Benevides', 'Capanema', 'Vigia'],
+    'PB': ['João Pessoa', 'Campina Grande', 'Santa Rita', 'Patos', 'Bayeux', 'Sousa', 'Cajazeiras', 'Guarabira', 'Mamanguape', 'Cabedelo', 'Monteiro', 'Esperança', 'Pombal', 'Princesa Isabel', 'Itabaiana', 'Conde', 'Alagoa Grande', 'Bananeiras', 'Areia', 'Picuí'],
+    'PR': ['Curitiba', 'Londrina', 'Maringá', 'Ponta Grossa', 'Cascavel', 'São José dos Pinhais', 'Foz do Iguaçu', 'Colombo', 'Guarapuava', 'Paranaguá', 'Araucária', 'Toledo', 'Apucarana', 'Pinhais', 'Campo Largo', 'Arapongas', 'Almirante Tamandaré', 'Umuarama', 'Piraquara', 'Cambé'],
+    'PE': ['Recife', 'Jaboatão dos Guararapes', 'Olinda', 'Caruaru', 'Petrolina', 'Paulista', 'Cabo de Santo Agostinho', 'Camaragibe', 'Garanhuns', 'Vitória de Santo Antão', 'Igarassu', 'São Lourenço da Mata', 'Abreu e Lima', 'Ipojuca', 'Santa Cruz do Capibaribe', 'Serra Talhada', 'Araripina', 'Gravatá', 'Carpina', 'Goiana'],
+    'PI': ['Teresina', 'Parnaíba', 'Picos', 'Piripiri', 'Floriano', 'Campo Maior', 'Barras', 'União', 'Altos', 'Pedro II', 'Esperantina', 'Oeiras', 'Valença do Piauí', 'São Raimundo Nonato', 'Corrente', 'Simplício Mendes', 'São João do Piauí', 'Bom Jesus', 'Uruçuí', 'Cocal'],
+    'RJ': ['Rio de Janeiro', 'São Gonçalo', 'Duque de Caxias', 'Nova Iguaçu', 'Niterói', 'Belford Roxo', 'São João de Meriti', 'Campos dos Goytacazes', 'Petrópolis', 'Volta Redonda', 'Magé', 'Macaé', 'Itaboraí', 'Cabo Frio', 'Angra dos Reis', 'Nova Friburgo', 'Barra Mansa', 'Teresópolis', 'Mesquita', 'Maricá', 'Nilópolis', 'Queimados', 'São Pedro da Aldeia', 'Resende', 'Rio das Ostras', 'Itaguaí', 'Japeri', 'Barra do Piraí', 'Seropédica', 'Três Rios', 'Valença', 'Paracambi', 'Vassouras', 'Sapucaia', 'Saquarema', 'Araruama', 'Silva Jardim', 'Casimiro de Abreu', 'Rio Bonito', 'Cachoeiras de Macacu'],
+    'RN': ['Natal', 'Mossoró', 'Parnamirim', 'São Gonçalo do Amarante', 'Macaíba', 'Ceará-Mirim', 'Caicó', 'Açu', 'Currais Novos', 'Nova Cruz', 'João Câmara', 'Canguaretama', 'Macaíba', 'Areia Branca', 'Extremoz', 'Touros', 'São José de Mipibu', 'Santa Cruz', 'Apodi', 'Pau dos Ferros'],
+    'RS': ['Porto Alegre', 'Caxias do Sul', 'Pelotas', 'Canoas', 'Santa Maria', 'Gravataí', 'Viamão', 'Novo Hamburgo', 'São Leopoldo', 'Rio Grande', 'Alvorada', 'Passo Fundo', 'Sapucaia do Sul', 'Uruguaiana', 'Santa Cruz do Sul', 'Cachoeirinha', 'Bagé', 'Bento Gonçalves', 'Erechim', 'Guaíba'],
+    'RO': ['Porto Velho', 'Ji-Paraná', 'Ariquemes', 'Vilhena', 'Cacoal', 'Rolim de Moura', 'Guajará-Mirim', 'Jaru', 'Ouro Preto do Oeste', 'Buritis', 'Pimenta Bueno', 'Espigão d\'Oeste', 'Costa Marques', 'Alta Floresta d\'Oeste', 'Nova Mamoré', 'Alvorada d\'Oeste', 'Presidente Médici', 'Candeias do Jamari', 'Nova Brasilândia d\'Oeste', 'São Miguel do Guaporé'],
+    'RR': ['Boa Vista', 'Rorainópolis', 'Caracaraí', 'Alto Alegre', 'Mucajaí', 'Bonfim', 'Cantá', 'Normandia', 'Pacaraima', 'Iracema', 'Caroebe', 'São João da Baliza', 'São Luiz', 'Uiramutã', 'Amajari', 'Cristalina', 'Taiano', 'Vila União', 'Vila Pacaraima', 'Vila Surumu'],
+    'SC': ['Florianópolis', 'Joinville', 'Blumenau', 'São José', 'Criciúma', 'Chapecó', 'Itajaí', 'Lages', 'Jaraguá do Sul', 'Palhoça', 'Balneário Camboriú', 'Brusque', 'Tubarão', 'São Bento do Sul', 'Caçador', 'Navegantes', 'Araranguá', 'Biguaçu', 'Camboriú', 'Concórdia'],
+    'SP': ['São Paulo', 'Guarulhos', 'Campinas', 'São Bernardo do Campo', 'Santo André', 'Osasco', 'Ribeirão Preto', 'Sorocaba', 'Mauá', 'São José dos Campos', 'Mogi das Cruzes', 'Diadema', 'Jundiaí', 'Carapicuíba', 'Piracicaba', 'Bauru', 'Itaquaquecetuba', 'Franca', 'São Vicente', 'Praia Grande', 'Guarujá', 'Taubaté', 'Limeira', 'Suzano', 'Sumaré', 'Barueri', 'Embu das Artes', 'Indaiatuba', 'Cotia', 'Americana', 'Araraquara', 'Jacareí', 'Presidente Prudente', 'Marília', 'Itapevi', 'Hortolândia', 'Rio Claro', 'Araçatuba', 'Ferraz de Vasconcelos', 'Santa Bárbara d\'Oeste', 'Francisco Morato', 'Itapecerica da Serra', 'Itu', 'Bragança Paulista', 'Pindamonhangaba', 'Itapetininga', 'São Caetano do Sul', 'Franco da Rocha', 'Mogi Guaçu', 'Taboão da Serra', 'Atibaia', 'Sertãozinho', 'Jaú', 'Leme', 'Itatiba', 'Araras', 'Assis', 'Catanduva', 'Botucatu', 'Santos', 'São Carlos', 'Votuporanga', 'Valinhos', 'Várzea Paulista', 'Birigui', 'Caraguatatuba', 'Ourinhos', 'Poá', 'Arujá', 'Salto', 'Vinhedo', 'Itanhaém', 'Cubatão', 'Mogi Mirim', 'Tatuí'],
+    'SE': ['Aracaju', 'Nossa Senhora do Socorro', 'Lagarto', 'Itabaiana', 'São Cristóvão', 'Estância', 'Simão Dias', 'Propriá', 'Barra dos Coqueiros', 'Tobias Barreto', 'Canindé de São Francisco', 'Nossa Senhora da Glória', 'Itabaianinha', 'Porto da Folha', 'Capela', 'Ribeirópolis', 'Frei Paulo', 'Boquim', 'Carira', 'Poço Redondo'],
+    'TO': ['Palmas', 'Araguaína', 'Gurupi', 'Porto Nacional', 'Paraíso do Tocantins', 'Colinas do Tocantins', 'Guaraí', 'Tocantinópolis', 'Miracema do Tocantins', 'Formoso do Araguaia', 'Dianópolis', 'Augustinópolis', 'Taguatinga', 'Xambioá', 'Arraias', 'Pedro Afonso', 'Wanderlândia', 'Babaçulândia', 'Filadélfia', 'Araguatins']
+};
+
+// Função para carregar cidades baseado no estado selecionado
+function carregarCidadesPorEstado() {
+    const estadoSelect = document.getElementById('animal-estado');
+    const cidadeSelect = document.getElementById('animal-cidade');
+    
+    if (!estadoSelect || !cidadeSelect) return;
+    
+    estadoSelect.addEventListener('change', function() {
+        const estadoSelecionado = this.value;
+        
+        // Limpa as opções de cidade
+        cidadeSelect.innerHTML = '<option value="" disabled selected>Selecione a cidade</option>';
+        
+        if (estadoSelecionado && cidadesPorEstado[estadoSelecionado]) {
+            // Habilita o select de cidade
+            cidadeSelect.disabled = false;
+            
+            // Adiciona as cidades do estado selecionado
+            cidadesPorEstado[estadoSelecionado].forEach(cidade => {
+                const option = document.createElement('option');
+                option.value = cidade;
+                option.textContent = cidade;
+                cidadeSelect.appendChild(option);
+            });
+        } else {
+            // Desabilita o select de cidade
+            cidadeSelect.disabled = true;
+            cidadeSelect.innerHTML = '<option value="" disabled selected>Primeiro selecione o estado</option>';
+        }
+    });
+}
+
+// Inicializar o sistema de cidades quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    carregarCidadesPorEstado();
+});

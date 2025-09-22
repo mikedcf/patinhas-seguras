@@ -27,7 +27,7 @@ body {
 ================================================
 */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -523,7 +523,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 5px;
-    color: #555;
+    color: #ffffff;
     font-weight: bold;
 }
 

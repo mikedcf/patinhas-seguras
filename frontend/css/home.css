@@ -63,7 +63,7 @@ img {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
   height: 12px;
 }
 
@@ -72,12 +72,12 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f00;
+  background: #f97316;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c00;
+  background: #e86a0f;
 }
 
 /** 2. HEADER **/

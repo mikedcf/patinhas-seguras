@@ -32,7 +32,7 @@ body, html {
 */
 /* Largura da barra */
 ::-webkit-scrollbar {
-  width: 12px; /* largura da barra lateral */
+  width: 8px; /* largura da barra lateral */
   height: 12px; /* altura para scroll horizontal */
 }
 
@@ -43,13 +43,12 @@ body, html {
 
 /* "Thumb" (parte que arrasta) */
 ::-webkit-scrollbar-thumb {
-  background: #ff0000; /* cor do thumb */
-  border-radius: 10px; /* bordas arredondadas */
+  background: #f97316;
+  border-radius: 10px;
 }
 
-/* Thumb ao passar o mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: #cc0000;
+  background: #e86a0f;
 }
 
 

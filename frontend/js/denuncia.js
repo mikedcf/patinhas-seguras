@@ -1,4 +1,3 @@
-
 // const URL = "http://127.0.0.1:3000";
 const URL = "https://patinhas-seguras-production.up.railway.app";
 
@@ -247,33 +246,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // ================================================
 // ============== [formulario de denuncia] =============
 
+let imgUrl = ''; // variável global para armazenar o link da imagem já enviada
+
 async function formularioDenuncia(event){
     event.preventDefault();
-    
+
     const local = document.getElementById('denuncia-local').value;
     const descricao = document.getElementById('denuncia-descricao').value;
     const especie = document.getElementById('denuncia-especie').value;
-    const provas = document.getElementById('denuncia-provas').value;
-    const imgInput = document.getElementById('denuncia-provas');
 
-    let img = '';
-    if (imgInput && imgInput.files && imgInput.files[0]) {
-        img = await uploadimagem(imgInput.files[0]);
-    } else {
-        img = '';
-    }
-
+    // aqui já uso a URL pronta do upload
     const dados = {
         local_ocorrencia: local,
         descricao_situacao: descricao,
         tipo_animal: especie,
-        arquivo_prova : img,
+        arquivo_prova: imgUrl, 
     };
-    console.log(dados);
-
+    
+    console.log('array', dados);
     enviarDados(dados);
 }
-
 
 async function enviarDados(dados){
     const response = await fetch(`${URL}/api/v1/denuncia`, {
@@ -290,8 +282,31 @@ async function enviarDados(dados){
         document.getElementById('denuncia-form').reset();
         document.getElementById('denuncia-modal').style.display = 'none';
         document.body.style.overflow = 'auto';
+        imgUrl = ''; // limpa variável depois
     } else {
         notify('Erro!', 'Erro ao enviar denúncia!', 3000, null, 'error');
+    }
+}
+
+// função chamada no onchange do input
+async function preloaderimg(){
+    const imgInput = document.getElementById('denuncia-provas');
+
+    if (imgInput && imgInput.files && imgInput.files[0]) {
+        // mostra loading
+        document.getElementById('upload-loading').style.display = 'flex';
+        
+        try {
+            imgUrl = await uploadimagem(imgInput.files[0]); // upload no cloudinary
+            console.log('Upload concluído:', imgUrl);
+            notify('Sucesso!', 'Arquivo enviado com sucesso!', 3000, null, 'success');
+        } catch (err) {
+            console.error("Erro no upload:", err);
+            notify('Erro!', 'Falha ao enviar arquivo!', 3000, null, 'error');
+        }
+
+        // esconde loading
+        document.getElementById('upload-loading').style.display = 'none';
     }
 }
 

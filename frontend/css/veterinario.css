@@ -27,7 +27,7 @@ body {
 ======== [ COR DO SCROLL ] ========
 ================================================
 */
-::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #ffffff; }
 ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #e86a0f; }

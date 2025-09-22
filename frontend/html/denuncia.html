@@ -129,7 +129,7 @@
                 </div>
                 <div class="form-group">
                     <label for="denuncia-provas">Anexar Provas (Fotos ou Vídeos):</label>
-                    <input type="file" id="denuncia-provas" name="provas" accept="image/*,video/*">
+                    <input type="file" id="denuncia-provas" onchange="preloaderimg()" name="provas" accept="image/*,video/*">
                 </div>
                 <p class="aviso-anonimato">Sua denúncia pode ser anônima. Seus dados não serão divulgados.</p>
                 <button type="submit" class="btn-enviar-denuncia" onclick="formularioDenuncia(event)">Enviar Denúncia</button>

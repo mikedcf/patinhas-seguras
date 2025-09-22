@@ -163,6 +163,71 @@ async function uploadImage(file) {
 
 
 // ===================================================================
+// ==================== [ VALIDAÇÃO DE SENHA ] ====================
+
+function validatePassword(password) {
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        special: /[@$!%*?&]/.test(password)
+    };
+    
+    return requirements;
+}
+
+function updatePasswordRequirements(password) {
+    const requirements = validatePassword(password);
+    
+    // Atualizar cada requisito
+    Object.keys(requirements).forEach(req => {
+        const element = document.getElementById(`req-${req}`);
+        const icon = element.querySelector('.requirement-icon');
+        const text = element.querySelector('.requirement-text');
+        
+        if (requirements[req]) {
+            icon.textContent = '✅';
+            element.classList.add('valid');
+            element.classList.remove('invalid');
+        } else {
+            icon.textContent = '❌';
+            element.classList.add('invalid');
+            element.classList.remove('valid');
+        }
+    });
+    
+    // Verificar se todos os requisitos foram atendidos
+    const allValid = Object.values(requirements).every(req => req);
+    const passwordInput = document.getElementById('password');
+    
+    if (allValid) {
+        passwordInput.classList.add('password-valid');
+        passwordInput.classList.remove('password-invalid');
+    } else {
+        passwordInput.classList.add('password-invalid');
+        passwordInput.classList.remove('password-valid');
+    }
+    
+    return allValid;
+}
+
+function initPasswordValidation() {
+    const passwordInput = document.getElementById('password');
+    
+    if (passwordInput) {
+        passwordInput.addEventListener('input', (e) => {
+            updatePasswordRequirements(e.target.value);
+        });
+        
+        // Validar senha inicial se já tiver valor
+        if (passwordInput.value) {
+            updatePasswordRequirements(passwordInput.value);
+        }
+    }
+}
+
+// ===================================================================
 // ==================== [ FORMULARIO DE CADASTRO ] ====================
 
 async function cadastro(event) {
@@ -183,8 +248,15 @@ async function cadastro(event) {
         foto_url = await uploadImage(file); // se tiver arquivo, faz upload
     }
 
+    // Validar se a senha atende todos os requisitos
+    const isPasswordValid = updatePasswordRequirements(senha);
+    if (!isPasswordValid) {
+        notify('Erro!', 'A senha não atende todos os requisitos de segurança.', 3000, null, 'error');
+        return;
+    }
+
     if (senha !== confirmarSenha) {
-        alert('As senhas não coincidem!');
+        notify('Erro!', 'As senhas não coincidem!', 3000, null, 'error');
         return;
     }
     
@@ -306,6 +378,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Inicializar o preview de imagem
     watchImageUpload();
+
+    // Inicializar validação de senha
+    initPasswordValidation();
 
     // Conectar formulário
     const form = document.querySelector('.register-form');

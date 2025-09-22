@@ -337,9 +337,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==================== [ PARCEIROS ] ====================
     // ===================================================================
     const parceiros = [
-        { nome: "Centro Veterinário Seres", endereco: "Av. Babita Camargos, 1295 - Cidade Industrial, Contagem - MG", telefone: "03130797389", logo: "https://i.ibb.co/spMnJ9ZG/Copilot-20250917-232014.png" },
-        { nome: "Dognostic", endereco: "R. Padre Adelino, 1811 - Quarta Parada, São Paulo - SP", telefone: "01126051126", logo: "https://i.ibb.co/ymyycd9W/logo.png" },
-        { nome: "Centro Veterinário Alpha Conde", endereco: "R. Capricórnio, 64 - Alphaville Conde I, Barueri - SP", telefone: "01141938231", logo: "https://i.ibb.co/KB9513s/Copilot-20250917-232636.png" }
+        { nome: "Centro Veterinário Seres", endereco: "Av. Babita Camargos, 1295 - Cidade Industrial, Contagem - MG", telefone: "03130797389", logo: "https://i.ibb.co/5XN8mZ6b/seres.png" },
+        { nome: "Dognostic", endereco: "R. Padre Adelino, 1811 - Quarta Parada, São Paulo - SP", telefone: "01126051126", logo: "https://i.ibb.co/W4pXYrsc/dognotic.png" },
+        { nome: "Centro Veterinário Alpha Conde", endereco: "R. Capricórnio, 64 - Alphaville Conde I, Barueri - SP", telefone: "01141938231", logo: "https://i.ibb.co/G4krC2VB/centro.png" }
     ];
 
     const parceirosGrid = document.querySelector('.parceiros-grid');
