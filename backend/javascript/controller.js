@@ -138,7 +138,8 @@ async function login(req, res) {
             email: usuario.email,
             telefone: usuario.telefone,
             endereco: usuario.endereco,
-            foto_url: usuario.foto_url
+            foto_url: usuario.foto_url,
+            tipo: usuario.tipo
         };
 
         res.status(200).json({ message: 'Login realizado com sucesso!', usuario: req.session.user });

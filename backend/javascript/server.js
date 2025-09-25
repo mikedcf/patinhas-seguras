@@ -39,6 +39,9 @@ app.use(cors({
     credentials: true
 }));
 
+
+//  ative para produção
+
 app.set('trust proxy', 1);
 
 app.use(session({
@@ -54,6 +57,8 @@ app.use(session({
     }
 }));
 
+
+// ative para localhost
 // app.use(session({
 //     secret: 'patinhas-web-secret-key',
 //     resave: false,
